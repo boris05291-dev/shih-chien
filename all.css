@@ -7,7 +7,129 @@ html {
     padding: 0;
     box-sizing: border-box;
 }
+.p-1,
+.p-2,
+.p-3,
+.p-4,
+.pdd,
+.pp1,
+.li-1,
+.li-2,
+.li-3,
+.li-4,
+.li-5 {
+    border-radius: 12px !important;
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.04),
+        0 1px 3px rgba(0, 0, 0, 0.02) !important;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease !important;
+}
+h2,
+.all1 h2,
+.li-1 h3,
+.li-2 h3,
+.li-3 h3,
+.li-4 h3,
+.li-5 h3 {
+    position: relative;
+    padding-left: 16px !important;
+    color: #2c3e50;
+}
+h2::before,
+.all1 h2::before,
+.li-1 h3::before,
+.li-2 h3::before,
+.li-3 h3::before,
+.li-4 h3::before,
+.li-5 h3::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 15%;
+    height: 70%;
+    width: 5px;
+    background: linear-gradient(to bottom, #6b9e58, #8bc34a);
+    border-radius: 4px;
+}
+.liall li {
+    position: relative;
+    padding: 10px 15px !important;
+    margin-bottom: 10px !important;
+    background-color: #ffffff !important;
+    border-radius: 8px !important;
+    border-left: 4px solid #ffffff !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
+    list-style-type: none !important;
+    transition: all 0.25s ease !important;
+}
+.liall li:hover {
+    transform: translateX(6px) !important;
+    background-color: #f1f8e9 !important;
+    box-shadow: 0 4px 12px rgba(107, 158, 88, 0.15) !important;
+}
+.p-1:hover,
+.p-2:hover,
+.p-3:hover,
+.p-4:hover,
+.pp1:hover,
+.li-1:hover,
+.li-2:hover,
+.li-3:hover,
+.li-4:hover,
+.li-5:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 8px 30px rgba(107, 158, 88, 0.08),
+        0 2px 6px rgba(0, 0, 0, 0.04) !important;
+}
+.li-1 li {
+    border-left-color: #6b9e58 !important;
+}
+.li-1 li:hover {
+    border-left-color: #558045 !important;
+}
 
+.li-2 li {
+    border-left-color: #32b800 !important;
+}
+.li-2 li:hover {
+    border-left-color: #279300 !important;
+}
+
+.li-3 li {
+    border-left-color: #00e2ff !important;
+}
+.li-3 li:hover {
+    border-left-color: #00b3cc !important;
+}
+
+.li-4 .liall li {
+    border-left: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+.li-4 .liall li::before {
+    position: absolute !important;
+    left: 0 !important;
+    top: 2px !important;
+    color: #e5c158 !important;
+} 
+
+.li-5 li {
+    border-left-color: #7bff00 !important;
+}
+.li-5 li:hover {
+    border-left-color: #62cc00 !important;
+}
+.pp1 {
+    background: linear-gradient(135deg, #fcfcfc 0%, #f4f6f7 100%) !important;
+    border: 1px solid #e3e6e4 !important;
+    border-left: 6px solid #6b9e58 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04) !important;
+}
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -131,12 +253,18 @@ a:hover {
     font-size: 22px;
     cursor: pointer;
     z-index: 999;
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        background-color 0.3s ease,
+        transform 0.3s ease;
 }
 
 .b-top.show {
     opacity: 1;
-    pointer-events: auto;
+    visibility: visible;
 }
 
 .b-top:hover {
@@ -181,20 +309,33 @@ a:hover {
     line-height: 1.6;
     color: #bdc3c7;
 }
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .page-all {
         flex-direction: column;
         gap: 20px;
         padding: 0 15px;
     }
-    .side-menu {
+    .all1 {
         width: 100%;
-        position: static;
+        padding-top: 60px !important;
+    }
+    .vp {
+        display: block;
+        width: 100%;
+    }
+    .side-menu {
+        width: 100% !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        z-index: 9999 !important;
+        background-color: #ffffff !important;
         display: flex;
         overflow-x: auto;
         white-space: nowrap;
         border-bottom: 1px solid #e0e0e0;
         padding-bottom: 5px;
+        scroll-snap-type: X mandatory;
     }
     .side-menu li {
         border-bottom: none;
@@ -273,7 +414,7 @@ a:hover {
     font-size: 16px;
     transition:
         background-color 0.3s ease,
-        padding-left 0.3s ease;
+        color 0.3s ease;
 }
 .side-menu a:hover {
     background-color: #f8f9fa;
@@ -314,4 +455,15 @@ a:hover {
     font-weight: bold;
     box-shadow: inset 4px 0 0 0 #6b9e58;
     padding-left: 20px;
+}
+@media (hover: hover) and (pointer: fine) {
+    .side-menu a:hover {
+        background-color: #f8f9fa;
+        color: #6b9e58;
+        padding-left: 28px;
+    }
+    a:hover {
+        color: fuchsia;
+        text-decoration: underline;
+    }
 }
