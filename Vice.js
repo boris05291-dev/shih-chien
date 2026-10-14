@@ -8,14 +8,12 @@
     const update = () => {
         const pos = window.scrollY + 150;
         let current = sections[0].id;
-
         sections.forEach((sec) => {
             if (pos >= sec.offsetTop) current = sec.id;
         });
         if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 2) {
             current = sections[sections.length - 1].id;
         }
-
         links.forEach((l) => {
             l.classList.toggle("active", l.getAttribute("data-target") === current);
         });
