@@ -1,8 +1,5 @@
 /* jshint esversion: 6, browser: true, devel: true */
-//以下為ai輔助完成
 document.addEventListener("DOMContentLoaded", () => {
-    
-    // 載入 Header
     const headerElem = document.querySelector("header");
     if (headerElem) {
         fetch("./components/header.html")
@@ -15,8 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .catch(error => console.error(error));
     }
-
-    // 載入 Footer
     const footerElem = document.querySelector("footer");
     if (footerElem) {
         fetch("./components/footer.html")

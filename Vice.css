@@ -7,7 +7,6 @@
     margin-bottom: 12px;
     font-size: 16px;
 }
-
 .liall h3,
 .liall h4 {
     font-size: 18px;
@@ -73,36 +72,4 @@
 }
 .side-menu .sub-menu li:last-child {
     border-bottom: 1px solid #e0e0e0;
-}
-
-@media (max-width: 768px) {
-    .side-menu .has-sub {
-        display: flex;
-        align-items: center;
-    }
-    .side-menu .sub-menu {
-        display: flex;
-        background: none;
-        border-top: none;
-    }
-    .side-menu .sub-menu a {
-        padding: 10px 15px;
-        font-size: 15px;
-        margin-right: 10px;
-    }
-    .side-menu .sub-menu a::before {
-        display: none;
-    }
-    .side-menu .sub-menu a:hover,
-    .side-menu .sub-menu a.active {
-        padding-left: 15px;
-        box-shadow: none;
-    }
-    .side-menu .sub-menu a.active {
-        background-color: #6b9e58;
-        color: #ffffff;
-    }
-    .side-menu .sub-menu li:last-child {
-        border-bottom: none;
-    }
 }

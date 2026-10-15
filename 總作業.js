@@ -39,3 +39,21 @@ if (h1Section && h7Section) {
         }
     });
 }
+(() => {
+    const menu = document.querySelector(".side-menu");
+    if (!menu) return;
+    const centerActive = () => {
+        const active = menu.querySelector("a.active");
+        if (!active || menu.scrollWidth <= menu.clientWidth) return;
+        const m = menu.getBoundingClientRect();
+        const a = active.getBoundingClientRect();
+        const left = menu.scrollLeft + (a.left - m.left) - (m.width - a.width) / 2;
+        menu.scrollTo({ left, behavior: "smooth" });
+    };
+    new MutationObserver(centerActive).observe(menu, {
+        attributes: true,
+        attributeFilter: ["class"],
+        subtree: true,
+    });
+    window.addEventListener("load", centerActive);
+})();
