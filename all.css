@@ -123,18 +123,6 @@ h2::before,
     border-left-color: #00b3cc !important;
 }
 
-.li-4 .liall li {
-    border-left: none !important;
-    background-color: transparent !important;
-    box-shadow: none !important;
-}
-.li-4 .liall li::before {
-    position: absolute !important;
-    left: 0 !important;
-    top: 2px !important;
-    color: #e5c158 !important;
-}
-
 .li-5 li {
     border-left-color: #7bff00 !important;
 }
@@ -185,17 +173,12 @@ a {
 }
 
 a:link {
-    color: #6b9e58;
+    color: #558045;
     text-decoration: none;
 }
 a:hover {
     color: fuchsia;
     text-decoration: underline;
-}
-.nav-container {
-    background-color: #d1d4d6;
-    border-top: 3px solid #6b9e58;
-    width: 100%;
 }
 .nav-container {
     display: flex;
@@ -267,7 +250,7 @@ a:hover {
 }
 .nav-menu a:hover {
     background-color: #f1f8e9;
-    color: #6b9e58;
+    color: #558045;
     text-decoration: none;
 }
 .nav-menu a:hover::after {
@@ -344,7 +327,7 @@ a:hover {
     color: #bdc3c7;
 }
 .h-t {
-    color: #6b9e58;
+    color: #558045;
     font-weight: bold;
 }
 .page-all {
@@ -389,7 +372,7 @@ a:hover {
 }
 .side-menu a:hover {
     background-color: #f8f9fa;
-    color: #6b9e58;
+    color: #558045;
     padding-left: 28px;
 }
 .s-icons {
@@ -422,21 +405,10 @@ a:hover {
 }
 .side-menu a.active {
     background-color: #f1f8e9;
-    color: #6b9e58;
+    color: #558045;
     font-weight: bold;
     box-shadow: inset 4px 0 0 0 #6b9e58;
     padding-left: 20px;
-}
-@media (hover: hover) and (pointer: fine) {
-    .side-menu a:hover {
-        background-color: #f8f9fa;
-        color: #6b9e58;
-        padding-left: 28px;
-    }
-    a:hover {
-        color: fuchsia;
-        text-decoration: underline;
-    }
 }
 .page-all main img {
     width: 100%;
@@ -595,11 +567,30 @@ section[id^="vp-"],
     transform: translateY(-7px) rotate(-45deg);
 }
 
-
 .side-toggle {
     display: none;
 }
 
+/* ---- 履歷清單共用樣式（原本重複寫在 Founder/headmaster/president/Vice.css）---- */
+.liall ul,
+.liall ol {
+    margin-left: 20px;
+    padding-top: 15px;
+}
+.liall li {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-main);
+}
+.liall h3,
+.liall h4 {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+.i-2 {
+    margin: 20px 0;
+}
 @media (max-width: 900px) {
     .page-all {
         flex-direction: column !important;
@@ -608,7 +599,7 @@ section[id^="vp-"],
         gap: 15px !important;
         padding: 0 15px !important;
         margin: 10px auto !important;
-        overflow-x: clip; 
+        overflow-x: clip;
     }
     .all1 {
         width: 100% !important;
@@ -839,12 +830,12 @@ section[id^="vp-"],
     .side-menu a:hover,
     .side-menu .sub-menu a:hover {
         background-color: #f1f8e9 !important;
-        color: #6b9e58 !important;
+        color: #558045 !important;
     }
     .side-menu a.active,
     .side-menu .sub-menu a.active {
         background-color: #f1f8e9 !important;
-        color: #6b9e58 !important;
+        color: #558045 !important;
         font-weight: 700 !important;
         box-shadow: inset 4px 0 0 0 #6b9e58 !important;
     }
@@ -971,4 +962,27 @@ section[id^="vp-"],
     * {
         transition-duration: 0.01ms !important;
     }
+}
+.brand-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 12px;
+}
+.brand-titles h3 {
+    margin-bottom: 5px !important;
+}
+
+.footer-avatar {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 3px solid var(--primary-color, #6b9e58); 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); 
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+.footer-avatar:hover {
+    transform: scale(1.15) rotate(8deg);
+    box-shadow: 0 6px 18px rgba(107, 158, 88, 0.5);
 }

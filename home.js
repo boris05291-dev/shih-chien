@@ -1,59 +1,37 @@
 /* jshint esversion: 6, browser: true */
+const docTop = (el) => el.getBoundingClientRect().top + window.scrollY;
+const onScrollOrLayout = (fn) => {
+    let ticking = false;
+    const run = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            fn();
+            ticking = false;
+        });
+    };
+    window.addEventListener("scroll", run, { passive: true });
+    window.addEventListener("resize", run);
+    window.addEventListener("load", run);
+    fn();
+};
 const btop = document.getElementById("b-top");
-window.addEventListener("scroll", () => {
-    if (window.scrollY > 300) {
-        btop.classList.add("show");
-    } else {
-        btop.classList.remove("show");
-    }
-});
-btop.addEventListener("click", () => {
-    window.scrollTo(0, 0);
-});
+if (btop) {
+    onScrollOrLayout(() => btop.classList.toggle("show", window.scrollY > 300));
+    btop.addEventListener("click", () => window.scrollTo(0, 0));
+}
 const h1Section = document.getElementById("h1");
 const h7Section = document.getElementById("h7");
-
 if (h1Section && h7Section) {
     const menuLinks = document.querySelectorAll(".side-menu .menu-link");
-    window.addEventListener("scroll", () => {
-        let scrollPos = window.scrollY + 150;
-        let currentTarget = "";
-        if (h7Section && scrollPos >= h7Section.offsetTop - 50) {
-            currentTarget = "h7";
-        } else if (h1Section && scrollPos >= h1Section.offsetTop - 50) {
-            currentTarget = "h1";
-        }
+    const OFFSET = 150; 
+    onScrollOrLayout(() => {
+        const pos = window.scrollY + OFFSET;
+        let current = "top-section";
+        if (pos >= docTop(h7Section)) current = "h7";
+        else if (pos >= docTop(h1Section)) current = "h1";
         menuLinks.forEach((link) => {
-            link.classList.remove("active");
-            const target = link.getAttribute("data-target");
-            if (currentTarget === "" && target === "top-section") {
-                link.classList.add("active");
-            } else if (target === currentTarget) {
-                link.classList.add("active");
-            }
+            link.classList.toggle("active", link.getAttribute("data-target") === current);
         });
-        if (window.scrollY < 100) {
-            menuLinks.forEach((link) => link.classList.remove("active"));
-            const homeLink = document.querySelector('.side-menu .menu-link[data-target="top-section"]');
-            if (homeLink) homeLink.classList.add("active");
-        }
     });
 }
-(() => {
-    const menu = document.querySelector(".side-menu");
-    if (!menu) return;
-    const centerActive = () => {
-        const active = menu.querySelector("a.active");
-        if (!active || menu.scrollWidth <= menu.clientWidth) return;
-        const m = menu.getBoundingClientRect();
-        const a = active.getBoundingClientRect();
-        const left = menu.scrollLeft + (a.left - m.left) - (m.width - a.width) / 2;
-        menu.scrollTo({ left, behavior: "smooth" });
-    };
-    new MutationObserver(centerActive).observe(menu, {
-        attributes: true,
-        attributeFilter: ["class"],
-        subtree: true,
-    });
-    window.addEventListener("load", centerActive);
-})();
