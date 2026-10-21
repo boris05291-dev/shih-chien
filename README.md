@@ -1,6 +1,4 @@
-Voici le fichier README.md rédigé en Markdown pur, structuré et prêt à être directement copié-collé sur GitHub (la section **七、專案文字架構流程圖** a été retirée comme demandé) :
 
-```markdown
 # 網頁程式設計：實踐大學個人作品集專案技術筆記
 
 ## 📌 專案簡介與開發背景
@@ -21,9 +19,6 @@ Voici le fichier README.md rédigé en Markdown pur, structuré et prêt à êtr
 
 ### 3. 響應式與內容適應 (RWD)
 為了讓手機瀏覽時不會卡住，我大量使用了媒體查詢 (`@media`) 以及 CSS 的 `column-count` 多欄位排版，讓原本很佔空間的表格、卡片與清單在小螢幕上可以自動折疊或轉成單欄。
-
----
-
 ## 🐞 二、 核心除錯與問題解決紀錄 (Bug Fixes)
 
 在開發過程中遇到了不少坑，以下是我整理出的幾個關鍵採坑與修復過程：
