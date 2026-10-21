@@ -148,6 +148,3 @@ document.addEventListener("DOMContentLoaded", () => {
 * **CSS 預處理器與框架**：這次寫純 CSS 發現重複性屬性還是偏多，下一步打算研究 Sass/SCSS 的變數與巢狀結構，或是直接嘗試 Tailwind CSS 來加快排版節奏。
 * **前端單頁應用框架 (SPA)**：這次用 Fetch API 做組件化只是個起步，之後希望能進一步摸索 React 或 Vue.js，學習如何做組件狀態管理，並實現免刷頁的 SPA 切換體驗。
 
-```
-
-```
