@@ -17,8 +17,10 @@
         <script src="components.js" defer></script>
     </head>
     <body>
+        <!-- 頁首頁尾留空，components.js 會 fetch 共用的 header / footer 塞進來 -->
         <header></header>
         <div class="page-all">
+            <!-- 側邊選單：「校長」這個有加 active，代表現在在這頁 -->
             <aside class="side-menu">
                 <ul>
                     <li><a href="home.html">首頁</a></li>
@@ -36,6 +38,7 @@
                     <img src="p/%E6%A0%A1%E9%95%B7.jpeg" alt="校長" width="895" height="1342" />
                 </div>
                 <h2>校長 洪久賢博士</h2>
+                <!-- 英文名片區：英文姓名、職稱，下面連到學校官網的英文介紹 -->
                 <div class="pp1">
                     <p>Jeou-Shyan Horng, Ph.D.</p>
                     <p>President</p>
@@ -43,6 +46,7 @@
                     <br />
                     <a href="https://www.usc.edu.tw/p/412-1000-93.php?Lang=en">Profile</a>
                 </div>
+                <!-- 四張卡片：現職、學歷、經歷、專長領域 -->
                 <div class="liall">
                     <section class="li-1">
                         <h3 id="p1">現職</h3>
@@ -92,6 +96,7 @@
             </main>
         </div>
         <footer class="f-1"></footer>
+        <!-- 回到頂部按鈕（home.js 控制） -->
         <button id="b-top" class="b-top" aria-label="返回頂部">↑</button>
     </body>
 </html>
