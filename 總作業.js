@@ -1,4 +1,5 @@
 /* jshint esversion: 6, browser: true */
+// 註：目前沒有任何 HTML 載入這個檔案，功能已經搬到 home.js（這是舊版）
 const btop = document.getElementById("b-top");
 window.addEventListener("scroll", () => {
     if (window.scrollY > 300) {
@@ -32,6 +33,7 @@ if (h1Section && h7Section) {
                 link.classList.add("active");
             }
         });
+        // 快捲到頂（100px 內）就固定標成「回到頂部」那一項
         if (window.scrollY < 100) {
             menuLinks.forEach((link) => link.classList.remove("active"));
             const homeLink = document.querySelector('.side-menu .menu-link[data-target="top-section"]');
@@ -39,6 +41,7 @@ if (h1Section && h7Section) {
         }
     });
 }
+// ===== 手機版側邊選單橫向捲動時，把目前 active 的項目自動捲到正中間 =====
 (() => {
     const menu = document.querySelector(".side-menu");
     if (!menu) return;
@@ -47,6 +50,7 @@ if (h1Section && h7Section) {
         if (!active || menu.scrollWidth <= menu.clientWidth) return;
         const m = menu.getBoundingClientRect();
         const a = active.getBoundingClientRect();
+        // 算法：目前已捲的距離 + 項目離選單左邊多遠 - (選單寬 - 項目寬) / 2 → 項目剛好置中
         const left = menu.scrollLeft + (a.left - m.left) - (m.width - a.width) / 2;
         menu.scrollTo({ left, behavior: "smooth" });
     };

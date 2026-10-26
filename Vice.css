@@ -1,12 +1,16 @@
+/* 每位副校長一個 .vp 區塊 */
 .vp {
     scroll-margin-top: 30px;
     padding-bottom: 20px;
 }
+/* .vp + .vp：相鄰選擇器，只選「前面緊接著也是 .vp」的 .vp
+   所以第一位上面不會有線，第二位開始才有分隔線 */
 .vp + .vp {
     margin-top: 40px;
     padding-top: 40px;
     border-top: 1px solid var(--border-light);
 }
+/* 有子選單的那一項只是標題，不能點，游標維持一般箭頭 */
 .side-menu .has-sub > a {
     cursor: default;
 }
@@ -24,6 +28,7 @@
     color: var(--text-soft);
     line-height: 1.4;
 }
+/* 子選單前面的小圓點用 ::before 畫；top: 50% + translateY(-50%) 讓它垂直置中 */
 .side-menu .sub-menu a::before {
     content: "";
     position: absolute;
@@ -50,6 +55,7 @@
     font-weight: bold;
     box-shadow: inset 4px 0 0 0 var(--primary-color);
 }
+/* 目前選到的那一項，小圓點變綠色並放大 1.3 倍 */
 .side-menu .sub-menu a.active::before {
     background-color: var(--primary-color);
     transform: translateY(-50%) scale(1.3);

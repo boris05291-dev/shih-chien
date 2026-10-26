@@ -1,3 +1,5 @@
+/* ===== 全站顏色、圓角、陰影變數 =====
+   顏色都集中放這裡管，要換主題色改這邊就好，其他地方用 var(--名字) 拿來用 */
 :root {
     --primary-color: #6b9e58;
     --primary-hover: #558045;
@@ -79,11 +81,15 @@
 html {
     scroll-behavior: smooth;
 }
+/* 把瀏覽器預設的 margin / padding 清掉
+   box-sizing: border-box → width 會包含 padding 跟邊框，寬度比較好算 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+/* ===== 卡片統一外觀 =====
+   各頁 CSS 有各自寫圓角陰影，這裡用 !important 強制大家長得一樣 */
 .p-1,
 .p-2,
 .p-3,
@@ -103,6 +109,9 @@ html {
         transform 0.3s ease,
         box-shadow 0.3s ease !important;
 }
+/* ===== 標題左邊的綠色小直條 =====
+   標題先設 position: relative，下面再用 ::before 絕對定位在左邊畫一條漸層線
+   top: 15% + height: 70% → 直條剛好上下置中 */
 h2,
 .all1 h2,
 .li-1 h3,
@@ -130,6 +139,7 @@ h2::before,
     background: var(--gradient-primary);
     border-radius: 4px;
 }
+/* 履歷清單每一行做成小卡片，左邊先留 4px 邊框，下面各區塊再換顏色 */
 .liall li {
     position: relative;
     padding: 10px 15px !important;
@@ -141,6 +151,7 @@ h2::before,
     list-style-type: none !important;
     transition: all 0.25s ease !important;
 }
+/* 滑鼠移過去往右滑一點 + 變淺綠，有互動感 */
 .liall li:hover {
     transform: translateX(6px) !important;
     background-color: var(--primary-light) !important;
@@ -161,6 +172,7 @@ h2::before,
         0 8px 30px rgba(107, 158, 88, 0.08),
         0 2px 6px rgba(0, 0, 0, 0.04) !important;
 }
+/* 每個區塊的清單左邊框換不同顏色，hover 時變深一點 */
 .li-1 li {
     border-left-color: var(--border-color-1) !important;
 }
@@ -211,6 +223,7 @@ h2::before,
         0 8px 30px rgba(107, 158, 88, 0.08),
         0 2px 6px rgba(0, 0, 0, 0.04) !important;
 }
+/* 主內容（.all1）一進頁面從下面淡入的動畫 */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -241,6 +254,8 @@ a:hover {
     color: var(--link-hover);
     text-decoration: underline;
 }
+/* ===== 頂部導覽列 =====
+   flex + space-between → logo 在左、選單在右；flex-wrap 讓空間不夠時自動換行 */
 .nav-container {
     display: flex;
     align-items: center;
@@ -258,7 +273,7 @@ a:hover {
 .logo {
     display: block;
     flex-shrink: 0;
-    line-height: 0;
+    line-height: 0; /* 把圖片下面多出來的那條空隙去掉 */
 }
 .logo:hover {
     text-decoration: none;
@@ -299,6 +314,8 @@ a:hover {
     white-space: nowrap;
     transition: all 0.3s ease;
 }
+/* 選單底線動畫：先用 scaleX(0) 把線縮成 0，hover 時變 scaleX(1)
+   transform-origin: center → 線會從中間往兩邊長出來 */
 .nav-menu a::after {
     content: "";
     position: absolute;
@@ -320,6 +337,9 @@ a:hover {
     transform: scaleX(1);
 }
 
+/* ===== 回到頂部按鈕 =====
+   position: fixed 固定在右下角；平常 opacity 0 + visibility hidden 藏起來
+   往下捲 JS 會加上 .show 讓它出現（用 visibility 是因為藏起來時就點不到） */
 .b-top {
     position: fixed;
     bottom: 30px;
@@ -393,6 +413,7 @@ a:hover {
     color: var(--accent-text);
     font-weight: bold;
 }
+/* ===== 內頁版面：左邊側邊選單 + 右邊內容 ===== */
 .page-all {
     display: flex;
     justify-content: center;
@@ -403,6 +424,7 @@ a:hover {
     gap: 50px;
     position: relative;
 }
+/* 側邊選單：position: sticky → 捲動時會黏在離頂端 40px 的地方，不會跟著跑掉 */
 .side-menu {
     width: 250px;
     flex-shrink: 0;
@@ -461,11 +483,13 @@ a:hover {
     max-width: 900px;
     margin: 0;
     padding: 0;
-    animation: fadeIn 0.6s ease-out forwards;
+    animation: fadeIn 0.6s ease-out forwards; /* forwards：動畫跑完停在最後一格 */
 }
 .s-icons a {
     margin-left: 0;
 }
+/* 目前所在的選單項目
+   用 inset 陰影假裝左邊框，這樣不會多佔寬度把文字擠歪 */
 .side-menu a.active {
     background-color: var(--primary-light);
     color: var(--accent-text);
@@ -531,11 +555,14 @@ a:hover {
 .li-5 {
     border-left: 5px solid var(--border-color-5);
 }
+/* 點選單跳到錨點時，標題不要被上面擋住，往下留 110px
+   section[id^="vp-"]：id 開頭是 vp- 的 section；[id^="h"]：id 開頭是 h 的元素 */
 .vp,
 section[id^="vp-"],
 [id^="h"] {
     scroll-margin-top: 110px !important;
 }
+/* 頁尾背景換成漸層（寫在後面，會蓋掉上面 .f-1 的單色背景） */
 .f-1 {
     background: linear-gradient(135deg, var(--footer-bg-start) 0%, var(--footer-bg-end) 100%);
     color: var(--footer-text);
@@ -588,6 +615,7 @@ section[id^="vp-"],
     border-radius: 50%;
     transition: all 0.3s ease;
 }
+/* 社群圖示 hover：往上跳 + 小轉一下 */
 .f-s1 .s-icons a:hover {
     background-color: var(--primary-color);
     color: var(--footer-heading);
@@ -595,6 +623,9 @@ section[id^="vp-"],
     box-shadow: 0 5px 15px rgba(107, 158, 88, 0.4);
     text-decoration: none;
 }
+/* ===== 手機版漢堡按鈕 =====
+   桌機先 display: none 藏起來，900px 以下才顯示
+   裡面三條線是 components.js 塞進去的三個 <span> */
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -620,6 +651,8 @@ section[id^="vp-"],
         transform 0.3s ease,
         opacity 0.2s ease;
 }
+/* 選單打開時（aria-expanded="true"）：
+   第 1、3 條線往中間移再轉 45 度交叉變成 X，中間那條直接變透明 */
 .nav-toggle[aria-expanded="true"] span:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
 }
@@ -630,6 +663,7 @@ section[id^="vp-"],
     transform: translateY(-7px) rotate(-45deg);
 }
 
+/* 側邊選單的下拉按鈕一樣是手機版才出現 */
 .side-toggle {
     display: none;
 }
@@ -654,6 +688,8 @@ section[id^="vp-"],
 .i-2 {
     margin: 20px 0;
 }
+/* ==================== 手機版（900px 以下）====================
+   這段很多 !important，因為要蓋掉各頁 CSS 跟上面桌機版的設定 */
 @media (max-width: 900px) {
     .page-all {
         flex-direction: column !important;
@@ -662,7 +698,7 @@ section[id^="vp-"],
         gap: 15px !important;
         padding: 0 15px !important;
         margin: 10px auto !important;
-        overflow-x: clip;
+        overflow-x: clip; /* 擋掉橫向捲軸；用 clip 不用 hidden，因為 hidden 會讓裡面的 sticky 失效 */
     }
     .all1 {
         width: 100% !important;
@@ -700,6 +736,10 @@ section[id^="vp-"],
     .nav-toggle {
         display: flex;
     }
+    /* 手機版選單收合的做法：
+       平常 max-height: 0 + overflow: hidden 把選單壓扁藏起來
+       加上 .is-active 後 max-height 變 80vh，搭配 transition 就有往下展開的動畫
+       （height: auto 沒辦法做動畫，所以才改用 max-height） */
     .nav-container .nav-collapse,
     .nav-container .hl-1 {
         position: absolute;
@@ -755,6 +795,8 @@ section[id^="vp-"],
     .nav-menu a::after {
         display: none;
     }
+    /* 手機版側邊選單變成黏在頂端的下拉選單
+       backdrop-filter: blur → 後面的內容會變毛玻璃效果 */
     .side-menu {
         display: block !important;
         width: 100% !important;
@@ -786,6 +828,8 @@ section[id^="vp-"],
         text-align: left;
         cursor: pointer;
     }
+    /* 文字太長就變成「...」：overflow hidden + nowrap + ellipsis 三個要一起用
+       min-width: 0 是讓 flex 子元素可以縮得比文字還窄，不然 ellipsis 不會生效 */
     .side-toggle-label {
         flex: 1;
         min-width: 0;
@@ -803,6 +847,8 @@ section[id^="vp-"],
         border-radius: 4px;
         background: var(--gradient-primary);
     }
+    /* 小箭頭：只畫右邊框 + 下邊框，再轉 45 度就變成往下的 ⌄
+       打開時轉成 -135 度，變成往上 */
     .side-toggle-icon {
         flex-shrink: 0;
         width: 9px;
@@ -815,6 +861,9 @@ section[id^="vp-"],
     .side-menu.is-open .side-toggle-icon {
         transform: rotate(-135deg) translate(-2px, -2px);
     }
+    /* 下拉清單：用 absolute 浮在按鈕正下方
+       收起來：visibility hidden + opacity 0 + pointer-events: none → 看不到也點不到
+       打開（.is-open）再全部開回來，配 transition 就有淡入往下滑的效果 */
     .side-menu > ul {
         display: block !important;
         position: absolute;
@@ -970,6 +1019,7 @@ section[id^="vp-"],
         padding: 10px 14px;
         font-size: 16px;
     }
+    /* env(safe-area-inset-bottom)：iPhone 底部橫條的安全距離，避免按鈕被擋到 */
     .b-top {
         right: 16px;
         bottom: calc(16px + env(safe-area-inset-bottom));
@@ -988,6 +1038,7 @@ section[id^="vp-"],
         margin-left: 0;
     }
 }
+/* 更小的手機（480px 以下）再縮一點 */
 @media (max-width: 480px) {
     .page-all {
         padding: 0 12px !important;
@@ -999,6 +1050,7 @@ section[id^="vp-"],
         height: 38px !important;
     }
 }
+/* 手機平板這種沒有滑鼠的裝置，點一下會卡在 hover 狀態，所以把位移效果取消 */
 @media (hover: none) {
     .liall li:hover,
     .p-1:hover,
@@ -1015,6 +1067,7 @@ section[id^="vp-"],
         transform: none !important;
     }
 }
+/* 使用者在系統設定開了「減少動態效果」的話，就把動畫跟平滑捲動關掉 */
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
@@ -1036,6 +1089,8 @@ section[id^="vp-"],
     margin-bottom: 5px !important;
 }
 
+/* 頁尾頭像
+   cubic-bezier(0.175, 0.885, 0.32, 1.275) 會先超過一點再彈回來，做出 Q 彈的放大感 */
 .footer-avatar {
     width: 65px;
     height: 65px;
@@ -1049,9 +1104,9 @@ section[id^="vp-"],
     transform: scale(1.15) rotate(8deg);
     box-shadow: 0 6px 18px rgba(107, 158, 88, 0.5);
 }
-
-/* ---- 捲動淡入：home.js 會幫卡片加上 .reveal，捲進畫面時再加 .is-visible ---- */
-/* 寫在檔案最後，才蓋得過前面卡片 transition 的 !important */
+/* ===== 捲動淡入 =====
+   JS 會幫卡片加上 .reveal；還沒捲到的（沒有 .is-visible）先透明 + 往下 24px
+   捲進畫面後 JS 加上 .is-visible，就靠 transition 慢慢浮上來 */
 .reveal {
     transition:
         opacity 0.6s ease,
@@ -1067,6 +1122,8 @@ section[id^="vp-"],
 .zoomable {
     cursor: zoom-in;
 }
+/* 燈箱本體：fixed + inset: 0（= top/right/bottom/left 都是 0）蓋滿整個畫面
+   z-index 設很大，壓在所有東西最上面 */
 .lightbox {
     position: fixed;
     inset: 0;
@@ -1091,6 +1148,8 @@ section[id^="vp-"],
     max-width: 100%;
     max-height: 100%;
 }
+/* 放大的圖：min(1000px, 100%) 取比較小的那個 → 大螢幕最多 1000px、小螢幕跟著縮
+   高度扣掉 120px 是留位置給說明文字跟關閉鈕 */
 .lightbox img {
     max-width: min(1000px, 100%);
     max-height: calc(100vh - 120px);
@@ -1155,6 +1214,7 @@ section[id^="vp-"],
     background-color: var(--primary-light);
     transform: rotate(20deg);
 }
+/* 手機版深色模式按鈕也跟著縮小、往右靠，疊在回到頂部按鈕上面 */
 @media (max-width: 900px) {
     .theme-toggle {
         right: 16px;

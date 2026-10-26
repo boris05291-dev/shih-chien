@@ -15,6 +15,7 @@
     margin-top: 40px;
     margin-bottom: 20px;
 }
+/* 首頁文字卡片的基本樣式（圓角陰影最後會被 all.css 統一蓋掉） */
 .p-1,
 .p-2,
 .p-3,
@@ -35,6 +36,7 @@
     margin-bottom: 20px;
     color: var(--text-muted);
 }
+/* 每張卡片的最後一段不要留下邊距，不然卡片底部會多一塊空白 */
 .p-1 p:last-child,
 .p-2 p:last-child,
 .p-3 p:last-child,
@@ -92,7 +94,7 @@
     border: 4px solid var(--primary-color);
 }
 .timeline time {
-    flex: 0 0 110px;
+    flex: 0 0 110px; /* 年份欄固定 110px，不放大也不縮小 */
     padding-top: 10px;
     font-weight: bold;
     color: var(--accent-text);
@@ -138,11 +140,15 @@
         top: 3px;
     }
 }
+/* 觸控裝置不做 hover 位移 */
 @media (hover: none) {
     .timeline-card:hover {
         transform: none;
     }
 }
+/* ===== 校名由來的表格 =====
+   border-collapse 把相鄰格子的邊框合併成一條
+   表格要有圓角得加 overflow: hidden，把超出圓角的部分裁掉 */
 .t-1 table {
     width: 100%;
     max-width: 300px;
@@ -175,6 +181,7 @@ td {
     background-color: var(--primary-light);
     transition: background-color 0.3s ease;
 }
+/* ===== 校歌影片區 ===== */
 .vall-1 {
     display: flex;
     flex-direction: column;
@@ -198,6 +205,7 @@ td {
     height: auto;
     display: block;
 }
+/* aspect-ratio: 16/9 固定影片比例，寬度變了高度會自己算，不用寫死高度 */
 .vall-1 .iframe-1,
 .vall-1 video {
     aspect-ratio: 16/9;
@@ -224,6 +232,8 @@ td {
     object-fit: cover;
     display: block;
 }
+/* 播放圓鈕置中技巧：top / left 50% 先把左上角移到正中間
+   再 translate(-50%, -50%) 往回拉自己寬高的一半，就剛好置中 */
 .yt-play {
     position: absolute;
     top: 50%;
@@ -252,6 +262,8 @@ td {
     background: var(--primary-hover);
 }
 
+/* ===== 校歌及校徽區（.pdd）=====
+   flex 直向排列 + align-items: center，裡面的圖片跟按鈕都置中 */
 .pdd {
     font-size: 16px;
     line-height: 1.8;
@@ -283,6 +295,8 @@ td {
     max-width: 450px;
     margin-top: 20px;
 }
+/* 下載按鈕做成膠囊形（border-radius: 25px）
+   :active 是「按下去那一瞬間」，縮小一點有按壓感 */
 .pdd a {
     display: inline-block;
     padding: 10px 24px;
