@@ -1,0 +1,58 @@
+/* 著作清單：桌機兩欄、手機一欄 */
+.liall ol {
+    column-count: 2;
+    column-gap: 40px;
+}
+@media (max-width: 768px) {
+    .liall ol {
+        column-count: 1;
+    }
+}
+
+/* 榮譽區塊：金色標題 + 星號清單
+   用 .liall .li-4（兩層 class）提高權重，才蓋得過 all.css 的 .liall li 與 .li-4 h3 */
+.liall .li-4 h3 {
+    color: #b8860b;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+.liall .li-4 h3 i {
+    color: #d4af37;
+    margin-right: 8px;
+    transform: scale(1.1);
+}
+.liall .li-4 ul {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 5px;
+}
+.liall .li-4 li {
+    padding-left: 30px !important;
+    margin-bottom: 15px !important;
+    background-color: transparent !important;
+    border-left: none !important;
+    box-shadow: none !important;
+    transition:
+        transform 0.25s ease,
+        background-color 0.25s ease !important;
+}
+.liall .li-4 li::before {
+    content: "\f005";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    left: 0;
+    top: 12px;
+    color: #e5c158;
+    font-size: 14px;
+}
+.liall .li-4 li:hover {
+    transform: translateX(6px) !important;
+    background-color: rgba(229, 193, 88, 0.08) !important;
+    box-shadow: none !important;
+}
+@media (hover: none) {
+    .liall .li-4 li:hover {
+        transform: none !important;
+    }
+}
