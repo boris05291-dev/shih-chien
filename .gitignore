@@ -3,3 +3,5 @@
 # Example .gitignore files: https://github.com/github/gitignore
 /bower_components/
 /node_modules/
+# Serena 工具自動產生的設定與快取
+/.serena/
