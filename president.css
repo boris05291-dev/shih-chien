@@ -12,12 +12,12 @@
 /* 榮譽區塊：金色標題 + 星號清單
    用 .liall .li-4（兩層 class）提高權重，才蓋得過 all.css 的 .liall li 與 .li-4 h3 */
 .liall .li-4 h3 {
-    color: #b8860b;
+    color: var(--gold-dark);
     font-size: 20px;
     margin-bottom: 15px;
 }
 .liall .li-4 h3 i {
-    color: #d4af37;
+    color: var(--gold);
     margin-right: 8px;
     transform: scale(1.1);
 }
@@ -43,7 +43,7 @@
     position: absolute;
     left: 0;
     top: 12px;
-    color: #e5c158;
+    color: var(--gold-light);
     font-size: 14px;
 }
 .liall .li-4 li:hover {
