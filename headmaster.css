@@ -1,10 +1,11 @@
+/* 註：目前沒有任何 HTML 載入這個檔案，這些樣式實際上是 all.css 在管 */
 
 .pp1 {
     font-size: 16px;
     line-height: 1.8;
     margin-bottom: 25px;
     padding: 20px;
-    background-color: #fcfcfc;
+    background-color: var(--bg-light);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
@@ -29,7 +30,7 @@
 }
 .liall h3 {
     font-size: 18px;
-    color: #2c3e50;
+    color: var(--heading-color);
     margin-bottom: 10px;
 }
 

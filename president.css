@@ -12,12 +12,12 @@
 /* 榮譽區塊：金色標題 + 星號清單
    用 .liall .li-4（兩層 class）提高權重，才蓋得過 all.css 的 .liall li 與 .li-4 h3 */
 .liall .li-4 h3 {
-    color: #b8860b;
+    color: var(--gold-dark);
     font-size: 20px;
     margin-bottom: 15px;
 }
 .liall .li-4 h3 i {
-    color: #d4af37;
+    color: var(--gold);
     margin-right: 8px;
     transform: scale(1.1);
 }
@@ -36,6 +36,8 @@
         transform 0.25s ease,
         background-color 0.25s ease !important;
 }
+/* 用 Font Awesome 的星星當清單符號：content 填圖示的編碼（\f005 是星星）
+   font-family 要指定 Font Awesome，font-weight: 900 才是實心那一套 */
 .liall .li-4 li::before {
     content: "\f005";
     font-family: "Font Awesome 6 Free";
@@ -43,7 +45,7 @@
     position: absolute;
     left: 0;
     top: 12px;
-    color: #e5c158;
+    color: var(--gold-light);
     font-size: 14px;
 }
 .liall .li-4 li:hover {
@@ -51,6 +53,7 @@
     background-color: rgba(229, 193, 88, 0.08) !important;
     box-shadow: none !important;
 }
+/* 觸控裝置取消 hover 位移 */
 @media (hover: none) {
     .liall .li-4 li:hover {
         transform: none !important;

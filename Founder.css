@@ -1,3 +1,4 @@
+/* 註：目前沒有任何 HTML 載入這個檔案，這些樣式實際上是 all.css 在管 */
 .liall ul {
     list-style-type: disc;
     margin-left: 20px;
@@ -6,18 +7,18 @@
 .liall li {
     margin-bottom: 12px;
     font-size: 16px;
-    color: #333333;
+    color: var(--text-main);
 }
 .li-1 {
     margin-top: 20px;
     margin-bottom: 30px;
     padding: 25px;
-    background-color: #f4f6f7;
-    border-left: 5px solid #6b9e58;
+    background-color: var(--bg-gray);
+    border-left: 5px solid var(--border-color-1);
     border-radius: 0 8px 8px 0;
 }
 .li-1 h3 {
     font-size: 18px;
-    color: #2c3e50;
+    color: var(--heading-color);
     margin-bottom: 10px;
 }

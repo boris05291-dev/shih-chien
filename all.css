@@ -1,3 +1,5 @@
+/* ===== 全站顏色、圓角、陰影變數 =====
+   顏色都集中放這裡管，要換主題色改這邊就好，其他地方用 var(--名字) 拿來用 */
 :root {
     --primary-color: #6b9e58;
     --primary-hover: #558045;
@@ -16,15 +18,78 @@
     --box-shadow-main: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
     --box-shadow-hover: 0 8px 30px rgba(107, 158, 88, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
     --gradient-primary: linear-gradient(to bottom, #6b9e58, #8bc34a);
+    /* ---- 以下是把原本寫死的色碼抽出來的變數，深色模式只要重新定義它們 ---- */
+    color-scheme: light;
+    --primary-active: #4a6f3b;
+    --accent-text: #558045; /* 綠色文字（強調字、連結、選單 hover） */
+    --border-color-2-hover: #279300;
+    --border-color-3-hover: #00b3cc;
+    --border-color-5-hover: #62cc00;
+    --heading-color: #2c3e50;
+    --text-body: #000000;
+    --text-soft: #555555;
+    --text-on-primary: #ffffff; /* 放在綠色按鈕上的字 */
+    --link-hover: fuchsia;
+    --bg-page: #ffffff;
+    --bg-surface: #ffffff; /* 導覽列、選單、清單項目 */
+    --bg-subtle: #f8f9fa;
+    --bg-sub-menu: #fafbfa;
+    --bg-blur: rgba(255, 255, 255, 0.97);
+    --border-light: #e0e0e0;
+    --border-soft: #e3e6e4;
+    --divider: #eef0ee;
+    --img-backdrop: transparent; /* 黑字透明底圖片（logo、書法字）的底色 */
+    --dark-btn: #2c3e50;
+    --dark-btn-hover: #1a252f;
+    --footer-bg-start: #1e2a36;
+    --footer-bg-end: #2c3e50;
+    --footer-text: #ecf0f1;
+    --footer-muted: #bdc3c7;
+    --footer-heading: #ffffff;
+    --footer-accent: #7bed9f;
+    --gold-dark: #b8860b;
+    --gold: #d4af37;
+    --gold-light: #e5c158;
+    --lightbox-bg: rgba(0, 0, 0, 0.88);
+}
+/* ---- 深色模式：只重新定義變數，所有用到變數的地方就會自動換色 ---- */
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --primary-light: #263522;
+    --accent-text: #9ccc85;
+    --heading-color: #eef1f3;
+    --text-main: #e4e6e8;
+    --text-muted: #c5c9cd;
+    --text-body: #e4e6e8;
+    --text-soft: #a2a9b0;
+    --link-hover: #ff8af2;
+    --bg-page: #14181c;
+    --bg-surface: #1d2227;
+    --bg-light: #1d2227;
+    --bg-gray: #23292f;
+    --bg-subtle: #191e23;
+    --bg-sub-menu: #191e23;
+    --bg-blur: rgba(29, 34, 39, 0.97);
+    --border-light: #343b42;
+    --border-soft: #343b42;
+    --divider: #2a3036;
+    --img-backdrop: #f4f6f7;
+    --dark-btn: #3a4b5c;
+    --dark-btn-hover: #4a5e72;
+    --box-shadow-main: 0 4px 20px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.25);
 }
 html {
     scroll-behavior: smooth;
 }
+/* 把瀏覽器預設的 margin / padding 清掉
+   box-sizing: border-box → width 會包含 padding 跟邊框，寬度比較好算 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+/* ===== 卡片統一外觀 =====
+   各頁 CSS 有各自寫圓角陰影，這裡用 !important 強制大家長得一樣 */
 .p-1,
 .p-2,
 .p-3,
@@ -44,6 +109,9 @@ html {
         transform 0.3s ease,
         box-shadow 0.3s ease !important;
 }
+/* ===== 標題左邊的綠色小直條 =====
+   標題先設 position: relative，下面再用 ::before 絕對定位在左邊畫一條漸層線
+   top: 15% + height: 70% → 直條剛好上下置中 */
 h2,
 .all1 h2,
 .li-1 h3,
@@ -53,7 +121,7 @@ h2,
 .li-5 h3 {
     position: relative;
     padding-left: 16px !important;
-    color: #2c3e50;
+    color: var(--heading-color);
 }
 h2::before,
 .all1 h2::before,
@@ -68,23 +136,25 @@ h2::before,
     top: 15%;
     height: 70%;
     width: 5px;
-    background: linear-gradient(to bottom, #6b9e58, #8bc34a);
+    background: var(--gradient-primary);
     border-radius: 4px;
 }
+/* 履歷清單每一行做成小卡片，左邊先留 4px 邊框，下面各區塊再換顏色 */
 .liall li {
     position: relative;
     padding: 10px 15px !important;
     margin-bottom: 10px !important;
-    background-color: #ffffff !important;
+    background-color: var(--bg-surface) !important;
     border-radius: 8px !important;
-    border-left: 4px solid #ffffff !important;
+    border-left: 4px solid var(--bg-surface) !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
     list-style-type: none !important;
     transition: all 0.25s ease !important;
 }
+/* 滑鼠移過去往右滑一點 + 變淺綠，有互動感 */
 .liall li:hover {
     transform: translateX(6px) !important;
-    background-color: #f1f8e9 !important;
+    background-color: var(--primary-light) !important;
     box-shadow: 0 4px 12px rgba(107, 158, 88, 0.15) !important;
 }
 .p-1:hover,
@@ -102,43 +172,44 @@ h2::before,
         0 8px 30px rgba(107, 158, 88, 0.08),
         0 2px 6px rgba(0, 0, 0, 0.04) !important;
 }
+/* 每個區塊的清單左邊框換不同顏色，hover 時變深一點 */
 .li-1 li {
-    border-left-color: #6b9e58 !important;
+    border-left-color: var(--border-color-1) !important;
 }
 .li-1 li:hover {
-    border-left-color: #558045 !important;
+    border-left-color: var(--primary-hover) !important;
 }
 
 .li-2 li {
-    border-left-color: #32b800 !important;
+    border-left-color: var(--border-color-2) !important;
 }
 .li-2 li:hover {
-    border-left-color: #279300 !important;
+    border-left-color: var(--border-color-2-hover) !important;
 }
 
 .li-3 li {
-    border-left-color: #00e2ff !important;
+    border-left-color: var(--border-color-3) !important;
 }
 .li-3 li:hover {
-    border-left-color: #00b3cc !important;
+    border-left-color: var(--border-color-3-hover) !important;
 }
 
 .li-5 li {
-    border-left-color: #7bff00 !important;
+    border-left-color: var(--border-color-5) !important;
 }
 .li-5 li:hover {
-    border-left-color: #62cc00 !important;
+    border-left-color: var(--border-color-5-hover) !important;
 }
 .pp1 {
     font-size: 16px;
     line-height: 1.8;
-    color: var(--text-muted, #444444);
+    color: var(--text-muted);
     margin-bottom: 25px;
     padding: 25px;
     text-align: justify;
-    background: linear-gradient(135deg, #fcfcfc 0%, #f4f6f7 100%) !important;
-    border: 1px solid #e3e6e4 !important;
-    border-left: 6px solid var(--primary-color, #6b9e58) !important;
+    background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-gray) 100%) !important;
+    border: 1px solid var(--border-soft) !important;
+    border-left: 6px solid var(--primary-color) !important;
     border-radius: 10px !important;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04) !important;
     transition:
@@ -152,6 +223,7 @@ h2::before,
         0 8px 30px rgba(107, 158, 88, 0.08),
         0 2px 6px rgba(0, 0, 0, 0.04) !important;
 }
+/* 主內容（.all1）一進頁面從下面淡入的動畫 */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -167,19 +239,23 @@ body {
     min-width: 100px;
     margin: 0 auto;
     font-family: "Microsoft JhengHei", "PingFang TC", sans-serif;
+    color: var(--text-body);
+    background-color: var(--bg-page);
 }
 a {
     transition: all 0.3s ease;
 }
 
 a:link {
-    color: #558045;
+    color: var(--accent-text);
     text-decoration: none;
 }
 a:hover {
-    color: fuchsia;
+    color: var(--link-hover);
     text-decoration: underline;
 }
+/* ===== 頂部導覽列 =====
+   flex + space-between → logo 在左、選單在右；flex-wrap 讓空間不夠時自動換行 */
 .nav-container {
     display: flex;
     align-items: center;
@@ -188,16 +264,16 @@ a:hover {
     gap: 16px 40px;
     width: 100%;
     padding: 14px 40px;
-    background-color: #ffffff;
-    border-top: 4px solid #6b9e58;
-    border-bottom: 1px solid #e3e6e4;
+    background-color: var(--bg-surface);
+    border-top: 4px solid var(--primary-color);
+    border-bottom: 1px solid var(--border-soft);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
 }
 
 .logo {
     display: block;
     flex-shrink: 0;
-    line-height: 0;
+    line-height: 0; /* 把圖片下面多出來的那條空隙去掉 */
 }
 .logo:hover {
     text-decoration: none;
@@ -207,6 +283,8 @@ a:hover {
     width: auto;
     max-width: 100%;
     height: 64px;
+    border-radius: 6px;
+    background-color: var(--img-backdrop);
     transition:
         transform 0.3s ease,
         opacity 0.3s ease;
@@ -229,13 +307,15 @@ a:hover {
     position: relative;
     display: block;
     padding: 10px 14px;
-    color: #333333;
+    color: var(--text-main);
     font-size: 16px;
     text-decoration: none;
     border-radius: 6px;
     white-space: nowrap;
     transition: all 0.3s ease;
 }
+/* 選單底線動畫：先用 scaleX(0) 把線縮成 0，hover 時變 scaleX(1)
+   transform-origin: center → 線會從中間往兩邊長出來 */
 .nav-menu a::after {
     content: "";
     position: absolute;
@@ -243,20 +323,23 @@ a:hover {
     right: 14px;
     bottom: 4px;
     height: 2px;
-    background-color: #6b9e58;
+    background-color: var(--primary-color);
     transform: scaleX(0);
     transform-origin: center;
     transition: transform 0.3s ease;
 }
 .nav-menu a:hover {
-    background-color: #f1f8e9;
-    color: #558045;
+    background-color: var(--primary-light);
+    color: var(--accent-text);
     text-decoration: none;
 }
 .nav-menu a:hover::after {
     transform: scaleX(1);
 }
 
+/* ===== 回到頂部按鈕 =====
+   position: fixed 固定在右下角；平常 opacity 0 + visibility hidden 藏起來
+   往下捲 JS 會加上 .show 讓它出現（用 visibility 是因為藏起來時就點不到） */
 .b-top {
     position: fixed;
     bottom: 30px;
@@ -265,8 +348,8 @@ a:hover {
     height: 48px;
     border: none;
     border-radius: 50%;
-    background: #2c3e50;
-    color: #fff;
+    background: var(--dark-btn);
+    color: var(--text-on-primary);
     font-size: 22px;
     cursor: pointer;
     z-index: 999;
@@ -285,11 +368,11 @@ a:hover {
 }
 
 .b-top:hover {
-    background-color: #1a252f;
+    background-color: var(--dark-btn-hover);
     transform: translateY(-5px);
 }
 .f-1 {
-    background-color: #2c3e50;
+    background-color: var(--footer-bg-end);
     padding: 40px 20px;
     margin-top: 50px;
     display: flex;
@@ -306,14 +389,14 @@ a:hover {
 }
 .f-1 a:link,
 .f-1 a:visited {
-    color: #7bed9f;
+    color: var(--footer-accent);
     text-decoration: none;
     margin-left: 8px;
     transition: color 0.3s ease;
 }
 
 .f-1 a:hover {
-    color: #ffffff;
+    color: var(--footer-heading);
     text-decoration: underline;
 }
 .f-1 small {
@@ -324,12 +407,13 @@ a:hover {
     margin-bottom: 12px;
     font-size: 15px;
     line-height: 1.6;
-    color: #bdc3c7;
+    color: var(--footer-muted);
 }
 .h-t {
-    color: #558045;
+    color: var(--accent-text);
     font-weight: bold;
 }
+/* ===== 內頁版面：左邊側邊選單 + 右邊內容 ===== */
 .page-all {
     display: flex;
     justify-content: center;
@@ -340,11 +424,12 @@ a:hover {
     gap: 50px;
     position: relative;
 }
+/* 側邊選單：position: sticky → 捲動時會黏在離頂端 40px 的地方，不會跟著跑掉 */
 .side-menu {
     width: 250px;
     flex-shrink: 0;
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-light);
     border-bottom: none;
     position: sticky;
     top: 40px;
@@ -357,13 +442,13 @@ a:hover {
 }
 
 .side-menu li {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--border-light);
 }
 
 .side-menu a {
     display: block;
     padding: 15px 20px;
-    color: #333333;
+    color: var(--text-main);
     text-decoration: none;
     font-size: 16px;
     transition:
@@ -371,8 +456,8 @@ a:hover {
         color 0.3s ease;
 }
 .side-menu a:hover {
-    background-color: #f8f9fa;
-    color: #558045;
+    background-color: var(--bg-subtle);
+    color: var(--accent-text);
     padding-left: 28px;
 }
 .s-icons {
@@ -383,14 +468,14 @@ a:hover {
 
 .s-icons a {
     font-size: 24px;
-    color: #bdc3c7;
+    color: var(--footer-muted);
     text-decoration: none;
     transition:
         color 0.3s ease,
         transform 0.3s ease;
 }
 .s-icons a:hover {
-    color: #7bed9f;
+    color: var(--footer-accent);
     transform: translateY(-5px);
 }
 .all1 {
@@ -398,16 +483,18 @@ a:hover {
     max-width: 900px;
     margin: 0;
     padding: 0;
-    animation: fadeIn 0.6s ease-out forwards;
+    animation: fadeIn 0.6s ease-out forwards; /* forwards：動畫跑完停在最後一格 */
 }
 .s-icons a {
     margin-left: 0;
 }
+/* 目前所在的選單項目
+   用 inset 陰影假裝左邊框，這樣不會多佔寬度把文字擠歪 */
 .side-menu a.active {
-    background-color: #f1f8e9;
-    color: #558045;
+    background-color: var(--primary-light);
+    color: var(--accent-text);
     font-weight: bold;
-    box-shadow: inset 4px 0 0 0 #6b9e58;
+    box-shadow: inset 4px 0 0 0 var(--primary-color);
     padding-left: 20px;
 }
 .page-all main img {
@@ -468,26 +555,29 @@ a:hover {
 .li-5 {
     border-left: 5px solid var(--border-color-5);
 }
+/* 點選單跳到錨點時，標題不要被上面擋住，往下留 110px
+   section[id^="vp-"]：id 開頭是 vp- 的 section；[id^="h"]：id 開頭是 h 的元素 */
 .vp,
 section[id^="vp-"],
 [id^="h"] {
     scroll-margin-top: 110px !important;
 }
+/* 頁尾背景換成漸層（寫在後面，會蓋掉上面 .f-1 的單色背景） */
 .f-1 {
-    background: linear-gradient(135deg, #1e2a36 0%, #2c3e50 100%);
-    color: #ecf0f1;
-    border-top: 5px solid var(--primary-color, #6b9e58);
+    background: linear-gradient(135deg, var(--footer-bg-start) 0%, var(--footer-bg-end) 100%);
+    color: var(--footer-text);
+    border-top: 5px solid var(--primary-color);
     padding: 50px 20px;
 }
 .footer-brand h3 {
     font-size: 20px;
-    color: #ffffff;
+    color: var(--footer-heading);
     margin-bottom: 10px;
     letter-spacing: 1.5px;
 }
 .developer-tag {
     font-size: 15px !important;
-    color: #7bed9f !important;
+    color: var(--footer-accent) !important;
     margin-bottom: 8px !important;
     font-family: monospace, "Microsoft JhengHei";
 }
@@ -500,16 +590,16 @@ section[id^="vp-"],
     gap: 12px;
     font-size: 15px;
     margin-bottom: 15px;
-    color: #bdc3c7;
+    color: var(--footer-muted);
 }
 .contact-info p i {
-    color: var(--primary-color, #6b9e58);
+    color: var(--primary-color);
     font-size: 18px;
     width: 20px;
     text-align: center;
 }
 .contact-info strong {
-    color: #ffffff;
+    color: var(--footer-heading);
     font-weight: 500;
 }
 .f-s1 .s-icons {
@@ -525,13 +615,17 @@ section[id^="vp-"],
     border-radius: 50%;
     transition: all 0.3s ease;
 }
+/* 社群圖示 hover：往上跳 + 小轉一下 */
 .f-s1 .s-icons a:hover {
-    background-color: var(--primary-color, #6b9e58);
-    color: #ffffff;
+    background-color: var(--primary-color);
+    color: var(--footer-heading);
     transform: translateY(-5px) rotate(8deg);
     box-shadow: 0 5px 15px rgba(107, 158, 88, 0.4);
     text-decoration: none;
 }
+/* ===== 手機版漢堡按鈕 =====
+   桌機先 display: none 藏起來，900px 以下才顯示
+   裡面三條線是 components.js 塞進去的三個 <span> */
 .nav-toggle {
     display: none;
     flex-direction: column;
@@ -542,9 +636,9 @@ section[id^="vp-"],
     width: 44px;
     height: 44px;
     padding: 0;
-    border: 1px solid #e3e6e4;
+    border: 1px solid var(--border-soft);
     border-radius: 8px;
-    background-color: #ffffff;
+    background-color: var(--bg-surface);
     cursor: pointer;
 }
 .nav-toggle span {
@@ -552,11 +646,13 @@ section[id^="vp-"],
     width: 22px;
     height: 2px;
     border-radius: 2px;
-    background-color: #2c3e50;
+    background-color: var(--heading-color);
     transition:
         transform 0.3s ease,
         opacity 0.2s ease;
 }
+/* 選單打開時（aria-expanded="true"）：
+   第 1、3 條線往中間移再轉 45 度交叉變成 X，中間那條直接變透明 */
 .nav-toggle[aria-expanded="true"] span:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
 }
@@ -567,6 +663,7 @@ section[id^="vp-"],
     transform: translateY(-7px) rotate(-45deg);
 }
 
+/* 側邊選單的下拉按鈕一樣是手機版才出現 */
 .side-toggle {
     display: none;
 }
@@ -585,12 +682,14 @@ section[id^="vp-"],
 .liall h3,
 .liall h4 {
     font-size: 18px;
-    color: #2c3e50;
+    color: var(--heading-color);
     margin-bottom: 10px;
 }
 .i-2 {
     margin: 20px 0;
 }
+/* ==================== 手機版（900px 以下）====================
+   這段很多 !important，因為要蓋掉各頁 CSS 跟上面桌機版的設定 */
 @media (max-width: 900px) {
     .page-all {
         flex-direction: column !important;
@@ -599,7 +698,7 @@ section[id^="vp-"],
         gap: 15px !important;
         padding: 0 15px !important;
         margin: 10px auto !important;
-        overflow-x: clip;
+        overflow-x: clip; /* 擋掉橫向捲軸；用 clip 不用 hidden，因為 hidden 會讓裡面的 sticky 失效 */
     }
     .all1 {
         width: 100% !important;
@@ -637,6 +736,10 @@ section[id^="vp-"],
     .nav-toggle {
         display: flex;
     }
+    /* 手機版選單收合的做法：
+       平常 max-height: 0 + overflow: hidden 把選單壓扁藏起來
+       加上 .is-active 後 max-height 變 80vh，搭配 transition 就有往下展開的動畫
+       （height: auto 沒辦法做動畫，所以才改用 max-height） */
     .nav-container .nav-collapse,
     .nav-container .hl-1 {
         position: absolute;
@@ -649,8 +752,8 @@ section[id^="vp-"],
         overflow: hidden;
         opacity: 0;
         visibility: hidden;
-        background-color: #ffffff;
-        border-bottom: 3px solid var(--primary-color, #6b9e58);
+        background-color: var(--bg-surface);
+        border-bottom: 3px solid var(--primary-color);
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
         transition:
             max-height 0.35s ease,
@@ -676,7 +779,7 @@ section[id^="vp-"],
         border-radius: 0;
     }
     .nav-menu li {
-        border-bottom: 1px solid #eef0ee;
+        border-bottom: 1px solid var(--divider);
     }
     .nav-menu li:last-child {
         border-bottom: none;
@@ -692,6 +795,8 @@ section[id^="vp-"],
     .nav-menu a::after {
         display: none;
     }
+    /* 手機版側邊選單變成黏在頂端的下拉選單
+       backdrop-filter: blur → 後面的內容會變毛玻璃效果 */
     .side-menu {
         display: block !important;
         width: 100% !important;
@@ -701,9 +806,9 @@ section[id^="vp-"],
         padding: 0 !important;
         overflow: visible !important;
         white-space: normal !important;
-        background-color: rgba(255, 255, 255, 0.97) !important;
+        background-color: var(--bg-blur) !important;
         backdrop-filter: blur(8px);
-        border: 1px solid #e0e0e0 !important;
+        border: 1px solid var(--border-light) !important;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
     .side-toggle {
@@ -719,10 +824,12 @@ section[id^="vp-"],
         font: inherit;
         font-size: 16px;
         font-weight: 600;
-        color: #2c3e50;
+        color: var(--heading-color);
         text-align: left;
         cursor: pointer;
     }
+    /* 文字太長就變成「...」：overflow hidden + nowrap + ellipsis 三個要一起用
+       min-width: 0 是讓 flex 子元素可以縮得比文字還窄，不然 ellipsis 不會生效 */
     .side-toggle-label {
         flex: 1;
         min-width: 0;
@@ -738,20 +845,25 @@ section[id^="vp-"],
         margin-right: 10px;
         vertical-align: -0.15em;
         border-radius: 4px;
-        background: var(--gradient-primary, #6b9e58);
+        background: var(--gradient-primary);
     }
+    /* 小箭頭：只畫右邊框 + 下邊框，再轉 45 度就變成往下的 ⌄
+       打開時轉成 -135 度，變成往上 */
     .side-toggle-icon {
         flex-shrink: 0;
         width: 9px;
         height: 9px;
-        border-right: 2px solid #6b9e58;
-        border-bottom: 2px solid #6b9e58;
+        border-right: 2px solid var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
         transform: rotate(45deg) translate(-2px, -2px);
         transition: transform 0.3s ease;
     }
     .side-menu.is-open .side-toggle-icon {
         transform: rotate(-135deg) translate(-2px, -2px);
     }
+    /* 下拉清單：用 absolute 浮在按鈕正下方
+       收起來：visibility hidden + opacity 0 + pointer-events: none → 看不到也點不到
+       打開（.is-open）再全部開回來，配 transition 就有淡入往下滑的效果 */
     .side-menu > ul {
         display: block !important;
         position: absolute;
@@ -763,9 +875,9 @@ section[id^="vp-"],
         margin: 0 !important;
         padding: 4px 0 !important;
         list-style: none !important;
-        background: #ffffff !important;
-        border: 1px solid #e0e0e0 !important;
-        border-top: 3px solid var(--primary-color, #6b9e58) !important;
+        background: var(--bg-surface) !important;
+        border: 1px solid var(--border-light) !important;
+        border-top: 3px solid var(--primary-color) !important;
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
         visibility: hidden;
         opacity: 0;
@@ -788,7 +900,7 @@ section[id^="vp-"],
         margin: 0 !important;
         padding: 0 !important;
         border: none !important;
-        border-bottom: 1px solid #eef0ee !important;
+        border-bottom: 1px solid var(--divider) !important;
     }
     .side-menu > ul > li:last-child {
         border-bottom: none !important;
@@ -800,7 +912,7 @@ section[id^="vp-"],
         padding: 14px 20px !important;
         font-size: 16px !important;
         font-weight: 500;
-        color: #333333 !important;
+        color: var(--text-main) !important;
         background-color: transparent !important;
         border-radius: 0 !important;
         text-decoration: none !important;
@@ -814,30 +926,30 @@ section[id^="vp-"],
         display: block !important;
         margin: 0 !important;
         padding: 0 !important;
-        background: #fafbfa !important;
+        background: var(--bg-sub-menu) !important;
         border: none !important;
-        border-top: 1px solid #eef0ee !important;
+        border-top: 1px solid var(--divider) !important;
     }
     .side-menu .sub-menu a {
         min-height: 44px;
         padding: 12px 20px 12px 36px !important;
         font-size: 15px !important;
-        color: #555555 !important;
+        color: var(--text-soft) !important;
     }
     .side-menu .sub-menu a::before {
         display: none !important;
     }
     .side-menu a:hover,
     .side-menu .sub-menu a:hover {
-        background-color: #f1f8e9 !important;
-        color: #558045 !important;
+        background-color: var(--primary-light) !important;
+        color: var(--accent-text) !important;
     }
     .side-menu a.active,
     .side-menu .sub-menu a.active {
-        background-color: #f1f8e9 !important;
-        color: #558045 !important;
+        background-color: var(--primary-light) !important;
+        color: var(--accent-text) !important;
         font-weight: 700 !important;
-        box-shadow: inset 4px 0 0 0 #6b9e58 !important;
+        box-shadow: inset 4px 0 0 0 var(--primary-color) !important;
     }
     .vp,
     section[id^="vp-"],
@@ -907,6 +1019,7 @@ section[id^="vp-"],
         padding: 10px 14px;
         font-size: 16px;
     }
+    /* env(safe-area-inset-bottom)：iPhone 底部橫條的安全距離，避免按鈕被擋到 */
     .b-top {
         right: 16px;
         bottom: calc(16px + env(safe-area-inset-bottom));
@@ -925,6 +1038,7 @@ section[id^="vp-"],
         margin-left: 0;
     }
 }
+/* 更小的手機（480px 以下）再縮一點 */
 @media (max-width: 480px) {
     .page-all {
         padding: 0 12px !important;
@@ -936,6 +1050,7 @@ section[id^="vp-"],
         height: 38px !important;
     }
 }
+/* 手機平板這種沒有滑鼠的裝置，點一下會卡在 hover 狀態，所以把位移效果取消 */
 @media (hover: none) {
     .liall li:hover,
     .p-1:hover,
@@ -952,6 +1067,7 @@ section[id^="vp-"],
         transform: none !important;
     }
 }
+/* 使用者在系統設定開了「減少動態效果」的話，就把動畫跟平滑捲動關掉 */
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
@@ -973,16 +1089,147 @@ section[id^="vp-"],
     margin-bottom: 5px !important;
 }
 
+/* 頁尾頭像
+   cubic-bezier(0.175, 0.885, 0.32, 1.275) 會先超過一點再彈回來，做出 Q 彈的放大感 */
 .footer-avatar {
     width: 65px;
     height: 65px;
     border-radius: 50%; 
     object-fit: cover; 
-    border: 3px solid var(--primary-color, #6b9e58); 
+    border: 3px solid var(--primary-color); 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); 
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
 }
 .footer-avatar:hover {
     transform: scale(1.15) rotate(8deg);
     box-shadow: 0 6px 18px rgba(107, 158, 88, 0.5);
+}
+/* ===== 捲動淡入 =====
+   JS 會幫卡片加上 .reveal；還沒捲到的（沒有 .is-visible）先透明 + 往下 24px
+   捲進畫面後 JS 加上 .is-visible，就靠 transition 慢慢浮上來 */
+.reveal {
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease,
+        box-shadow 0.3s ease !important;
+}
+.reveal:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(24px);
+}
+
+/* ---- 照片燈箱 ---- */
+.zoomable {
+    cursor: zoom-in;
+}
+/* 燈箱本體：fixed + inset: 0（= top/right/bottom/left 都是 0）蓋滿整個畫面
+   z-index 設很大，壓在所有東西最上面 */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background-color: var(--lightbox-bg);
+    cursor: zoom-out;
+    animation: lightboxIn 0.25s ease;
+}
+/* display: flex 會蓋掉 hidden 屬性，所以要自己補回來 */
+.lightbox[hidden] {
+    display: none;
+}
+.lightbox figure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    max-width: 100%;
+    max-height: 100%;
+}
+/* 放大的圖：min(1000px, 100%) 取比較小的那個 → 大螢幕最多 1000px、小螢幕跟著縮
+   高度扣掉 120px 是留位置給說明文字跟關閉鈕 */
+.lightbox img {
+    max-width: min(1000px, 100%);
+    max-height: calc(100vh - 120px);
+    object-fit: contain;
+    border-radius: var(--border-radius-sub);
+    background-color: var(--img-backdrop);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    cursor: default;
+}
+.lightbox figcaption {
+    color: var(--footer-text);
+    font-size: 15px;
+}
+.lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--footer-heading);
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.lightbox-close:hover,
+.lightbox-close:focus-visible {
+    background-color: var(--primary-color);
+}
+@keyframes lightboxIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* ---- 深色模式切換按鈕（放在回到頂部按鈕上方）---- */
+.theme-toggle {
+    position: fixed;
+    right: 30px;
+    bottom: 90px;
+    z-index: 999;
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--border-soft);
+    border-radius: 50%;
+    background-color: var(--bg-surface);
+    color: var(--heading-color);
+    font-size: 20px;
+    box-shadow: var(--box-shadow-main);
+    cursor: pointer;
+    transition:
+        background-color 0.3s ease,
+        transform 0.3s ease;
+}
+.theme-toggle:hover {
+    background-color: var(--primary-light);
+    transform: rotate(20deg);
+}
+/* 手機版深色模式按鈕也跟著縮小、往右靠，疊在回到頂部按鈕上面 */
+@media (max-width: 900px) {
+    .theme-toggle {
+        right: 16px;
+        bottom: calc(72px + env(safe-area-inset-bottom));
+        width: 44px;
+        height: 44px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    /* 不要動畫的人直接顯示卡片，不做淡入 */
+    .reveal:not(.is-visible) {
+        opacity: 1;
+        transform: none;
+    }
+    .lightbox {
+        animation: none;
+    }
 }

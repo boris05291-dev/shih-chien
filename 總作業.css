@@ -15,6 +15,7 @@
     margin-top: 40px;
     margin-bottom: 20px;
 }
+/* 首頁文字卡片的基本樣式（圓角陰影最後會被 all.css 統一蓋掉） */
 .p-1,
 .p-2,
 .p-3,
@@ -24,7 +25,7 @@
     line-height: 1.8;
     margin-bottom: 25px;
     padding: 20px;
-    background-color: #fcfcfc;
+    background-color: var(--bg-light);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
@@ -33,8 +34,9 @@
 .p-4 p {
     text-align: justify;
     margin-bottom: 20px;
-    color: #444444;
+    color: var(--text-muted);
 }
+/* 每張卡片的最後一段不要留下邊距，不然卡片底部會多一塊空白 */
 .p-1 p:last-child,
 .p-2 p:last-child,
 .p-3 p:last-child,
@@ -43,13 +45,110 @@
 }
 .p-4 ol {
     margin: 15px 0 25px 40px;
-    color: #444444;
+    color: var(--text-muted);
 }
 .p-4 ol li {
     margin-bottom: 12px;
     padding-left: 10px;
     line-height: 1.8;
 }
+/* ---- 簡史時間軸：左邊年份圓點、右邊事件卡片 ---- */
+.timeline {
+    position: relative;
+    list-style: none;
+    margin: 0 0 25px;
+    padding: 0;
+}
+/* 用 ::before 畫出貫穿整條時間軸的直線 */
+.timeline::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 7px;
+    width: 3px;
+    border-radius: 3px;
+    background: var(--gradient-primary);
+}
+.timeline li {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding-left: 34px;
+    margin-bottom: 18px;
+}
+.timeline li:last-child {
+    margin-bottom: 0;
+}
+/* 每個事件前面的圓點，圓心對齊上面那條線 */
+.timeline li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 14px;
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: var(--bg-page);
+    border: 4px solid var(--primary-color);
+}
+.timeline time {
+    flex: 0 0 110px; /* 年份欄固定 110px，不放大也不縮小 */
+    padding-top: 10px;
+    font-weight: bold;
+    color: var(--accent-text);
+}
+.timeline time small {
+    display: block;
+    font-size: 14px;
+    font-weight: normal;
+    color: var(--text-soft);
+}
+.timeline-card {
+    flex: 1;
+    padding: 12px 18px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-muted);
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius-main);
+    box-shadow: var(--box-shadow-main);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+.timeline-card:hover {
+    transform: translateX(6px);
+    box-shadow: var(--box-shadow-hover);
+}
+@media (max-width: 900px) {
+    /* 手機版：年份疊在卡片上方，比較不擠 */
+    .timeline li {
+        flex-direction: column;
+        gap: 6px;
+    }
+    .timeline time {
+        flex-basis: auto;
+        padding-top: 0;
+    }
+    .timeline time small {
+        display: inline;
+        margin-left: 6px;
+    }
+    .timeline li::before {
+        top: 3px;
+    }
+}
+/* 觸控裝置不做 hover 位移 */
+@media (hover: none) {
+    .timeline-card:hover {
+        transform: none;
+    }
+}
+/* ===== 校名由來的表格 =====
+   border-collapse 把相鄰格子的邊框合併成一條
+   表格要有圓角得加 overflow: hidden，把超出圓角的部分裁掉 */
 .t-1 table {
     width: 100%;
     max-width: 300px;
@@ -59,37 +158,30 @@
     overflow: hidden;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
 }
-.ul-1 {
-    margin: 15px 0 25px 30px;
-    color: #444444;
-}
-.ul-1 li {
-    margin-bottom: 12px;
-    padding-left: 5px;
-}
 th,
 td {
     padding: 12px 20px;
     text-align: center;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--border-light);
     font-size: 18px;
 }
 
 th {
     font-weight: bold;
-    color: #ffffff;
-    background-color: #6b9e58;
+    color: var(--text-on-primary);
+    background-color: var(--primary-color);
     width: 40%;
 }
 
 td {
-    color: #333333;
-    background-color: #ffffff;
+    color: var(--text-main);
+    background-color: var(--bg-surface);
 }
 .t-1 table tr:hover td {
-    background-color: #f1f8e9;
+    background-color: var(--primary-light);
     transition: background-color 0.3s ease;
 }
+/* ===== 校歌影片區 ===== */
 .vall-1 {
     display: flex;
     flex-direction: column;
@@ -97,7 +189,7 @@ td {
     gap: 40px;
     margin: 40px 0;
     padding: 40px 20px;
-    background-color: #f8f9fa;
+    background-color: var(--bg-subtle);
     border-radius: 12px;
 }
 .vall-1 .iframe-1,
@@ -113,6 +205,7 @@ td {
     height: auto;
     display: block;
 }
+/* aspect-ratio: 16/9 固定影片比例，寬度變了高度會自己算，不用寫死高度 */
 .vall-1 .iframe-1,
 .vall-1 video {
     aspect-ratio: 16/9;
@@ -139,6 +232,8 @@ td {
     object-fit: cover;
     display: block;
 }
+/* 播放圓鈕置中技巧：top / left 50% 先把左上角移到正中間
+   再 translate(-50%, -50%) 往回拉自己寬高的一半，就剛好置中 */
 .yt-play {
     position: absolute;
     top: 50%;
@@ -160,19 +255,21 @@ td {
     transform: translate(-50%, -50%);
     border-style: solid;
     border-width: 14px 0 14px 24px;
-    border-color: transparent transparent transparent var(--bg-light);
+    border-color: transparent transparent transparent var(--text-on-primary);
 }
 .yt-lite:hover .yt-play,
 .yt-lite:focus-visible .yt-play {
     background: var(--primary-hover);
 }
 
+/* ===== 校歌及校徽區（.pdd）=====
+   flex 直向排列 + align-items: center，裡面的圖片跟按鈕都置中 */
 .pdd {
     font-size: 16px;
     line-height: 1.8;
     margin-bottom: 25px;
     padding: 40px 20px;
-    background-color: #fcfcfc;
+    background-color: var(--bg-light);
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     display: flex;
@@ -186,6 +283,8 @@ td {
     height: auto;
     border-radius: 10px;
     object-fit: contain;
+    /* 深色模式時給黑字的書法圖一塊淺色底，不然會看不到 */
+    background-color: var(--img-backdrop);
 }
 .pdd .ii-1 {
     max-width: 300px;
@@ -196,12 +295,14 @@ td {
     max-width: 450px;
     margin-top: 20px;
 }
+/* 下載按鈕做成膠囊形（border-radius: 25px）
+   :active 是「按下去那一瞬間」，縮小一點有按壓感 */
 .pdd a {
     display: inline-block;
     padding: 10px 24px;
     margin: 5px;
-    background-color: #6b9e58;
-    color: #ffffff !important;
+    background-color: var(--primary-color);
+    color: var(--text-on-primary) !important;
     text-decoration: none;
     border-radius: 25px;
     font-size: 15px;
@@ -211,13 +312,13 @@ td {
     box-shadow: 0 3px 6px rgba(107, 158, 88, 0.3);
 }
 .pdd a:hover {
-    background-color: #558045;
+    background-color: var(--primary-hover);
     transform: translateY(-2px);
     box-shadow: 0 5px 12px rgba(107, 158, 88, 0.4);
     text-decoration: none !important;
 }
 .pdd a:active {
     transform: scale(0.95);
-    background-color: #4a6f3b;
+    background-color: var(--primary-active);
     box-shadow: 0 2px 4px rgba(107, 158, 88, 0.4);
 }

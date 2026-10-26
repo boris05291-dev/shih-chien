@@ -3,7 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- viewport 這行一定要有，不然手機會把網頁縮成超小的電腦版 -->
         <meta name="description" content="實踐大學高雄校區網頁程式設計總作業 - 由張栢睿製作的個人專案作品集網站。" />
+        <!-- og: 開頭的是 Open Graph，把網址貼到 LINE / FB 時會跑出來的預覽標題、說明跟圖片 -->
         <meta property="og:type" content="website" />
         <meta property="og:title" content="實踐大學 - 網頁程式設計總作業 | 張栢睿" />
         <meta property="og:description" content="瀏覽實踐大學高雄校區介紹、創辦人、董事長、校長及副校長團隊資訊。" />
@@ -13,15 +15,23 @@
         <link rel="stylesheet" href="總作業.css" />
         <link rel="stylesheet" href="all.css" />
         <link rel="icon" href="p/01.png" />
+        <!-- Font Awesome 是從 CDN 抓的圖示庫，<i class="fas fa-xxx"> 就能放小圖示 -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        <!-- defer：等 HTML 都讀完才跑 JS，這樣 JS 找元素才不會找不到，也不會卡住畫面 -->
         <script src="home.js" defer></script>
         <script src="components.js" defer></script>
     </head>
     <body>
+        <!-- 頁首故意留空！components.js 會用 fetch 把 components/header.html 塞進來 -->
+        <!-- 所以直接雙擊開檔（file://）會看不到頁首，要用即時預覽開 -->
         <header></header>
+
+        <!-- ===== 整頁版面：左邊側邊選單 + 右邊主要內容 ===== -->
         <div class="page-all">
+            <!-- 側邊選單：手機版（900px 以下）會被 components.js 變成可以收合的選單 -->
             <aside class="side-menu">
                 <ul>
+                    <!-- menu-link + data-target：捲到哪一段，JS 就靠 data-target 找到對應連結幫它加 active（亮起來） -->
                     <li><a href="#" class="menu-link active" data-target="top-section">首頁</a></li>
                     <li><a href="#h1" class="menu-link" data-target="h1">本校沿革</a></li>
                     <li><a href="#h7" class="menu-link" data-target="h7">校歌及校徽</a></li>
@@ -31,30 +41,62 @@
                     <li><a href="Vice.html">副校長</a></li>
                 </ul>
             </aside>
+
+            <!-- ===== 主要內容區 ===== -->
             <main class="all1">
                 <div class="hall1">
                     <h1 id="home-1">實踐大學高雄校區</h1>
                 </div>
+                <!-- ===== 第一大段：本校沿革 ===== -->
+                <!-- id="h1" 是給側邊選單 href="#h1" 跳過來用的錨點 -->
                 <div class="h-1">
                     <h2 id="h1">本校沿革</h2>
                 </div>
                 <div class="i-1">
+                    <!-- 圖片有寫 width / height，瀏覽器會先留好位置，圖片載入時版面才不會跳來跳去 -->
                     <img src="p/03.jpg" alt="實踐高雄校區" width="400" height="246" />
                 </div>
                 <div class="h-3">
                     <h3 id="h3">簡史</h3>
                 </div>
-                <section class="p-1">
-                    <p>民國四十七年三月，謝東閔先生創立實踐家政專科學校，是本校最前身。</p>
-                    <p>民國六十八年六月，校名改為實踐家政經濟專科學校。</p>
-                    <p>民國七十五年五月，兼辦五年制專科。</p>
-                    <p>民國八十年八月，改制為實踐設計管理學院，專科停招。</p>
-                    <p>民國八十四年八月，高雄校區成立，開始招生。</p>
-                    <p>民國八十六年八月，改名為實踐大學。</p>
-                </section>
+                <!-- 時間軸：合併原本「簡史」與「創校歷史」兩份年份清單 -->
+                <!-- 用 <ol> 是因為事件有先後順序；中間那條線跟圓點是 CSS 畫的 -->
+                <!-- 每個 li 捲到畫面裡時，home.js 會讓它淡入出現 -->
+                <ol class="timeline">
+                    <li>
+                        <!-- <time> 的 datetime 是給機器看的標準日期格式，畫面上顯示的是民國年 -->
+                        <time datetime="1958-03">民國47年3月<small>1958</small></time>
+                        <div class="timeline-card">謝東閔先生創立「<span class="h-t">實踐家政專科學校</span>」，奉准設立招生，是本校最前身。</div>
+                    </li>
+                    <li>
+                        <time datetime="1979-06">民國68年6月<small>1979</small></time>
+                        <div class="timeline-card">更名為「實踐家政經濟專科學校」。</div>
+                    </li>
+                    <li>
+                        <time datetime="1986-05">民國75年5月<small>1986</small></time>
+                        <div class="timeline-card">兼辦五年制專科。</div>
+                    </li>
+                    <li>
+                        <time datetime="1991-08">民國80年8月<small>1991</small></time>
+                        <div class="timeline-card">改制為「實踐設計管理學院」，專科停招。</div>
+                    </li>
+                    <li>
+                        <time datetime="1995-08">民國84年8月<small>1995</small></time>
+                        <div class="timeline-card">高雄校區成立。</div>
+                    </li>
+                    <li>
+                        <time datetime="1995-09">民國84年9月<small>1995</small></time>
+                        <div class="timeline-card">高雄校區開發完成，開始招生。</div>
+                    </li>
+                    <li>
+                        <time datetime="1997-08">民國86年8月<small>1997</small></time>
+                        <div class="timeline-card">奉准改名為「<span class="h-t">實踐大學</span>」。</div>
+                    </li>
+                </ol>
                 <div class="h-4">
                     <h3 id="h4">校名由來</h3>
                 </div>
+                <!-- class="h-t" 的 span 是重點文字，會被 CSS 標顏色 -->
                 <section class="p-2">
                     <p>
                         本校創辦人謝東閔先生，深刻體認我國「修齊治平」的傳統哲學觀，並鑑於家為國之本，欲國家富強、民生樂利，必先健全家庭，於是在民國四十六年毅然決定創辦家政學校。翌年三月廿六日，中華民國第一所家政學校—<span
@@ -81,14 +123,7 @@
                     <p>
                         由本校科系之設置，亦可看出前述穩健務實的辦學理念。創校之初僅設家政科，其後再增設服裝設計、食品營養、會計、事務管理、社會工作、音樂、美術工藝、兒童保育等科系。其後再配合社會脈動、工商經濟與資訊科技之發展，而陸續增設銀行保險、國際貿易、企業管理、室內空間設計、工業產品設計、資訊管理、媒體傳達設計、觀光管理、建築設計等科系。
                     </p>
-                    <p>自創校迄今，其間本校經歷下列重要階段之發展，由此發展過程亦可看出本校務實之辦學理念廣受肯定。</p>
-                    <ul class="ul-1">
-                        <li><strong>民國47年3月：奉准設立招生，校名為「實踐家政專科學校」</strong></li>
-                        <li><strong>民國68年6月：更名為「實踐家政經濟專科學校」</strong></li>
-                        <li><strong>民國80年8月：改制為「實踐設計管理學院」</strong></li>
-                        <li><strong>民國84年9月：高雄校區開發完成開始招生</strong></li>
-                        <li><strong>民國86年8月：奉准成為「實踐大學」</strong></li>
-                    </ul>
+                    <p>自創校迄今，本校經歷的重要發展階段請見上方「<a href="#h3">簡史</a>」時間軸，由此發展過程亦可看出本校務實之辦學理念廣受肯定。</p>
                     <p>
                         經歷逾50年的發展，本校目前已成為設有台北、高雄兩校區，分設民生、設計、管理、商學與資訊、文化與創意五學院之綜合大學。
                     </p>
@@ -128,9 +163,11 @@
                         >的辦學理念，達到華人世界最佳生活科學大學的發展願景。
                     </p>
                 </section>
+                <!-- ===== 第二大段：校歌及校徽 ===== -->
                 <div class="h-7">
                     <h2 id="h7">校歌</h2>
                 </div>
+                <!-- vall-1 把作詞作曲表格、影片、歌詞圖排在一起 -->
                 <div class="vall-1">
                     <div class="t-1">
                         <table>
@@ -146,18 +183,24 @@
                     </div>
                     <div class="iframe-1">
                         <!-- 先只顯示縮圖，點了才載入 YouTube（程式在 home.js） -->
+                        <!-- 高級技巧：直接放 iframe 一開頁面就會載一大堆 YouTube 的東西，很慢 -->
+                        <!-- 所以先用按鈕假裝成播放器，data-id 存影片 ID，點下去 JS 才換成真的 iframe -->
+                        <!-- 縮圖的 alt="" 是故意的，因為按鈕的 aria-label 已經說明了，螢幕閱讀器不用念兩次 -->
                         <button type="button" class="yt-lite" data-id="0XMQiq8tRkI" aria-label="播放實踐大學校歌影片">
                             <img src="https://i.ytimg.com/vi/0XMQiq8tRkI/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" />
                             <span class="yt-play" aria-hidden="true"></span>
                         </button>
                     </div>
                     <div class="i2">
+                        <!-- loading="lazy"：圖片快捲到才開始下載，首頁打開比較快 -->
                         <img src="p/348588577.jpg" alt="實踐大學校歌歌詞" loading="lazy" width="418" height="571" />
                     </div>
                 </div>
                 <div class="h-8">
                     <h2>校徽</h2>
                 </div>
+                <!-- 校徽下載區：<a> 加 download 屬性，點了會直接下載檔案而不是開新頁 -->
+                <!-- 檔名裡的 %E5%AF... 是中文檔名編碼後的樣子（實踐大學、高雄校區） -->
                 <section class="pdd">
                     <img class="ii-1" src="p/903635956.png" alt="校徽" width="800" height="600" loading="lazy" />
                     <a href="p/903635956.pdf" download>點此下載 PDF 文件</a>
@@ -169,7 +212,10 @@
                 </section>
             </main>
         </div>
+        <!-- 頁尾也是空的，一樣由 components.js 把 components/footer.html 塞進來 -->
         <footer class="f-1"></footer>
+        <!-- 回到頂部按鈕：往下捲一段才會出現，點了滑回最上面（home.js 控制） -->
+        <!-- 按鈕上只有箭頭，所以補 aria-label 讓螢幕閱讀器知道它是幹嘛的 -->
         <button id="b-top" class="b-top" aria-label="返回頂部">↑</button>
     </body>
 </html>
