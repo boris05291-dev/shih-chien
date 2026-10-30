@@ -1,0 +1,72 @@
+/* ===== courses.html 專屬 =====｜顏色用 all.css 變數 → 深色模式自動換色 */
+
+/* 特色標題 */
+.feature-title{
+    font-size: 24px;
+    color: var(--accent-text);
+    margin-bottom: 10px;
+}
+
+/* 標語橫幅：全站綠色漸層 */
+.slogan{
+    margin: 40px 0;
+    height: 80px;
+    background: var(--gradient-primary);
+    border-radius: var(--border-radius-main);
+}
+.slogan p{
+    margin: 0;
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    color: var(--text-on-primary);
+}
+
+/* ===== 課程卡片 ===== */
+/* 蓋掉 Bootstrap 白底灰框 → 全站卡片樣式 */
+.course-card{
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius-main);
+    box-shadow: var(--box-shadow-main);
+    /* transition → 慢慢變化 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.course-card:hover{
+    transform: translateY(-8px); /* 上浮 8px */
+    box-shadow: var(--box-shadow-hover);
+}
+.course-card .card-title{
+    font-size: 22px;
+    color: var(--heading-color);
+}
+.course-icon{
+    color: var(--primary-color);
+}
+.course-desc{
+    color: var(--text-main);
+    margin: 8px 0;
+}
+.course-meta{
+    color: var(--text-soft);
+    margin: 4px 0;
+}
+.price-now{
+    color: var(--accent-text);
+    margin-top: 12px;
+}
+
+/* 「了解更多」按鈕｜要比 all.css 的 a:link 精確才蓋得過 */
+.course-card a.btn-site{
+    background-color: var(--primary-color);
+    color: var(--text-on-primary);
+    border: none;
+    border-radius: var(--border-radius-sub);
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+.course-card a.btn-site:hover{
+    background-color: var(--primary-hover);
+    color: var(--text-on-primary);
+    text-decoration: none; /* 拿掉 all.css a:hover 的底線 */
+    transform: scale(1.05); /* 滑過放大 */
+}

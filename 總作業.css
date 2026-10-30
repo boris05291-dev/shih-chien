@@ -15,7 +15,7 @@
     margin-top: 40px;
     margin-bottom: 20px;
 }
-/* 首頁文字卡片的基本樣式（圓角陰影最後會被 all.css 統一蓋掉） */
+/* 首頁文字卡片（圓角陰影由 all.css 統一） */
 .p-1,
 .p-2,
 .p-3,
@@ -36,7 +36,7 @@
     margin-bottom: 20px;
     color: var(--text-muted);
 }
-/* 每張卡片的最後一段不要留下邊距，不然卡片底部會多一塊空白 */
+/* 最後一段不留下邊距 → 卡片底部不多空白 */
 .p-1 p:last-child,
 .p-2 p:last-child,
 .p-3 p:last-child,
@@ -52,14 +52,14 @@
     padding-left: 10px;
     line-height: 1.8;
 }
-/* ---- 簡史時間軸：左邊年份圓點、右邊事件卡片 ---- */
+/* ---- 時間軸：左邊年份圓點、右邊事件卡片 ---- */
 .timeline {
     position: relative;
     list-style: none;
     margin: 0 0 25px;
     padding: 0;
 }
-/* 用 ::before 畫出貫穿整條時間軸的直線 */
+/* ::before 畫貫穿的直線 */
 .timeline::before {
     content: "";
     position: absolute;
@@ -81,7 +81,7 @@
 .timeline li:last-child {
     margin-bottom: 0;
 }
-/* 每個事件前面的圓點，圓心對齊上面那條線 */
+/* 圓點：圓心對齊直線 */
 .timeline li::before {
     content: "";
     position: absolute;
@@ -94,7 +94,7 @@
     border: 4px solid var(--primary-color);
 }
 .timeline time {
-    flex: 0 0 110px; /* 年份欄固定 110px，不放大也不縮小 */
+    flex: 0 0 110px; /* 年份欄固定 110px */
     padding-top: 10px;
     font-weight: bold;
     color: var(--accent-text);
@@ -123,7 +123,7 @@
     box-shadow: var(--box-shadow-hover);
 }
 @media (max-width: 900px) {
-    /* 手機版：年份疊在卡片上方，比較不擠 */
+    /* 手機版：年份疊在卡片上方 */
     .timeline li {
         flex-direction: column;
         gap: 6px;
@@ -146,9 +146,7 @@
         transform: none;
     }
 }
-/* ===== 校名由來的表格 =====
-   border-collapse 把相鄰格子的邊框合併成一條
-   表格要有圓角得加 overflow: hidden，把超出圓角的部分裁掉 */
+/* ===== 校名由來表格 =====｜border-collapse 合併邊框｜圓角要配 overflow: hidden */
 .t-1 table {
     width: 100%;
     max-width: 300px;
@@ -205,7 +203,7 @@ td {
     height: auto;
     display: block;
 }
-/* aspect-ratio: 16/9 固定影片比例，寬度變了高度會自己算，不用寫死高度 */
+/* aspect-ratio: 16/9 → 高度自動算 */
 .vall-1 .iframe-1,
 .vall-1 video {
     aspect-ratio: 16/9;
@@ -215,7 +213,7 @@ td {
     height: 100%;
     border: none;
 }
-/* YouTube 縮圖按鈕：點擊後才換成 iframe */
+/* YouTube 縮圖按鈕：點了才換成 iframe */
 .yt-lite {
     position: relative;
     display: block;
@@ -232,8 +230,7 @@ td {
     object-fit: cover;
     display: block;
 }
-/* 播放圓鈕置中技巧：top / left 50% 先把左上角移到正中間
-   再 translate(-50%, -50%) 往回拉自己寬高的一半，就剛好置中 */
+/* 播放鈕置中：top / left 50% + translate(-50%, -50%) */
 .yt-play {
     position: absolute;
     top: 50%;
@@ -246,7 +243,7 @@ td {
     box-shadow: var(--box-shadow-main);
     transition: background 0.2s;
 }
-/* 用 border 畫出白色三角形播放符號 */
+/* border 畫白色三角形 */
 .yt-play::after {
     content: "";
     position: absolute;
@@ -262,8 +259,7 @@ td {
     background: var(--primary-hover);
 }
 
-/* ===== 校歌及校徽區（.pdd）=====
-   flex 直向排列 + align-items: center，裡面的圖片跟按鈕都置中 */
+/* ===== 校歌及校徽（.pdd）=====｜flex 直排 + 置中 */
 .pdd {
     font-size: 16px;
     line-height: 1.8;
@@ -283,7 +279,7 @@ td {
     height: auto;
     border-radius: 10px;
     object-fit: contain;
-    /* 深色模式時給黑字的書法圖一塊淺色底，不然會看不到 */
+    /* 深色模式：書法圖加淺色底，不然看不到 */
     background-color: var(--img-backdrop);
 }
 .pdd .ii-1 {
@@ -295,8 +291,7 @@ td {
     max-width: 450px;
     margin-top: 20px;
 }
-/* 下載按鈕做成膠囊形（border-radius: 25px）
-   :active 是「按下去那一瞬間」，縮小一點有按壓感 */
+/* 下載按鈕：膠囊形｜:active 縮小 → 按壓感 */
 .pdd a {
     display: inline-block;
     padding: 10px 24px;

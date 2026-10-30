@@ -9,8 +9,7 @@
     }
 }
 
-/* 榮譽區塊：金色標題 + 星號清單
-   用 .liall .li-4（兩層 class）提高權重，才蓋得過 all.css 的 .liall li 與 .li-4 h3 */
+/* 榮譽區塊：金色標題 + 星號清單｜兩層 class 提高權重 → 蓋過 all.css */
 .liall .li-4 h3 {
     color: var(--gold-dark);
     font-size: 20px;
@@ -36,8 +35,7 @@
         transform 0.25s ease,
         background-color 0.25s ease !important;
 }
-/* 用 Font Awesome 的星星當清單符號：content 填圖示的編碼（\f005 是星星）
-   font-family 要指定 Font Awesome，font-weight: 900 才是實心那一套 */
+/* 清單符號用 Font Awesome 星星 \f005｜font-weight: 900 = 實心 */
 .liall .li-4 li::before {
     content: "\f005";
     font-family: "Font Awesome 6 Free";

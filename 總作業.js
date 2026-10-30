@@ -1,5 +1,5 @@
 /* jshint esversion: 6, browser: true */
-// 註：目前沒有任何 HTML 載入這個檔案，功能已經搬到 home.js（這是舊版）
+// 註：沒有 HTML 載入此檔（舊版，功能已搬到 home.js）
 const btop = document.getElementById("b-top");
 window.addEventListener("scroll", () => {
     if (window.scrollY > 300) {
@@ -33,7 +33,7 @@ if (h1Section && h7Section) {
                 link.classList.add("active");
             }
         });
-        // 快捲到頂（100px 內）就固定標成「回到頂部」那一項
+        // 捲到頂 100px 內 → 標成「回到頂部」
         if (window.scrollY < 100) {
             menuLinks.forEach((link) => link.classList.remove("active"));
             const homeLink = document.querySelector('.side-menu .menu-link[data-target="top-section"]');
@@ -50,7 +50,7 @@ if (h1Section && h7Section) {
         if (!active || menu.scrollWidth <= menu.clientWidth) return;
         const m = menu.getBoundingClientRect();
         const a = active.getBoundingClientRect();
-        // 算法：目前已捲的距離 + 項目離選單左邊多遠 - (選單寬 - 項目寬) / 2 → 項目剛好置中
+        // 置中算法：已捲距離 + 項目左距 - (選單寬 - 項目寬) / 2
         const left = menu.scrollLeft + (a.left - m.left) - (m.width - a.width) / 2;
         menu.scrollTo({ left, behavior: "smooth" });
     };

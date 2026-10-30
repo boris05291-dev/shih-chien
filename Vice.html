@@ -15,13 +15,13 @@
         <link rel="stylesheet" href="all.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
         <script src="home.js" defer></script>
-        <!-- Vice.js 是這頁專用的：捲到哪位副校長，子選單就亮哪一個 -->
+        <!-- Vice.js：捲到哪位副校長，子選單亮哪個 -->
         <script src="Vice.js" defer></script>
         <script src="components.js" defer></script>
     </head>
-    <!-- body 給 id="top"，連結寫 #top 就能跳回最上面 -->
+    <!-- body id="top" → 連結寫 #top 回頂端 -->
     <body id="top">
-        <!-- 頁首頁尾留空，components.js 會 fetch 共用的 header / footer 塞進來 -->
+        <!-- 頁首頁尾留空 → components.js 載入 -->
         <header></header>
         <div class="page-all">
             <aside class="side-menu">
@@ -32,11 +32,11 @@
                     <li><a href="Founder.html">創辦人</a></li>
                     <li><a href="president.html">董事長</a></li>
                     <li><a href="headmaster.html">校長</a></li>
-                    <!-- 二層選單：has-sub 底下再包一個 ul.sub-menu，放三位副校長 -->
+                    <!-- 二層選單：li.has-sub > ul.sub-menu -->
                     <li class="has-sub">
                         <a href="#vp-1" class="active">副校長</a>
-                        <!-- data-target 要跟下面 section 的 id 一模一樣，Vice.js 才找得到對應的人 -->
-                        <!-- 之後要加第四位副校長，只要多一個 li + 一個 section，JS 不用改 -->
+                        <!-- data-target = 下方 section 的 id（Vice.js 靠它對應） -->
+                        <!-- 新增副校長：加一個 li + 一個 section，JS 不用改 -->
                         <ul class="sub-menu">
                             <li><a href="#vp-1" class="menu-link active" data-target="vp-1">李孟晃 副校長</a></li>
                             <li><a href="#vp-2" class="menu-link" data-target="vp-2">郭壽旺 國際暨兩岸副校長</a></li>
@@ -49,9 +49,9 @@
                 <h1 id="h-1">副校長</h1>
 
                 <!-- ===== 第一位：李孟晃 副校長 ===== -->
-                <!-- 每位副校長都包成一個 section.vp，結構都一樣：照片 → 名字 → 英文名片 → 三張卡片 -->
+                <!-- section.vp：照片 → 名字 → 英文名片 → 三張卡 -->
                 <section class="vp" id="vp-1">
-                    <!-- 第一張照片在最上面，所以「不」加 lazy，讓它馬上載入 -->
+                    <!-- 第一張照片在最上面 → 不加 lazy -->
                     <div class="i-2">
                         <img src="p/vp1.jpg" alt="李孟晃副校長" width="400" height="300" />
                     </div>
@@ -61,7 +61,7 @@
                         <p>Vice President</p>
                         <p>Shih Chien University</p>
                         <br />
-                        <!-- 點了會開學校提供的 PDF 簡歷 -->
+                        <!-- 開啟學校提供的 PDF 簡歷 -->
                         <a href="p/vicepresidentProfile(1120807).pdf"> Profile - 李孟晃博士（PDF）</a>
                     </div>
                     <div class="liall">
@@ -101,7 +101,7 @@
                 <!-- ===== 第二位：郭壽旺 國際暨兩岸事務副校長 ===== -->
                 <section class="vp" id="vp-2">
                     <div class="i-2">
-                        <!-- 下面的照片一開始看不到，加 loading="lazy" 等捲到再載 -->
+                        <!-- 下方照片 → loading="lazy" -->
                         <img src="p/vp2.jpg" alt="郭壽旺副校長" loading="lazy" width="400" height="300" />
                     </div>
                     <h2 id="hv-2">國際暨兩岸事務副校長 郭壽旺博士</h2>
@@ -200,7 +200,7 @@
             </main>
         </div>
         <footer class="f-1"></footer>
-        <!-- 回到頂部按鈕（home.js 控制） -->
+        <!-- 回到頂部（home.js） -->
         <button id="b-top" class="b-top" aria-label="返回頂部">↑</button>
     </body>
 </html>

@@ -11,21 +11,21 @@
         <meta property="og:image" content="https://boris05291-dev.github.io/shih-chien/p/makebead-256x225.png" />
         <title>創辦人｜實踐大學高雄校區</title>
         <link rel="icon" href="p/01.png" />
-        <!-- 這頁沒有自己的 CSS 檔，全部吃 all.css 的共用樣式 -->
+        <!-- 沒有專屬 CSS，只用 all.css -->
         <link rel="stylesheet" href="all.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-        <!-- home.js 雖然叫 home，但回到頂部、淡入、燈箱這些每頁都會用到，所以也要載 -->
+        <!-- home.js：回到頂部、淡入、燈箱（每頁共用） -->
         <script src="home.js" defer></script>
         <script src="components.js" defer></script>
     </head>
     <body>
-        <!-- 頁首頁尾留空，components.js 會 fetch 共用的 header / footer 塞進來 -->
+        <!-- 頁首頁尾留空 → components.js 載入 -->
         <header></header>
         <div class="page-all">
-            <!-- 側邊選單：每頁都一樣，只差在「目前這頁」那個連結有加 active -->
+            <!-- 側邊選單：目前頁面加 active -->
             <aside class="side-menu">
                 <ul>
-                    <!-- 回首頁的段落要寫 home.html#h1，因為錨點在別的檔案 -->
+                    <!-- 錨點在別頁 → 寫 home.html#h1 -->
                     <li><a href="home.html">首頁</a></li>
                     <li><a href="home.html#h1">本校沿革</a></li>
                     <li><a href="home.html#h7">校歌及校徽</a></li>
@@ -41,7 +41,7 @@
                     <img src="p/f.gif" alt="創辦人謝東閔先生" width="191" height="266" />
                 </section>
                 <h2>創辦人 謝東閔先生</h2>
-                <!-- liall 是卡片的外框，裡面每個 section 都是一張卡片（介紹、經歷） -->
+                <!-- liall = 卡片外框｜每個 section 一張卡（介紹、經歷） -->
                 <div class="liall">
                     <section class="pp1">
                         <p>
@@ -62,7 +62,7 @@
             </main>
         </div>
         <footer class="f-1"></footer>
-        <!-- 回到頂部按鈕（home.js 控制） -->
+        <!-- 回到頂部（home.js） -->
         <button id="b-top" class="b-top" aria-label="返回頂部">↑</button>
     </body>
 </html>

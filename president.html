@@ -11,7 +11,7 @@
         <meta property="og:image" content="https://boris05291-dev.github.io/shih-chien/p/makebead-256x225.png" />
         <title>董事長｜實踐大學高雄校區</title>
         <link rel="icon" href="p/01.png" />
-        <!-- 先載這頁專屬的 president.css，再載共用的 all.css -->
+        <!-- 先載專屬 president.css，再載共用 all.css -->
         <link rel="stylesheet" href="president.css" />
         <link rel="stylesheet" href="all.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -19,10 +19,10 @@
         <script src="components.js" defer></script>
     </head>
     <body>
-        <!-- 頁首頁尾留空，components.js 會 fetch 共用的 header / footer 塞進來 -->
+        <!-- 頁首頁尾留空 → components.js 載入 -->
         <header></header>
         <div class="page-all">
-            <!-- 側邊選單：「董事長」這個有加 active，代表現在在這頁 -->
+            <!-- 側邊選單：「董事長」加 active -->
             <aside class="side-menu">
                 <ul>
                     <li><a href="home.html">首頁</a></li>
@@ -40,7 +40,7 @@
                     <img src="p/p.jpg" alt="董事長" width="200" height="292" />
                 </div>
                 <h2>董事長 謝孟雄博士</h2>
-                <!-- liall 裡面每個 section 就是一張卡片：現職、學歷、經歷、榮譽、著作 -->
+                <!-- 每個 section 一張卡：現職、學歷、經歷、榮譽、著作 -->
                 <div class="liall">
                     <section class="li-1">
                         <h3 id="p1">現職</h3>
@@ -84,7 +84,7 @@
                         </ul>
                     </section>
                     <section class="li-4">
-                        <!-- <i class="fas fa-award"> 是 Font Awesome 的獎章小圖示 -->
+                        <!-- fa-award = 獎章圖示 -->
                         <h3><i class="fas fa-award"></i> 榮譽</h3>
                         <ul>
                             <li>民國七十六年獲教育部頒發師鐸獎</li>
@@ -97,7 +97,7 @@
                     </section>
                     <section class="li-5">
                         <h3 id="p5">著作</h3>
-                        <!-- 著作用 <ol> 有編號，比較好數總共有幾本 -->
+                        <!-- <ol> → 著作有編號 -->
                         <ol>
                             <li>子宮異常出血之研究</li>
                             <li>中年婦女的疾病與防治</li>
@@ -131,7 +131,7 @@
             </main>
         </div>
         <footer class="f-1"></footer>
-        <!-- 回到頂部按鈕（home.js 控制） -->
+        <!-- 回到頂部（home.js） -->
         <button id="b-top" class="b-top" aria-label="返回頂部">↑</button>
     </body>
 </html>
