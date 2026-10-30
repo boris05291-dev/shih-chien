@@ -59,16 +59,19 @@
     margin: 0 0 25px;
     padding: 0;
 }
-/* ::before 畫貫穿的直線 */
-.timeline::before {
+/* li::after 畫圓點之間的連接線 */
+.timeline li::after {
     content: "";
     position: absolute;
-    top: 8px;
-    bottom: 8px;
+    top: 26.5px;
     left: 7px;
     width: 3px;
-    border-radius: 3px;
-    background: var(--gradient-primary);
+    height: calc(100% + 18px);
+    background: var(--primary-color);
+}
+/* 最後一個圓點不接線 */
+.timeline li:last-child::after {
+    display: none;
 }
 .timeline li {
     position: relative;
@@ -86,16 +89,18 @@
     content: "";
     position: absolute;
     left: 0;
-    top: 14px;
+    top: 18px; 
     width: 17px;
     height: 17px;
     border-radius: 50%;
     background: var(--bg-page);
     border: 4px solid var(--primary-color);
+    box-sizing: border-box;
+    z-index: 1; 
 }
 .timeline time {
     flex: 0 0 110px; /* 年份欄固定 110px */
-    padding-top: 10px;
+    padding-top: 16px;
     font-weight: bold;
     color: var(--accent-text);
 }
@@ -137,7 +142,10 @@
         margin-left: 6px;
     }
     .timeline li::before {
-        top: 3px;
+        top: 2px;
+    }
+        .timeline li::after {
+        top: 10.5px; 
     }
 }
 /* 觸控裝置不做 hover 位移 */
