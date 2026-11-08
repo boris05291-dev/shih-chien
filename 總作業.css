@@ -359,7 +359,7 @@ td {
     display: block;
     width: min(100%, 480px);
     height: auto;
-    margin-top: 32px;
+    margin: 32px auto 0; /* 左右 auto → 水平置中（沒有捲動動畫時） */
     mix-blend-mode: multiply; /* 白底融進頁面底色 */
 }
 :root[data-theme="dark"] .chronicle-brush {
@@ -377,11 +377,12 @@ html.scrub .chronicle-stage {
     top: 65px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto minmax(0, auto) auto;
+    grid-template-rows: auto auto minmax(0, auto) auto auto;
     grid-template-areas:
         "head skip"
         "year year"
-        "story brush"
+        "story story"
+        "brush brush"
         "bar bar";
     align-content: center;
     column-gap: 48px;
@@ -462,7 +463,7 @@ html.scrub .chronicle .timeline-card:hover {
 html.scrub .chronicle-brush {
     grid-area: brush;
     align-self: center;
-    justify-self: end;
+    justify-self: center;
     margin-top: 0;
     clip-path: inset(0 100% 0 0); /* 由 home.js 從左往右打開，像寫字 */
 }
@@ -493,7 +494,7 @@ html.scrub .chronicle-bar span {
         padding: 16px;
     }
     html.scrub .chronicle-brush {
-        justify-self: start;
+        justify-self: center;
         width: min(100%, 320px);
         margin-top: 12px;
     }
