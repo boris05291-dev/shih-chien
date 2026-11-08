@@ -1,6 +1,8 @@
 /* jshint esversion: 6, browser: true */
 // 小工具：元素離整頁頂端的距離
 const docTop = (el) => el.getBoundingClientRect().top + window.scrollY;
+// 英文頁的 <html lang="en"> → JS 產生的文字也換英文
+const isEn = document.documentElement.lang === "en";
 // 小工具：捲動 / 縮放 / 載入時執行 fn｜requestAnimationFrame + ticking 節流 → 每幀最多一次
 const onScrollOrLayout = (fn) => {
     let ticking = false;
@@ -29,7 +31,7 @@ document.querySelectorAll(".yt-lite").forEach((btn) => {
     btn.addEventListener("click", () => {
         const iframe = document.createElement("iframe");
         iframe.src = "https://www.youtube.com/embed/" + btn.dataset.id + "?autoplay=1";
-        iframe.title = "實踐大學校歌";
+        iframe.title = isEn ? "Shih Chien University anthem" : "實踐大學校歌";
         iframe.allow = "accelerometer; autoplay; encrypted-media; web-share";
         iframe.referrerPolicy = "strict-origin-when-cross-origin";
         iframe.allowFullscreen = true;
@@ -70,7 +72,8 @@ if (h1Section && h7Section) {
     const apply = (theme) => {
         root.setAttribute("data-theme", theme);
         btn.innerHTML = theme === "dark" ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
-        btn.setAttribute("aria-label", theme === "dark" ? "切換成淺色模式" : "切換成深色模式");
+        const labels = isEn ? ["Switch to light mode", "Switch to dark mode"] : ["切換成淺色模式", "切換成深色模式"];
+        btn.setAttribute("aria-label", theme === "dark" ? labels[0] : labels[1]);
     };
     const btn = document.createElement("button");
     btn.type = "button";
@@ -123,9 +126,9 @@ if (h1Section && h7Section) {
     box.hidden = true;
     box.setAttribute("role", "dialog");
     box.setAttribute("aria-modal", "true");
-    box.setAttribute("aria-label", "圖片放大檢視");
+    box.setAttribute("aria-label", isEn ? "Enlarged image" : "圖片放大檢視");
     box.innerHTML =
-        '<button type="button" class="lightbox-close" aria-label="關閉">&times;</button>' +
+        `<button type="button" class="lightbox-close" aria-label="${isEn ? "Close" : "關閉"}">&times;</button>` +
         '<figure><img alt="" /><figcaption></figcaption></figure>';
     document.body.appendChild(box);
     const bigImg = box.querySelector("img");
@@ -154,7 +157,7 @@ if (h1Section && h7Section) {
         // Tab 可選到，Enter / 空白鍵打開
         img.tabIndex = 0;
         img.setAttribute("role", "button");
-        img.setAttribute("aria-label", "放大檢視：" + img.alt);
+        img.setAttribute("aria-label", (isEn ? "Enlarge: " : "放大檢視：") + img.alt);
         img.addEventListener("click", () => open(img));
         img.addEventListener("keydown", (e) => {
             if (e.key === "Enter" || e.key === " ") {

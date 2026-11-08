@@ -1483,3 +1483,23 @@ th {
         border-color: var(--text-main) !important;
     }
 }
+
+/* ---- 語言切換與英文排版 ---- */
+.lang-switch {
+    font-weight: 600;
+}
+@media (min-width: 901px) {
+    .nav-menu a.lang-switch {
+        border: 1px solid var(--border-soft);
+    }
+}
+/* 導覽列多了切換鈕：窄桌機縮小間距，才不會換行 */
+@media (min-width: 901px) and (max-width: 1024px) {
+    .nav-menu a {
+        padding: 8px;
+    }
+}
+/* 英文左右對齊會拉出大空隙，改靠左 */
+:lang(en) :is(.pp1, .p-2 p, .p-3 p, .p-4 p) {
+    text-align: left;
+}
