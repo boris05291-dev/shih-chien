@@ -325,3 +325,191 @@ td {
     background-color: var(--primary-active);
     box-shadow: 0 2px 4px rgba(107, 158, 88, 0.4);
 }
+
+/* ===== 開場：校史 =====｜先寫靜態版（沒動畫時用），捲動版都掛在 html.scrub 底下 */
+.chronicle-stage {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px;
+}
+.chronicle h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.2;
+    color: var(--heading-color);
+}
+.chronicle h2 {
+    margin: 8px 0 28px;
+    padding-left: 0 !important;
+    font-size: 1rem;
+    font-weight: normal;
+    letter-spacing: 0.2em;
+    color: var(--accent-text);
+}
+.chronicle h2::before {
+    display: none;
+}
+.chronicle-year,
+.chronicle-bar,
+.chronicle-skip {
+    display: none;
+}
+.chronicle-brush {
+    display: block;
+    width: min(100%, 480px);
+    height: auto;
+    margin-top: 32px;
+    mix-blend-mode: multiply; /* 白底融進頁面底色 */
+}
+:root[data-theme="dark"] .chronicle-brush {
+    filter: invert(1);
+    mix-blend-mode: screen;
+}
+/* 高度 = 一個畫面 + 6 段 × 45svh（7 個年代 = 6 次切換）*/
+html.scrub .chronicle {
+    height: 370svh;
+}
+/* sticky：捲動時舞台固定，用捲動距離驅動內容｜65px = 頁首高度 */
+html.scrub .chronicle-stage {
+    background-color: var(--bg-page); /* sticky 自成一層，混色要有底色才融得進去 */
+    position: sticky;
+    top: 65px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto minmax(0, auto) auto;
+    grid-template-areas:
+        "head skip"
+        "year year"
+        "story brush"
+        "bar bar";
+    align-content: center;
+    column-gap: 48px;
+    height: calc(100svh - 65px);
+    overflow: hidden;
+}
+html.scrub .chronicle-head {
+    grid-area: head;
+}
+html.scrub .chronicle h1 {
+    font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+}
+html.scrub .chronicle h2 {
+    margin-bottom: 0;
+}
+html.scrub .chronicle-skip {
+    grid-area: skip;
+    justify-self: end;
+    align-self: start;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+}
+html.scrub .chronicle-year {
+    grid-area: year;
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(6rem, min(24vw, 34svh), 18rem);
+    font-weight: 700;
+    line-height: 1.05;
+    font-variant-numeric: tabular-nums;
+    color: var(--accent-text);
+}
+/* 所有年代疊在同一格：格子高度 = 最長那段，切換時版面不跳 */
+html.scrub .chronicle .timeline {
+    grid-area: story;
+    display: grid;
+    margin: 0;
+}
+html.scrub .chronicle .timeline li {
+    grid-area: 1 / 1;
+    display: block;
+    margin: 0;
+    padding: 0;
+    opacity: 0; /* 用透明不用 display:none → 螢幕閱讀器仍讀得到全部 */
+    transform: translateY(16px);
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+}
+html.scrub .chronicle .timeline li.is-current {
+    opacity: 1;
+    transform: none;
+}
+html.scrub .chronicle .timeline li::before,
+html.scrub .chronicle .timeline li::after {
+    display: none;
+}
+html.scrub .chronicle .timeline time {
+    display: block;
+    padding: 0;
+}
+html.scrub .chronicle .timeline time small {
+    display: inline;
+    margin-left: 8px;
+}
+html.scrub .chronicle .timeline-card,
+html.scrub .chronicle .timeline-card:hover {
+    padding: 8px 0 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.4vw, 1.875rem);
+    line-height: 1.5;
+    color: var(--text-main);
+    background: none;
+    box-shadow: none;
+    transform: none;
+}
+html.scrub .chronicle-brush {
+    grid-area: brush;
+    align-self: center;
+    justify-self: end;
+    margin-top: 0;
+    clip-path: inset(0 100% 0 0); /* 由 home.js 從左往右打開，像寫字 */
+}
+html.scrub .chronicle-bar {
+    grid-area: bar;
+    display: block;
+    height: 3px;
+    margin-top: 24px;
+    background-color: var(--border-soft);
+}
+html.scrub .chronicle-bar span {
+    display: block;
+    height: 100%;
+    background-color: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: left;
+}
+@media (max-width: 900px) {
+    html.scrub .chronicle-stage {
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto auto auto auto;
+        grid-template-areas:
+            "head skip"
+            "year year"
+            "story story"
+            "brush brush"
+            "bar bar";
+        padding: 16px;
+    }
+    html.scrub .chronicle-brush {
+        justify-self: start;
+        width: min(100%, 320px);
+        margin-top: 12px;
+    }
+}
+/* 手機橫放等矮畫面：放不下書法就省略 */
+@media (max-height: 560px) {
+    html.scrub .chronicle-brush {
+        display: none;
+    }
+    html.scrub .chronicle-stage {
+        padding-block: 8px;
+    }
+    html.scrub .chronicle-year {
+        font-size: min(24vw, 22svh);
+    }
+    html.scrub .chronicle-bar {
+        margin-top: 8px;
+    }
+}

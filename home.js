@@ -89,13 +89,46 @@ if (h1Section && h7Section) {
     });
 })();
 
+// ---- 開場校史：捲動距離 → 年份、目前事件、書法 ----
+(() => {
+    const section = document.querySelector(".chronicle");
+    // html.scrub 由 <head> 判斷（減少動態的使用者不會有）
+    if (!section || !document.documentElement.classList.contains("scrub")) return;
+    const stage = section.querySelector(".chronicle-stage");
+    const yearEl = section.querySelector(".chronicle-year");
+    const brush = section.querySelector(".chronicle-brush");
+    const bar = section.querySelector(".chronicle-bar span");
+    const items = Array.from(section.querySelectorAll(".timeline li"));
+    // 年份直接讀 <time datetime>，不用另外維護一份
+    const years = items.map((li) => Number(li.querySelector("time").dateTime.slice(0, 4)));
+    const last = items.length - 1;
+    const clamp01 = (n) => Math.min(1, Math.max(0, n));
+
+    onScrollOrLayout(() => {
+        const range = section.offsetHeight - stage.offsetHeight;
+        const progress = clamp01((parseFloat(getComputedStyle(stage).top) - section.getBoundingClientRect().top) / range);
+        // × 1.12 → 提早走到終點，最後停留一下讓人看完書法
+        const pos = Math.min(last, progress * last * 1.12);
+        const index = Math.floor(pos);
+        const next = Math.min(last, index + 1);
+        const year = String(Math.round(years[index] + (years[next] - years[index]) * (pos - index)));
+        if (yearEl.textContent !== year) yearEl.textContent = year;
+        const current = Math.round(pos);
+        items.forEach((li, i) => li.classList.toggle("is-current", i === current));
+        // 只有最後一段（1995 → 1997）才寫出校名
+        brush.style.clipPath = `inset(0 ${100 - clamp01(pos - (last - 1)) * 100}% 0 0)`;
+        bar.style.transform = `scaleX(${progress})`;
+    });
+})();
+
 // ---- 捲動淡入：卡片捲進畫面才浮現 ----
 (() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     // 不要動畫或瀏覽器不支援 → 不處理（卡片照常顯示）
     if (reduceMotion || !("IntersectionObserver" in window)) return;
+    // 開場照片（.person-hero）不淡入：先透明會拖慢最大內容繪製（LCP）
     const cards = document.querySelectorAll(
-        ".all1 .timeline li, .p-2, .p-3, .p-4, .vall-1, .pdd, .i-1, .i-2, .pp1, .li-1, .li-2, .li-3, .li-4, .li-5",
+        ".all1 .timeline li, .p-2, .p-3, .p-4, .vall-1, .pdd, .i-1, .i-2:not(.person-hero .i-2), .pp1, .li-1, .li-2, .li-3, .li-4, .li-5",
     );
     // IntersectionObserver：瀏覽器偵測進畫面，比監聽 scroll 省效能｜rootMargin 底部 -10% → 多露出一點才算
     const observer = new IntersectionObserver(

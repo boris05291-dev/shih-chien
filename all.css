@@ -20,7 +20,8 @@
     /* ---- 抽出的色碼變數（深色模式重新定義這些）---- */
     color-scheme: light;
     --primary-active: #4a6f3b;
-    --accent-text: #558045; /* 綠色文字（強調字、連結、選單 hover） */
+    --accent-text: #4a6f3b; /* 綠色文字（強調字、連結、選單 hover）｜對比需 ≥ 4.5 */
+    --font-display: "Noto Serif TC", "PMingLiU", serif; /* 標題用襯線字 */
     --border-color-2-hover: #6b8f55;
     --border-color-3-hover: #47847a;
     --border-color-5-hover: #88a34c;
@@ -781,6 +782,9 @@ section[id^="vp-"],
     .side-menu {
         display: block !important;
         width: 100% !important;
+        /* 按鈕 48px + 上下框線 2px：按鈕由 JS 插入，先留高度，內容才不會被往下推 */
+        box-sizing: border-box;
+        min-height: 50px;
         position: sticky !important;
         top: 0 !important;
         z-index: 999 !important;
@@ -1502,4 +1506,210 @@ th {
 /* 英文左右對齊會拉出大空隙，改靠左 */
 :lang(en) :is(.pp1, .p-2 p, .p-3 p, .p-4 p) {
     text-align: left;
+}
+
+/* 頁首用 fetch 載入：先留好高度，塞進來時頁面才不會被往下推 */
+header:empty {
+    height: 65px;
+}
+/* ===== 標題字體 =====｜只動內容區，導覽列維持原字體 */
+.page-all main h1,
+.page-all main h2 {
+    font-family: var(--font-display);
+}
+.page-all main h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+}
+/* 內文連結加底線：不能只靠顏色分辨連結 */
+.all1 p a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+/* ===== 跳至主內容 =====｜平常移出畫面，Tab 到才出現 */
+.skip-link {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 3000;
+    padding: 10px 16px;
+    border-radius: var(--border-radius-sub);
+    background-color: var(--bg-surface);
+    box-shadow: var(--box-shadow-main);
+    transform: translateY(-200%);
+    transition: none; /* 蓋掉全站 a 的 transition → Tab 到立刻出現 */
+}
+.skip-link:focus {
+    transform: none;
+}
+main:focus {
+    outline: none; /* 程式移過來的焦點，不需要外框 */
+}
+/* ===== 內頁人物版型 =====｜開場：左邊大字、右邊照片｜內容：左介紹、右清單 */
+.person-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto; /* minmax(0, …) → 長字不會把欄位撐破 */
+    gap: 32px;
+    align-items: center;
+    padding: 32px;
+    margin-bottom: 24px;
+    background-color: var(--primary-light);
+    border-radius: var(--border-radius-main);
+    box-shadow: var(--box-shadow-main);
+}
+.page-all main .person-hero h1 {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+.page-all main .person-hero h2 {
+    margin: 0;
+}
+.person-hero .i-2 {
+    margin: 0;
+}
+/* 照片顯示寬度：直式人像 191px（創辦人原圖只有這麼大，放大會糊），副校長橫式照片在下面改大 */
+.person-hero {
+    --person-photo: 191px;
+}
+.vp .person-hero {
+    --person-photo: 260px;
+}
+.page-all main .person-hero .i-2 img {
+    display: block;
+    width: var(--person-photo);
+}
+/* 英文名片：放在開場區塊裡，不再是獨立卡片 */
+.person-card {
+    margin-top: 16px;
+    line-height: 1.7;
+    color: var(--text-muted);
+}
+.person-card p:last-child {
+    margin-top: 8px;
+}
+.person-motto {
+    margin-top: 24px;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--accent-text);
+}
+.person-body {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 24px;
+    align-items: start;
+}
+.person-body > section {
+    margin: 0;
+}
+/* is-even：兩欄等寬、同列卡片等高｜person-wide：這張卡佔滿整列 */
+.person-body.is-even {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+}
+.person-wide {
+    grid-column: 1 / -1;
+}
+/* 長清單分兩欄｜break-inside: avoid → 一個項目不會被切成兩半 */
+.person-list-2 ul {
+    column-count: 2;
+    column-gap: 16px;
+}
+.person-list-2 li {
+    break-inside: avoid;
+}
+@media (max-width: 900px) {
+    .person-body.is-even {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .person-list-2 ul {
+        column-count: 1;
+    }
+    .person-hero,
+    .person-body {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .person-hero {
+        padding: 24px;
+    }
+    /* 蓋掉手機版「圖片撐滿」的 !important，維持原尺寸 */
+    .page-all main .person-hero .i-2 img {
+        width: var(--person-photo) !important;
+        max-width: 100% !important;
+    }
+}
+
+/* ===== 圖示 =====｜Font Awesome 6.4.0 Free（圖示 CC BY 4.0、字型 OFL 1.1，fontawesome.com）
+   完整字型 253KB 卻只用十幾個圖示，拖慢手機載入 → 精簡成 fonts/ 裡的兩個小檔
+   shortcut: 只含下面列的圖示和董事長頁的星星，要用新圖示得重新產生字型 */
+@font-face {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-display: block;
+    src: url("fonts/fa-solid-subset.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Font Awesome 6 Brands";
+    font-weight: 400;
+    font-display: block;
+    src: url("fonts/fa-brands-subset.woff2") format("woff2");
+}
+.fas,
+.fa-solid,
+.fab {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+.fas,
+.fa-solid {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+}
+.fab {
+    font-family: "Font Awesome 6 Brands";
+    font-weight: 400;
+}
+.fa-4x {
+    font-size: 4em;
+}
+.fa-award::before {
+    content: "\f559";
+}
+.fa-code::before {
+    content: "\f121";
+}
+.fa-earth-asia::before {
+    content: "\f57e";
+}
+.fa-envelope::before {
+    content: "\f0e0";
+}
+.fa-fax::before {
+    content: "\f1ac";
+}
+.fa-graduation-cap::before {
+    content: "\f19d";
+}
+.fa-house-chimney::before {
+    content: "\e3af";
+}
+.fa-map-marker-alt::before {
+    content: "\f3c5";
+}
+.fa-moon::before {
+    content: "\f186";
+}
+.fa-phone-alt::before {
+    content: "\f879";
+}
+.fa-sun::before {
+    content: "\f185";
+}
+.fa-github::before {
+    content: "\f09b";
 }

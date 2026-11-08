@@ -110,9 +110,23 @@ function setupSideMenuDropdown() {
     });
 }
 
+// ===== 跳至主內容：鍵盤使用者不必一路 Tab 過導覽列 =====
+function addSkipLink() {
+    const main = document.querySelector("main");
+    if (!main) return;
+    if (!main.id) main.id = "main-content";
+    main.tabIndex = -1; // 讓 main 能接收焦點
+    const link = document.createElement("a");
+    link.className = "skip-link";
+    link.href = "#" + main.id;
+    link.textContent = document.documentElement.lang === "en" ? "Skip to main content" : "跳至主內容";
+    document.body.prepend(link);
+}
+
 // ===== 頁面 HTML 讀完後開始 =====
 // fetch 共用頁首頁尾塞進 <header>、<footer>｜file:// 會失敗，要用本機伺服器
 document.addEventListener("DOMContentLoaded", () => {
+    addSkipLink();
     setupSideMenuDropdown();
     const suffix = document.documentElement.lang === "en" ? "-en" : ""; // 英文頁載入 header-en.html
     const headerElem = document.querySelector("header");
