@@ -1228,9 +1228,14 @@ body {
     color: var(--heading-color);
 }
 .page-all main h2 {
-    font-size: 1.5rem;
     line-height: 1.35;
     color: var(--heading-color);
+}
+/* 只在桌機放大 → 手機版才會用前面設定的 1.25rem */
+@media (min-width: 901px) {
+    .page-all main h2 {
+        font-size: 1.5rem;
+    }
 }
 
 /* ---- 導覽列：半透明毛玻璃，內容從底下捲過去 ---- */
@@ -1496,6 +1501,13 @@ th {
         border: 1px solid var(--border-soft);
     }
 }
+/* 英文一行限制約 75 字元，太長不好換行閱讀｜.pp1 本身是卡片 → 用右側留白縮文字，卡片寬度不變 */
+:lang(en) :is(.p-2 p, .p-3 p, .p-4 p) {
+    max-width: 75ch;
+}
+:lang(en) .pp1 {
+    padding-right: max(25px, calc(100% - 75ch));
+}
 /* 導覽列多了切換鈕：窄桌機縮小間距，才不會換行 */
 @media (min-width: 901px) and (max-width: 1024px) {
     .nav-menu a {
@@ -1517,7 +1529,11 @@ header:empty {
     font-family: var(--font-display);
 }
 .page-all main h1 {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.6rem, 4vw, 3rem); /* 下限 1.6rem → 手機版標題不會過大 */
+}
+/* 內容區預設行高：中文需要比瀏覽器預設寬鬆；寫在 .all1 → 導覽列高度不受影響 */
+.all1 {
+    line-height: 1.7;
 }
 /* 內文連結加底線：不能只靠顏色分辨連結 */
 .all1 p a {
@@ -1711,4 +1727,17 @@ main:focus {
 }
 .fa-github::before {
     content: "\f09b";
+}
+
+/* 非官方聲明與資料來源（每頁頁尾上方） */
+.site-note {
+    margin: 0;
+    padding: 12px 16px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-soft);
+}
+.site-note a {
+    color: inherit;
+    text-decoration: underline;
 }
