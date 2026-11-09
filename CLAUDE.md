@@ -2,7 +2,8 @@
 
 張栢睿的「網頁程式設計」總作業。純 HTML + CSS + JavaScript，沒有框架、沒有建置工具、沒有 npm。
 
-- 線上網址：https://boris05291-dev.github.io/shih-chien/home.html （GitHub Pages）
+- 線上網址：https://boris05291-dev.github.io/shih-chien/ （GitHub Pages，會轉址到 `總作業/home.html`）
+- 網站原始碼都在 `總作業/`，下面提到的網站檔案路徑都相對於這個資料夾；英文版是同名加 `-en`（例如 `home-en.html`）
 - 編輯器：Phoenix Code（用它的即時預覽開發伺服器）
 
 ## 回覆與程式碼慣例
@@ -17,9 +18,9 @@
 | 頁面 | 專屬 CSS | 內容 |
 | --- | --- | --- |
 | `home.html` | `總作業.css` | 首頁：本校沿革、簡史、校名由來、校歌及校徽 |
-| `Founder.html` | `Founder.css` | 創辦人 |
+| `Founder.html` | 無（只用 `all.css`） | 創辦人 |
 | `president.html` | `president.css` | 董事長 |
-| `headmaster.html` | `headmaster.css` | 校長 |
+| `headmaster.html` | 無（只用 `all.css`） | 校長 |
 | `Vice.html` | `Vice.css`、`Vice.js` | 副校長 |
 
 每一頁都會載入：
@@ -27,7 +28,7 @@
 - `all.css`：全站共用樣式與顏色變數（放在 `:root`）。共用的東西改這裡，單頁的改各自的 CSS。
 - `components.js`：用 `fetch` 把 `components/header.html`、`components/footer.html` 塞進 `<header>`、`<footer>`，並處理手機版漢堡選單與側邊選單。
 - `home.js`：回到頂部按鈕等互動。
-- Font Awesome 6.4.0（CDN）提供圖示。
+- Font Awesome 6.4.0 圖示：`all.css` 載入 `fonts/` 的精簡字型，要用新圖示得重新產生字型。
 
 注意：因為頁首頁尾是用 `fetch` 載入，直接雙擊打開 HTML（`file://`）會看不到頁首頁尾，要用 Phoenix Code 的即時預覽或其他本機伺服器開。
 

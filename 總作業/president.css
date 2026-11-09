@@ -35,6 +35,21 @@
         transform 0.25s ease,
         background-color 0.25s ease !important;
 }
+/* 榮譽時間軸：年份獨立一行，星星之間用直線連起來 */
+.liall .li-4 time {
+    display: block;
+    font-weight: 700;
+    color: var(--accent-text);
+}
+.liall .li-4 li:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 34px;
+    bottom: -15px;
+    width: 2px;
+    background-color: var(--border-light);
+}
 /* 清單符號用 Font Awesome 星星 \f005｜font-weight: 900 = 實心 */
 .liall .li-4 li::before {
     content: "\f005";

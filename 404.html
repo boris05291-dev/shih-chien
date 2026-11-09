@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-Hant">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>找不到頁面｜實踐大學高雄校區</title>
+        <script>
+            // 舊網址（搬進 總作業/ 之前）自動轉到新位置
+            const old = location.pathname.match(/^\/shih-chien\/([\w-]+\.html)$/);
+            if (old) location.replace("/shih-chien/%E7%B8%BD%E4%BD%9C%E6%A5%AD/" + old[1] + location.hash);
+        </script>
+        <link rel="icon" href="/shih-chien/%E7%B8%BD%E4%BD%9C%E6%A5%AD/p/01.png" />
+        <link rel="stylesheet" href="/shih-chien/%E7%B8%BD%E4%BD%9C%E6%A5%AD/all.css" />
+        <style>
+            .not-found { min-height: 100svh; display: grid; place-content: center; gap: 12px; padding: 24px; text-align: center; color: var(--text-main); }
+            .not-found h1 { font-family: var(--font-display); font-size: clamp(5rem, 20vw, 10rem); line-height: 1; color: var(--accent-text); }
+            .not-found a { text-decoration: underline; }
+        </style>
+    </head>
+    <body>
+        <main class="not-found">
+            <h1>404</h1>
+            <p>這一頁不在校史裡。<span lang="en">This page could not be found.</span></p>
+            <p><a href="/shih-chien/%E7%B8%BD%E4%BD%9C%E6%A5%AD/home.html">回到首頁</a> ・ <a href="/shih-chien/%E7%B8%BD%E4%BD%9C%E6%A5%AD/home-en.html" lang="en">Back to home</a></p>
+        </main>
+    </body>
+</html>

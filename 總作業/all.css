@@ -4,36 +4,37 @@
     --primary-hover: #558045;
     --primary-light: #f1f8e9;
     --border-color-1: #6b9e58;
-    --border-color-2: #32b800;
-    --border-color-3: #00e2ff;
-    --border-color-4: #ff00dd;
-    --border-color-5: #7bff00;
+    --border-color-2: #86a96f;
+    --border-color-3: #5a9e92;
+    --border-color-4: #c8a24a;
+    --border-color-5: #a3bf62;
     --text-main: #333333;
     --text-muted: #444444;
     --bg-light: #fcfcfc;
     --bg-gray: #f4f6f7;
-    --border-radius-main: 12px;
-    --border-radius-sub: 8px;
+    --border-radius-main: 16px;
+    --border-radius-sub: 10px;
     --box-shadow-main: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
     --box-shadow-hover: 0 8px 30px rgba(107, 158, 88, 0.08), 0 2px 6px rgba(0, 0, 0, 0.04);
     --gradient-primary: linear-gradient(to bottom, #6b9e58, #8bc34a);
     /* ---- 抽出的色碼變數（深色模式重新定義這些）---- */
     color-scheme: light;
     --primary-active: #4a6f3b;
-    --accent-text: #558045; /* 綠色文字（強調字、連結、選單 hover） */
-    --border-color-2-hover: #279300;
-    --border-color-3-hover: #00b3cc;
-    --border-color-5-hover: #62cc00;
+    --accent-text: #4a6f3b; /* 綠色文字（強調字、連結、選單 hover）｜對比需 ≥ 4.5 */
+    --font-display: "Noto Serif TC", "PMingLiU", serif; /* 標題用襯線字 */
+    --border-color-2-hover: #6b8f55;
+    --border-color-3-hover: #47847a;
+    --border-color-5-hover: #88a34c;
     --heading-color: #2c3e50;
     --text-body: #000000;
     --text-soft: #555555;
     --text-on-primary: #ffffff; /* 放在綠色按鈕上的字 */
-    --link-hover: fuchsia;
-    --bg-page: #ffffff;
+    --link-hover: #3f6332;
+    --bg-page: #f5f6f3;
     --bg-surface: #ffffff; /* 導覽列、選單、清單項目 */
     --bg-subtle: #f8f9fa;
     --bg-sub-menu: #fafbfa;
-    --bg-blur: rgba(255, 255, 255, 0.97);
+    --bg-blur: rgba(255, 255, 255, 0.72);
     --border-light: #e0e0e0;
     --border-soft: #e3e6e4;
     --divider: #eef0ee;
@@ -49,7 +50,7 @@
     --gold-dark: #b8860b;
     --gold: #d4af37;
     --gold-light: #e5c158;
-    --lightbox-bg: rgba(0, 0, 0, 0.88);
+    --lightbox-bg: rgba(0, 0, 0, 0.72);
 }
 /* ---- 深色模式：只重新定義變數 → 全站自動換色 ---- */
 :root[data-theme="dark"] {
@@ -61,14 +62,14 @@
     --text-muted: #c5c9cd;
     --text-body: #e4e6e8;
     --text-soft: #a2a9b0;
-    --link-hover: #ff8af2;
+    --link-hover: #c3e3b2;
     --bg-page: #14181c;
     --bg-surface: #1d2227;
     --bg-light: #1d2227;
     --bg-gray: #23292f;
     --bg-subtle: #191e23;
     --bg-sub-menu: #191e23;
-    --bg-blur: rgba(29, 34, 39, 0.97);
+    --bg-blur: rgba(29, 34, 39, 0.72);
     --border-light: #343b42;
     --border-soft: #343b42;
     --divider: #2a3036;
@@ -781,6 +782,9 @@ section[id^="vp-"],
     .side-menu {
         display: block !important;
         width: 100% !important;
+        /* 按鈕 48px + 上下框線 2px：按鈕由 JS 插入，先留高度，內容才不會被往下推 */
+        box-sizing: border-box;
+        min-height: 50px;
         position: sticky !important;
         top: 0 !important;
         z-index: 999 !important;
@@ -1204,4 +1208,507 @@ section[id^="vp-"],
     .lightbox {
         animation: none;
     }
+}
+
+/* ==================== 視覺精修（Apple 風格）====================
+   放在檔尾：同權重時後寫的贏，所以不用動上面的舊規則。 */
+:root {
+    --nav-h: 65px; /* 導覽列高度：側邊選單的 sticky 位置要避開它 */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1); /* 一開始快 → 感覺反應靈敏 */
+}
+
+/* ---- 字體：先用各平台的系統字，內建的字形微調最好 ---- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Microsoft JhengHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+/* 大標題行距收緊；中文字距維持 0（負字距是給西文用的，中文會擠在一起） */
+.page-all main h1 {
+    line-height: 1.2;
+    color: var(--heading-color);
+}
+.page-all main h2 {
+    font-size: 1.5rem;
+    line-height: 1.35;
+    color: var(--heading-color);
+}
+
+/* ---- 導覽列：半透明毛玻璃，內容從底下捲過去 ---- */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.nav-container {
+    padding: 10px 24px;
+    background-color: var(--bg-blur);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-top: none;
+    box-shadow: none;
+}
+.logo img {
+    height: 44px;
+}
+.nav-menu {
+    gap: 2px;
+}
+.nav-menu a {
+    padding: 8px 12px;
+    font-size: 15px;
+    border-radius: var(--border-radius-sub);
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+}
+/* 已有 hover 底色，底線就多餘了 */
+.nav-menu a::after {
+    display: none;
+}
+.nav-container .nav-collapse,
+.nav-container .hl-1.is-active {
+    border-bottom-width: 1px;
+    border-bottom-color: var(--border-soft);
+}
+
+/* ---- 桌機側邊選單：整塊卡片，目前項目用圓角底色 ---- */
+@media (min-width: 901px) {
+    .side-menu {
+        top: calc(var(--nav-h) + 24px);
+        max-height: calc(100vh - var(--nav-h) - 48px);
+        overflow-y: auto;
+        padding: 8px;
+        border: none;
+        border-radius: var(--border-radius-main);
+        box-shadow: var(--box-shadow-main);
+    }
+    .side-menu li,
+    .side-menu .sub-menu li:last-child {
+        border-bottom: none;
+    }
+    .side-menu .sub-menu {
+        background-color: transparent;
+        border-top: none;
+    }
+    .side-menu a {
+        padding: 10px 14px;
+        font-size: 15px;
+        border-radius: var(--border-radius-sub);
+    }
+    /* padding 會讓文字重新排版，hover 不要動它 */
+    .side-menu a:hover {
+        padding-left: 14px;
+    }
+    .side-menu a.active,
+    .side-menu .sub-menu a.active {
+        padding-left: 14px;
+        box-shadow: none;
+    }
+    .side-menu .sub-menu a,
+    .side-menu .sub-menu a:hover,
+    .side-menu .sub-menu a.active {
+        padding-left: 36px;
+    }
+    .side-menu .sub-menu a::before {
+        left: 18px;
+    }
+    /* 父項和子項同時 active 時，只讓子項有底色，兩塊才不會黏在一起 */
+    .side-menu .has-sub > a.active {
+        background-color: transparent;
+    }
+}
+
+/* ---- 手機版：側邊選單黏在導覽列下方，錨點要多留它的高度 ---- */
+@media (max-width: 900px) {
+    .side-menu {
+        top: var(--nav-h) !important;
+        border-radius: var(--border-radius-sub);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+    }
+    .side-menu > ul {
+        top: calc(100% + 6px);
+        border-top: 1px solid var(--border-light) !important;
+        border-radius: var(--border-radius-sub);
+    }
+    .vp,
+    section[id^="vp-"],
+    [id^="h"] {
+        scroll-margin-top: 130px !important;
+    }
+}
+
+/* ---- 卡片：靠留白和陰影分層，拿掉粗色條與漸層 ---- */
+:is(.li-1, .li-2, .li-3, .li-4, .li-5) {
+    background-color: var(--bg-surface);
+    border-left: none;
+    border-radius: var(--border-radius-main) !important;
+}
+:is(.p-1, .p-2, .p-3, .p-4, .pdd, .pp1) {
+    border-radius: var(--border-radius-main) !important;
+}
+.pp1 {
+    background: var(--bg-surface) !important;
+    border: none !important;
+}
+.liall li {
+    background-color: var(--bg-subtle) !important;
+    border-left-width: 3px !important;
+    border-radius: var(--border-radius-sub) !important;
+    box-shadow: none !important;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease !important;
+}
+.vall-1 {
+    border-radius: var(--border-radius-main);
+}
+.i-1 img,
+.i-2 img {
+    border-radius: var(--border-radius-main);
+    box-shadow: var(--box-shadow-main);
+}
+/* 閱讀中的大區塊不要跟著滑鼠移動，hover 只留陰影變化 */
+:is(.p-1, .p-2, .p-3, .p-4, .pp1, .li-1, .li-2, .li-3, .li-4, .li-5):hover,
+.timeline-card:hover {
+    transform: none;
+}
+.liall li:hover,
+.liall .li-4 li:hover {
+    transform: none !important;
+}
+/* 綠底白字：原本的主色對比只有 3.2:1，換深一階才讀得清楚 */
+.pdd a,
+th {
+    background-color: var(--primary-hover);
+}
+.pdd a {
+    transition:
+        background-color 0.15s ease,
+        transform 0.12s var(--ease-out);
+}
+.pdd a:hover {
+    background-color: var(--primary-active);
+    transform: none;
+}
+
+/* ---- 頁尾與懸浮按鈕：收斂誇張的旋轉和彈跳 ---- */
+.f-1 {
+    border-top: none;
+}
+.f-s1 .s-icons a {
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+}
+.f-s1 .s-icons a:hover,
+.s-icons a:hover,
+.b-top:hover,
+.theme-toggle:hover {
+    transform: none;
+}
+.footer-avatar:hover {
+    transform: none;
+}
+.theme-toggle {
+    background-color: var(--bg-blur);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+/* ---- 按壓回饋：手指一按下就有反應 ---- */
+.pdd a:active,
+.b-top:active,
+.theme-toggle:active,
+.nav-toggle:active {
+    transform: scale(0.96);
+    transition-duration: 0.1s;
+}
+
+/* ---- 鍵盤操作時看得到焦點 ---- */
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* ---- 捲動淡入：用強 ease-out，開頭就動起來 ---- */
+.reveal {
+    transition:
+        opacity 0.5s var(--ease-out),
+        transform 0.5s var(--ease-out),
+        box-shadow 0.2s ease !important;
+}
+
+/* ---- 燈箱：背景模糊，圖片從略小放大進場（不從 0） ---- */
+.lightbox {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+.lightbox img {
+    animation: lightboxImg 0.22s var(--ease-out);
+}
+@keyframes lightboxImg {
+    from {
+        transform: scale(0.96);
+    }
+}
+
+/* ---- 無障礙：尊重使用者的系統設定 ---- */
+@media (prefers-reduced-motion: reduce) {
+    .lightbox img {
+        animation: none;
+    }
+    :is(.pdd a, .b-top, .theme-toggle, .nav-toggle):active {
+        transform: none;
+    }
+}
+/* 想減少透明效果、或瀏覽器不支援毛玻璃 → 換實色，文字才讀得清楚 */
+@media (prefers-reduced-transparency: reduce) {
+    .nav-container,
+    .side-menu,
+    .theme-toggle {
+        background-color: var(--bg-surface) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .nav-container,
+    .side-menu,
+    .theme-toggle {
+        background-color: var(--bg-surface) !important;
+    }
+}
+@media (prefers-contrast: more) {
+    .nav-container,
+    .side-menu {
+        background-color: var(--bg-surface) !important;
+        border-color: var(--text-main) !important;
+    }
+}
+
+/* ---- 語言切換與英文排版 ---- */
+.lang-switch {
+    font-weight: 600;
+}
+@media (min-width: 901px) {
+    .nav-menu a.lang-switch {
+        border: 1px solid var(--border-soft);
+    }
+}
+/* 導覽列多了切換鈕：窄桌機縮小間距，才不會換行 */
+@media (min-width: 901px) and (max-width: 1024px) {
+    .nav-menu a {
+        padding: 8px;
+    }
+}
+/* 英文左右對齊會拉出大空隙，改靠左 */
+:lang(en) :is(.pp1, .p-2 p, .p-3 p, .p-4 p) {
+    text-align: left;
+}
+
+/* 頁首用 fetch 載入：先留好高度，塞進來時頁面才不會被往下推 */
+header:empty {
+    height: 65px;
+}
+/* ===== 標題字體 =====｜只動內容區，導覽列維持原字體 */
+.page-all main h1,
+.page-all main h2 {
+    font-family: var(--font-display);
+}
+.page-all main h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+}
+/* 內文連結加底線：不能只靠顏色分辨連結 */
+.all1 p a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+/* ===== 跳至主內容 =====｜平常移出畫面，Tab 到才出現 */
+.skip-link {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 3000;
+    padding: 10px 16px;
+    border-radius: var(--border-radius-sub);
+    background-color: var(--bg-surface);
+    box-shadow: var(--box-shadow-main);
+    transform: translateY(-200%);
+    transition: none; /* 蓋掉全站 a 的 transition → Tab 到立刻出現 */
+}
+.skip-link:focus {
+    transform: none;
+}
+main:focus {
+    outline: none; /* 程式移過來的焦點，不需要外框 */
+}
+/* ===== 內頁人物版型 =====｜開場：左邊大字、右邊照片｜內容：左介紹、右清單 */
+.person-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto; /* minmax(0, …) → 長字不會把欄位撐破 */
+    gap: 32px;
+    align-items: center;
+    padding: 32px;
+    margin-bottom: 24px;
+    background-color: var(--primary-light);
+    border-radius: var(--border-radius-main);
+    box-shadow: var(--box-shadow-main);
+}
+.page-all main .person-hero h1 {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+.page-all main .person-hero h2 {
+    margin: 0;
+}
+.person-hero .i-2 {
+    margin: 0;
+}
+/* 照片顯示寬度：直式人像 191px（創辦人原圖只有這麼大，放大會糊），副校長橫式照片在下面改大 */
+.person-hero {
+    --person-photo: 191px;
+}
+.vp .person-hero {
+    --person-photo: 260px;
+}
+.page-all main .person-hero .i-2 img {
+    display: block;
+    width: var(--person-photo);
+}
+/* 英文名片：放在開場區塊裡，不再是獨立卡片 */
+.person-card {
+    margin-top: 16px;
+    line-height: 1.7;
+    color: var(--text-muted);
+}
+.person-card p:last-child {
+    margin-top: 8px;
+}
+.person-motto {
+    margin-top: 24px;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--accent-text);
+}
+.person-body {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 24px;
+    align-items: start;
+}
+.person-body > section {
+    margin: 0;
+}
+/* is-even：兩欄等寬、同列卡片等高｜person-wide：這張卡佔滿整列 */
+.person-body.is-even {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+}
+.person-wide {
+    grid-column: 1 / -1;
+}
+/* 長清單分兩欄｜break-inside: avoid → 一個項目不會被切成兩半 */
+.person-list-2 ul {
+    column-count: 2;
+    column-gap: 16px;
+}
+.person-list-2 li {
+    break-inside: avoid;
+}
+@media (max-width: 900px) {
+    .person-body.is-even {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .person-list-2 ul {
+        column-count: 1;
+    }
+    .person-hero,
+    .person-body {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .person-hero {
+        padding: 24px;
+    }
+    /* 蓋掉手機版「圖片撐滿」的 !important，維持原尺寸 */
+    .page-all main .person-hero .i-2 img {
+        width: var(--person-photo) !important;
+        max-width: 100% !important;
+    }
+}
+
+/* ===== 圖示 =====｜Font Awesome 6.4.0 Free（圖示 CC BY 4.0、字型 OFL 1.1，fontawesome.com）
+   完整字型 253KB 卻只用十幾個圖示，拖慢手機載入 → 精簡成 fonts/ 裡的兩個小檔
+   shortcut: 只含下面列的圖示和董事長頁的星星，要用新圖示得重新產生字型 */
+@font-face {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-display: block;
+    src: url("fonts/fa-solid-subset.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Font Awesome 6 Brands";
+    font-weight: 400;
+    font-display: block;
+    src: url("fonts/fa-brands-subset.woff2") format("woff2");
+}
+.fas,
+.fa-solid,
+.fab {
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+.fas,
+.fa-solid {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+}
+.fab {
+    font-family: "Font Awesome 6 Brands";
+    font-weight: 400;
+}
+.fa-4x {
+    font-size: 4em;
+}
+.fa-award::before {
+    content: "\f559";
+}
+.fa-code::before {
+    content: "\f121";
+}
+.fa-earth-asia::before {
+    content: "\f57e";
+}
+.fa-envelope::before {
+    content: "\f0e0";
+}
+.fa-fax::before {
+    content: "\f1ac";
+}
+.fa-graduation-cap::before {
+    content: "\f19d";
+}
+.fa-house-chimney::before {
+    content: "\e3af";
+}
+.fa-map-marker-alt::before {
+    content: "\f3c5";
+}
+.fa-moon::before {
+    content: "\f186";
+}
+.fa-phone-alt::before {
+    content: "\f879";
+}
+.fa-sun::before {
+    content: "\f185";
+}
+.fa-github::before {
+    content: "\f09b";
 }
