@@ -58,14 +58,18 @@
 
 /* 「了解更多」按鈕｜要比 all.css 的 a:link 精確才蓋得過 */
 .course-card a.btn-site{
-    background-color: var(--primary-color);
+    background-color: var(--primary-hover); /* 主色配白字對比不足 4.5:1 */
     color: var(--text-on-primary);
     border: none;
     border-radius: var(--border-radius-sub);
     transition: transform 0.2s ease, background-color 0.3s ease;
 }
+/* Bootstrap 的 .text-danger 不跟深色模式，要用 !important 才蓋得過 */
+:root[data-theme="dark"] .price-now .text-danger{
+    color: var(--text-soft) !important;
+}
 .course-card a.btn-site:hover{
-    background-color: var(--primary-hover);
+    background-color: var(--primary-active);
     color: var(--text-on-primary);
     text-decoration: none; /* 拿掉 all.css a:hover 的底線 */
     transform: scale(1.05); /* 滑過放大 */

@@ -45,12 +45,12 @@
 .side-menu .sub-menu a:hover {
     padding-left: 48px;
     background-color: var(--primary-light);
-    color: var(--primary-color);
+    color: var(--accent-text);
 }
 .side-menu .sub-menu a.active {
     padding-left: 44px;
     background-color: var(--primary-light);
-    color: var(--primary-color);
+    color: var(--accent-text);
     font-weight: bold;
     box-shadow: inset 4px 0 0 0 var(--primary-color);
 }
