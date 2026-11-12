@@ -309,6 +309,22 @@
         bar.appendChild(btn);
     };
 
+    // 自己等頁首出現再加按鈕：不必依賴 components.js（避免新舊檔案快取不一致時按鈕不見）
+    const waitForNav = () => {
+        if (document.querySelector(".nav-container")) return window.setupSiteSearch();
+        const header = document.querySelector("header");
+        if (!header) return;
+        const obs = new MutationObserver(() => {
+            if (header.querySelector(".nav-container")) {
+                obs.disconnect();
+                window.setupSiteSearch();
+            }
+        });
+        obs.observe(header, { childList: true, subtree: true });
+    };
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", waitForNav);
+    else waitForNav();
+
     document.addEventListener("keydown", (e) => {
         const t = e.target;
         const typing = t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName));
