@@ -136,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (headerElem && headerElem.children.length > 0) {
         setupNavToggle();
         setupLangSwitch();
+        if (window.setupSiteSearch) window.setupSiteSearch(); // search.js：導覽列加搜尋按鈕
     } else if (headerElem) {
         fetch(`./components/header${suffix}.html`)
             .then(response => {
@@ -146,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 headerElem.innerHTML = html;
                 setupNavToggle(); // 頁首塞好才有漢堡按鈕
                 setupLangSwitch();
+                if (window.setupSiteSearch) window.setupSiteSearch();
             })
             .catch(error => console.error(error));
     }
