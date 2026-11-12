@@ -10,7 +10,7 @@ function setupNavToggle() {
     panel.classList.add("nav-collapse");
     if (!panel.id) panel.id = "nav-panel";
     // 舊按鈕可能綁了 onclick → cloneNode 換成乾淨的｜沒有按鈕就自己建
-    let btn = bar.querySelector(".nav-toggle, .menu-toggle, .hamburger, button");
+    let btn = bar.querySelector(".nav-toggle, .menu-toggle, .hamburger, button:not(.search-trigger)"); // 排除 search.js 先加進來的搜尋鈕
     if (btn) {
         const fresh = btn.cloneNode(true);
         fresh.removeAttribute("onclick");
@@ -112,6 +112,22 @@ function setupSideMenuDropdown() {
     });
 }
 
+// ===== 導覽列外部連結：加 ↗ 標示「會離開本站，前往學校官網」=====
+// 用網域判斷（不是本站網域就算外部）｜螢幕閱讀器另外念出隱藏文字
+function markExternalNavLinks() {
+    const isEn = document.documentElement.lang === "en";
+    document.querySelectorAll(".nav-menu a[href]").forEach((a) => {
+        if (a.host === location.host || a.querySelector(".ext-icon")) return;
+        a.classList.add("is-external");
+        a.title = isEn ? "Opens the official university website" : "前往實踐大學官網";
+        a.insertAdjacentHTML(
+            "beforeend",
+            '<span class="ext-icon" aria-hidden="true">↗</span>' +
+                `<span class="visually-hidden">${isEn ? " (official site)" : "（學校官網）"}</span>`
+        );
+    });
+}
+
 // ===== 跳至主內容：鍵盤使用者不必一路 Tab 過導覽列 =====
 function addSkipLink() {
     const main = document.querySelector("main");
@@ -136,6 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (headerElem && headerElem.children.length > 0) {
         setupNavToggle();
         setupLangSwitch();
+        markExternalNavLinks();
         if (window.setupSiteSearch) window.setupSiteSearch(); // search.js：導覽列加搜尋按鈕
     } else if (headerElem) {
         fetch(`./components/header${suffix}.html`)
@@ -147,6 +164,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 headerElem.innerHTML = html;
                 setupNavToggle(); // 頁首塞好才有漢堡按鈕
                 setupLangSwitch();
+                markExternalNavLinks();
                 if (window.setupSiteSearch) window.setupSiteSearch();
             })
             .catch(error => console.error(error));
