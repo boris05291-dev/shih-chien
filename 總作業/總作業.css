@@ -155,6 +155,13 @@
     }
 }
 /* ===== 校名由來表格 =====｜border-collapse 合併邊框｜圓角要配 overflow: hidden */
+/* 父層 flex 置中會讓 .t-1 縮到內容寬 → 表格被擠窄、作者名字折行，所以撐滿 */
+.t-1 {
+    width: 100%;
+}
+.t-1 td {
+    white-space: nowrap; /* 作者名字不折行 */
+}
 .t-1 table {
     width: 100%;
     max-width: 300px;
