@@ -584,6 +584,19 @@ section[id^="vp-"],
     margin-bottom: 8px !important;
     font-family: monospace, "Microsoft JhengHei";
 }
+/* 閱讀進度條（home.js）｜scaleX 只動合成層，不會重排版面 */
+.read-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--primary-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    z-index: 3001;
+    pointer-events: none;
+}
 .developer-tag i {
     margin-right: 5px;
 }

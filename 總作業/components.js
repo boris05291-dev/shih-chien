@@ -176,6 +176,10 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .then(html => {
                 footerElem.innerHTML = html;
+                // 創校年數：1958 年 3 月創立 → 還沒到今年 3 月就少算 1 年
+                const now = new Date();
+                const years = now.getFullYear() - 1958 - (now.getMonth() < 2 ? 1 : 0);
+                footerElem.querySelectorAll(".since-years").forEach((el) => (el.textContent = years));
             })
             .catch(error => console.error(error));
     }

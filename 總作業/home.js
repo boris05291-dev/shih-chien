@@ -26,6 +26,15 @@ if (btop) {
     onScrollOrLayout(() => btop.classList.toggle("show", window.scrollY > 300));
     btop.addEventListener("click", () => window.scrollTo(0, 0));
 }
+// ===== 閱讀進度條：捲多少比例，頂端綠線就長多少 =====
+const readBar = document.createElement("div");
+readBar.className = "read-progress";
+readBar.setAttribute("aria-hidden", "true");
+document.body.append(readBar);
+onScrollOrLayout(() => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    readBar.style.transform = `scaleX(${max > 0 ? window.scrollY / max : 0})`;
+});
 // YouTube：點縮圖才建立 iframe
 document.querySelectorAll(".yt-lite").forEach((btn) => {
     btn.addEventListener("click", () => {
