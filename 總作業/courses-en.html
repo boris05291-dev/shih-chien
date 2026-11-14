@@ -15,7 +15,8 @@
 	<link rel="alternate" hreflang="zh-Hant" href="https://boris05291-dev.github.io/shih-chien/%E7%B8%BD%E4%BD%9C%E6%A5%AD/courses.html">
 	<link rel="alternate" hreflang="en" href="https://boris05291-dev.github.io/shih-chien/%E7%B8%BD%E4%BD%9C%E6%A5%AD/courses-en.html">
 	<link rel="icon" href="p/01.png">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- 深色模式要在畫面畫出來前就設好，不然會先閃白（home.js 有 defer，太晚）-->
+	<script>var t; try { t = localStorage.getItem("theme"); } catch (e) {} document.documentElement.dataset.theme = t || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");</script>
 	<link rel="stylesheet" href="all.css?v=4">
 	<link rel="stylesheet" href="css/style.css">
 	<script src="home.js" defer></script>
@@ -42,87 +43,87 @@
     </div>
 </nav>
 </header>
-<main class="container my-5">
-		<img src="p/實踐大學.webp" alt="Shih Chien University in Chinese calligraphy" class="img-fluid d-block mx-auto mb-4 ink-img">
-		<h1 class="text-center">Recommended Courses</h1>
+<main class="courses">
+		<img src="p/實踐大學.webp" alt="Shih Chien University in Chinese calligraphy" class="courses-hero ink-img">
+		<h1>Recommended Courses</h1>
 		<section>
-			<div class="row">
-				<div class="col-md-4 text-center">
+			<div class="course-grid">
+				<div class="feature">
 					<h3 class="feature-title">Practical Focus</h3>
 					<p>Valuing fundamentals and practicality, teaching and research focus on real-world application, developing people with creativity and the ability to put ideas into practice.</p>
 				</div>
-				<div class="col-md-4 text-center">
+				<div class="feature">
 					<h3 class="feature-title">Living Sciences</h3>
 					<p>With roots in home economics, the overall educational goal is to research and promote knowledge of the science of living, and to enhance well-being and the meaning of life.</p>
 				</div>
-				<div class="col-md-4 text-center">
+				<div class="feature">
 					<h3 class="feature-title">Global Outlook</h3>
 					<p>Cultivating graduates of talent and virtue with humanistic care, creativity in daily life, scientific literacy and an international outlook.</p>
 				</div>
 			</div>
 		</section>
-		<section class="d-flex justify-content-center slogan">
-			<p class="align-self-center">Innovation・Practice・Excellence</p>
+		<section class="slogan">
+			<p>Innovation・Practice・Excellence</p>
 		</section>
 		<section>
 			<h2>Course List</h2>
-			<div class="row">
-				<div class="col-md-4 mb-4">
-					<div class="card h-100 course-card text-center">
-						<div class="card-body d-flex flex-column">
+			<div class="course-grid">
+				<div>
+					<div class="course-card">
+						<div class="card-body">
 							<div>
 								<i class="fa-solid fa-code fa-4x course-icon" aria-hidden="true"></i>
 							</div>
-							<h3 class="card-title mt-3">Web Programming</h3>
+							<h3 class="card-title">Web Programming</h3>
 							<p class="course-desc">Build your own website step by step, from HTML and CSS to JavaScript. This website is a project from the course.</p>
 							<p class="course-meta">Key topics: front-end development, responsive design</p>
 							<p class="course-meta">Best for: students who want to build their own projects</p>
-							<div class="mt-2 mb-2">
-								<h4 class="price-now"><small class="text-danger text-nowrap"><s>Was NT$ 15,000</s></small> <span class="text-nowrap">Now NT$ 0</span></h4>
+							<div>
+								<h4 class="price-now"><small class="price-old"><s>Was NT$ 15,000</s></small> <span class="price-new">Now NT$ 0</span></h4>
 								<small class="course-meta">* Prices are for this class project only and are not actual university fees.</small>
 							</div>
-							<div class="mt-auto">
-								<a href="https://itc.kh.usc.edu.tw/" target="_blank" rel="noopener" class="btn btn-block btn-lg btn-site">Learn More About Web Programming</a>
+							<div class="course-action">
+								<a href="https://itc.kh.usc.edu.tw/" target="_blank" rel="noopener" class="btn-site">Learn More About Web Programming</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4 mb-4">
-					<div class="card h-100 course-card text-center">
-						<div class="card-body d-flex flex-column">
+				<div>
+					<div class="course-card">
+						<div class="card-body">
 							<div>
 								<i class="fa-solid fa-house-chimney fa-4x course-icon" aria-hidden="true"></i>
 							</div>
-							<h3 class="card-title mt-3">Introduction to Living Sciences</h3>
+							<h3 class="card-title">Introduction to Living Sciences</h3>
 							<p class="course-desc">Explore the university's four founding goals of ethical, scientific, productive and artistic families, and what the science of living means.</p>
 							<p class="course-meta">Key topics: home economics education, applications in daily life</p>
 							<p class="course-meta">Best for: students who want to understand the Shih Chien spirit</p>
-							<div class="mt-2 mb-2">
-								<h4 class="price-now"><small class="text-danger text-nowrap"><s>Was NT$ 12,000</s></small> <span class="text-nowrap">Now NT$ 0</span></h4>
+							<div>
+								<h4 class="price-now"><small class="price-old"><s>Was NT$ 12,000</s></small> <span class="price-new">Now NT$ 0</span></h4>
 								<small class="course-meta">* Prices are for this class project only and are not actual university fees.</small>
 							</div>
-							<div class="mt-auto">
-								<a href="https://li.kh.usc.edu.tw/" target="_blank" rel="noopener" class="btn btn-block btn-lg btn-site">Learn More About Living Sciences</a>
+							<div class="course-action">
+								<a href="https://li.kh.usc.edu.tw/" target="_blank" rel="noopener" class="btn-site">Learn More About Living Sciences</a>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4 mb-4">
-					<div class="card h-100 course-card text-center">
-						<div class="card-body d-flex flex-column">
+				<div>
+					<div class="course-card">
+						<div class="card-body">
 							<div>
 								<i class="fa-solid fa-earth-asia fa-4x course-icon" aria-hidden="true"></i>
 							</div>
-							<h3 class="card-title mt-3">International Communication and Foreign Languages</h3>
+							<h3 class="card-title">International Communication and Foreign Languages</h3>
 							<p class="course-desc">Strengthen your language skills and cross-cultural communication, broaden your global outlook, and prepare for your future career.</p>
 							<p class="course-meta">Key topics: foreign languages, cross-cultural exchange</p>
 							<p class="course-meta">Best for: students who want to go international</p>
-							<div class="mt-2 mb-2">
-								<h4 class="price-now"><small class="text-danger text-nowrap"><s>Was NT$ 18,000</s></small> <span class="text-nowrap">Now NT$ 0</span></h4>
+							<div>
+								<h4 class="price-now"><small class="price-old"><s>Was NT$ 18,000</s></small> <span class="price-new">Now NT$ 0</span></h4>
 								<small class="course-meta">* Prices are for this class project only and are not actual university fees.</small>
 							</div>
-							<div class="mt-auto">
-								<a href="https://lc.kh.usc.edu.tw/index.php?Lang=zh-tw" target="_blank" rel="noopener" class="btn btn-block btn-lg btn-site">Learn More About Foreign Languages</a>
+							<div class="course-action">
+								<a href="https://lc.kh.usc.edu.tw/index.php?Lang=zh-tw" target="_blank" rel="noopener" class="btn-site">Learn More About Foreign Languages</a>
 							</div>
 						</div>
 					</div>

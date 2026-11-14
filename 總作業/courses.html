@@ -15,7 +15,8 @@
 	<link rel="alternate" hreflang="zh-Hant" href="https://boris05291-dev.github.io/shih-chien/%E7%B8%BD%E4%BD%9C%E6%A5%AD/courses.html">
 	<link rel="alternate" hreflang="en" href="https://boris05291-dev.github.io/shih-chien/%E7%B8%BD%E4%BD%9C%E6%A5%AD/courses-en.html">
 	<link rel="icon" href="p/01.png">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- 深色模式要在畫面畫出來前就設好，不然會先閃白（home.js 有 defer，太晚）-->
+	<script>var t; try { t = localStorage.getItem("theme"); } catch (e) {} document.documentElement.dataset.theme = t || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");</script>
 	<link rel="stylesheet" href="all.css?v=4">
 	<link rel="stylesheet" href="css/style.css">
 	<script src="home.js" defer></script>
@@ -42,99 +43,99 @@
     </div>
 </nav>
 </header>
-<main class="container my-5">
-		<img src="p/實踐大學.webp" alt="實踐大學" class="img-fluid d-block mx-auto mb-4 ink-img">
-		<h1 class="text-center">推薦課程</h1>
+<main class="courses">
+		<img src="p/實踐大學.webp" alt="實踐大學" class="courses-hero ink-img">
+		<h1>推薦課程</h1>
 		<!-- 特色/開始 -->
 		<section>
-			<div class="row">
-				<div class="col-md-4 text-center">
+			<div class="course-grid">
+				<div class="feature">
 					<!-- feature-title：顏色用 all.css 變數（style.css） -->
 					<h3 class="feature-title">實用導向</h3>
 					<p>秉持講求根本、崇尚務實的精神，教學與研究都以「實用」為導向，培養具備創造力與實踐力的人才</p>
 				</div>
-				<div class="col-md-4 text-center">
+				<div class="feature">
 					<h3 class="feature-title">生活科學</h3>
 					<p>從家政教育起家，以「研究並推廣生活科學知能，增進生活福祉與生命意義」為教育總目標</p>
 				</div>
-				<div class="col-md-4 text-center">
+				<div class="feature">
 					<h3 class="feature-title">國際視野</h3>
 					<p>培育才德兼備、具人文關懷、生活創意、科學素養與國際視野的實踐人</p>
 				</div>
 			</div>
 		</section>
 		<!-- 特色/結束 -->
-		<section class="d-flex justify-content-center slogan">
-			<p class="align-self-center">創新・實踐・至善</p>
+		<section class="slogan">
+			<p>創新・實踐・至善</p>
 		</section>
 		<!-- 主標語/結束 -->
 		<!-- 推薦課程/開始 -->
 		<section>
 			<h2>課程列表</h2>
-			<div class="row">
+			<div class="course-grid">
 				<!-- 課程1/開始 -->
-				<div class="col-md-4 mb-4">
-					<div class="card h-100 course-card text-center">
-						<div class="card-body d-flex flex-column">
+				<div>
+					<div class="course-card">
+						<div class="card-body">
 							<div>
 								<i class="fa-solid fa-code fa-4x course-icon" aria-hidden="true"></i>
 							</div>
-							<h3 class="card-title mt-3">網頁程式設計</h3>
+							<h3 class="card-title">網頁程式設計</h3>
 							<p class="course-desc">從 HTML、CSS 到 JavaScript，一步一步做出自己的網站，這個網站就是課堂作品</p>
 							<p class="course-meta">學習重點：前端網頁、響應式設計</p>
 							<p class="course-meta">適合對象：想做出自己作品的同學</p>
-							<div class="mt-2 mb-2">
-								<h4 class="price-now"><small class="text-danger text-nowrap"><s>原價 NT$ 15,000</s></small> <span class="text-nowrap">現在 NT$ 0</span></h4>
+							<div>
+								<h4 class="price-now"><small class="price-old"><s>原價 NT$ 15,000</s></small> <span class="price-new">現在 NT$ 0</span></h4>
 								<small class="course-meta">※ 價格為作業示意，非學校實際收費</small>
 							</div>
-							<div class="mt-auto">
-								<a href="https://itc.kh.usc.edu.tw/" target="_blank" rel="noopener" class="btn btn-block btn-lg btn-site">了解網頁程式設計</a>
+							<div class="course-action">
+								<a href="https://itc.kh.usc.edu.tw/" target="_blank" rel="noopener" class="btn-site">了解網頁程式設計</a>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- 課程1/結束 -->
 				<!-- 課程2/開始 -->
-				<div class="col-md-4 mb-4">
-					<div class="card h-100 course-card text-center">
-						<div class="card-body d-flex flex-column">
+				<div>
+					<div class="course-card">
+						<div class="card-body">
 							<div>
 								<i class="fa-solid fa-house-chimney fa-4x course-icon" aria-hidden="true"></i>
 							</div>
-							<h3 class="card-title mt-3">生活科學概論</h3>
+							<h3 class="card-title">生活科學概論</h3>
 							<p class="course-desc">認識本校「家庭倫理化、科學化、生產化、藝術化」的四化辦學目標，了解生活科學的意義</p>
 							<p class="course-meta">學習重點：家政教育、生活應用</p>
 							<p class="course-meta">適合對象：想認識實踐精神的同學</p>
-							<div class="mt-2 mb-2">
-								<h4 class="price-now"><small class="text-danger text-nowrap"><s>原價 NT$ 12,000</s></small> <span class="text-nowrap">現在 NT$ 0</span></h4>
+							<div>
+								<h4 class="price-now"><small class="price-old"><s>原價 NT$ 12,000</s></small> <span class="price-new">現在 NT$ 0</span></h4>
 								<small class="course-meta">※ 價格為作業示意，非學校實際收費</small>
 							</div>
-							<div class="mt-auto">
+							<div class="course-action">
 								<!-- → 通識教育二中心 -->
-								<a href="https://li.kh.usc.edu.tw/" target="_blank" rel="noopener" class="btn btn-block btn-lg btn-site">了解生活科學概論</a>
+								<a href="https://li.kh.usc.edu.tw/" target="_blank" rel="noopener" class="btn-site">了解生活科學概論</a>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- 課程2/結束 -->
 				<!-- 課程3/開始 -->
-				<div class="col-md-4 mb-4">
-					<div class="card h-100 course-card text-center">
-						<div class="card-body d-flex flex-column">
+				<div>
+					<div class="course-card">
+						<div class="card-body">
 							<div>
 								<i class="fa-solid fa-earth-asia fa-4x course-icon" aria-hidden="true"></i>
 							</div>
-							<h3 class="card-title mt-3">國際溝通與外語</h3>
+							<h3 class="card-title">國際溝通與外語</h3>
 							<p class="course-desc">加強外語能力與跨文化溝通，拓展國際視野，為未來的職場做好準備</p>
 							<p class="course-meta">學習重點：外語能力、跨文化交流</p>
 							<p class="course-meta">適合對象：想走向國際的同學</p>
-							<div class="mt-2 mb-2">
-								<h4 class="price-now"><small class="text-danger text-nowrap"><s>原價 NT$ 18,000</s></small> <span class="text-nowrap">現在 NT$ 0</span></h4>
+							<div>
+								<h4 class="price-now"><small class="price-old"><s>原價 NT$ 18,000</s></small> <span class="price-new">現在 NT$ 0</span></h4>
 								<small class="course-meta">※ 價格為作業示意，非學校實際收費</small>
 							</div>
-							<div class="mt-auto">
+							<div class="course-action">
 								<!-- → 語言二中心 -->
-								<a href="https://lc.kh.usc.edu.tw/index.php?Lang=zh-tw" target="_blank" rel="noopener" class="btn btn-block btn-lg btn-site">了解國際溝通與外語</a>
+								<a href="https://lc.kh.usc.edu.tw/index.php?Lang=zh-tw" target="_blank" rel="noopener" class="btn-site">了解國際溝通與外語</a>
 							</div>
 						</div>
 					</div>

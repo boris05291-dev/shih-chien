@@ -1,5 +1,38 @@
 /* ===== courses.html 專屬 =====｜顏色用 all.css 變數 → 深色模式自動換色 */
 
+/* ===== 版面（原本靠 Bootstrap，改成自己寫幾行）===== */
+.courses{
+    max-width: 1140px;
+    margin: 48px auto;
+    padding: 0 15px;
+    line-height: 1.5;
+}
+/* :where() 權重為 0 → 下面 .feature-title、.course-desc 等 class 規則才蓋得過 */
+.courses :where(h1, h2, h3, h4){
+    line-height: 1.2;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+.courses h1{ font-size: 40px; text-align: center; }
+.courses h2{ font-size: 32px; }
+.courses :where(p){ margin-bottom: 16px; }
+.courses-hero{
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto 24px;
+}
+/* 三欄排列｜手機（≤ 900px，全站斷點）變一欄 */
+.course-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+@media (max-width: 900px){
+    .course-grid{ grid-template-columns: 1fr; }
+}
+.feature{ text-align: center; }
+
 /* 特色標題 */
 .feature-title{
     font-size: 24px;
@@ -9,6 +42,9 @@
 
 /* 標語橫幅：全站綠色漸層 */
 .slogan{
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 文字上下置中 */
     margin: 40px 0;
     height: 80px;
     background: var(--gradient-primary);
@@ -23,8 +59,9 @@
 }
 
 /* ===== 課程卡片 ===== */
-/* 蓋掉 Bootstrap 白底灰框 → 全站卡片樣式 */
 .course-card{
+    height: 100%;
+    text-align: center;
     background-color: var(--bg-surface);
     border: 1px solid var(--border-light);
     border-radius: var(--border-radius-main);
@@ -36,7 +73,16 @@
     transform: translateY(-8px); /* 上浮 8px */
     box-shadow: var(--box-shadow-hover);
 }
+/* 直向 flex：按鈕區用 margin-top: auto 推到卡片底部，三張卡按鈕對齊 */
+.card-body{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+}
+.course-action{ margin-top: auto; }
 .course-card .card-title{
+    margin: 16px 0 12px;
     font-size: 22px;
     color: var(--heading-color);
 }
@@ -53,21 +99,27 @@
 }
 .price-now{
     color: var(--accent-text);
-    margin-top: 12px;
+    margin: 12px 0 8px;
+    font-size: 24px;
 }
+/* 原價用灰色刪除線｜用變數 → 深色模式自動換色 */
+.price-old{
+    color: var(--text-soft);
+    font-size: 80%;
+}
+.price-old, .price-new{ white-space: nowrap; }
 
 /* 「了解更多」按鈕｜要比 all.css 的 a:link 精確才蓋得過 */
 .course-card a.btn-site{
+    display: block;
+    margin-top: 8px;
+    padding: 8px 16px;
+    font-size: 20px;
+    line-height: 1.5;
     background-color: var(--primary-hover); /* 主色配白字對比不足 4.5:1 */
     color: var(--text-on-primary);
-    border: none;
     border-radius: var(--border-radius-sub);
     transition: transform 0.2s ease, background-color 0.3s ease;
-    white-space: normal; /* Bootstrap .btn 預設不換行 → 英文按鈕字太長會超出按鈕 */
-}
-/* Bootstrap 的 .text-danger 不跟深色模式，要用 !important 才蓋得過 */
-:root[data-theme="dark"] .price-now .text-danger{
-    color: var(--text-soft) !important;
 }
 .course-card a.btn-site:hover{
     background-color: var(--primary-active);

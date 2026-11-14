@@ -84,7 +84,7 @@ function setupSideMenuDropdown() {
         if (current) label.textContent = current.textContent.trim();
     };
     updateLabel();
-    // MutationObserver 監視 class → home.js / Vice.js 換 active 時同步更新按鈕文字
+    // MutationObserver 監視 class → home.js 換 active 時同步更新按鈕文字
     new MutationObserver(updateLabel).observe(aside, {
         attributes: true,
         attributeFilter: ["class"],
@@ -153,7 +153,6 @@ document.addEventListener("DOMContentLoaded", () => {
         setupNavToggle();
         setupLangSwitch();
         markExternalNavLinks();
-        if (window.setupSiteSearch) window.setupSiteSearch(); // search.js：導覽列加搜尋按鈕
     } else if (headerElem) {
         fetch(`./components/header${suffix}.html`)
             .then(response => {
@@ -165,7 +164,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 setupNavToggle(); // 頁首塞好才有漢堡按鈕
                 setupLangSwitch();
                 markExternalNavLinks();
-                if (window.setupSiteSearch) window.setupSiteSearch();
             })
             .catch(error => console.error(error));
     }

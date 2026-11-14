@@ -38,22 +38,25 @@ document.querySelectorAll(".yt-lite").forEach((btn) => {
         btn.replaceWith(iframe);
     });
 });
-// ===== 首頁側邊選單：捲到哪段，哪項加 active =====
-// 只有首頁有 h1、h7 區塊
-const h1Section = document.getElementById("h1");
-const h7Section = document.getElementById("h7");
-if (h1Section && h7Section) {
-    const menuLinks = document.querySelectorAll(".side-menu .menu-link");
+// ===== 側邊選單：捲到哪段，哪項加 active（首頁、副校長頁共用）=====
+// 選單 data-target = 區塊 id｜找不到區塊的項目（首頁的 top-section）→ 還沒捲到任何區塊時的預設
+const spyLinks = Array.from(document.querySelectorAll(".side-menu .menu-link[data-target]"));
+const spySections = spyLinks.map((link) => document.getElementById(link.dataset.target)).filter(Boolean);
+if (spySections.length) {
     const OFFSET = 150; // 提早 150px 判定（上方有東西擋）
     onScrollOrLayout(() => {
         const pos = window.scrollY + OFFSET;
-        let current = "top-section";
-        if (pos >= docTop(h7Section)) current = "h7";
-        else if (pos >= docTop(h1Section)) current = "h1";
-        // toggle(class, true / false) → 加上 / 拿掉
-        menuLinks.forEach((link) => {
-            link.classList.toggle("active", link.getAttribute("data-target") === current);
+        // 由上往下，最後一個捲過判定線的就是目前段落
+        let current = spyLinks[0].dataset.target;
+        spySections.forEach((sec) => {
+            if (pos >= docTop(sec)) current = sec.id;
         });
+        // 已捲到底 → 直接算最後一段（最後一段太短時判定線碰不到）｜-2 容許誤差
+        if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+            current = spySections[spySections.length - 1].id;
+        }
+        // toggle(class, true / false) → 加上 / 拿掉
+        spyLinks.forEach((link) => link.classList.toggle("active", link.dataset.target === current));
     });
 }
 // ---- 深色模式：<html data-theme="dark"> → all.css 換一組變數 ----
@@ -61,13 +64,6 @@ if (h1Section && h7Section) {
 (() => {
     const KEY = "theme";
     const root = document.documentElement;
-    // localStorage 可能丟錯（無痕模式）→ try/catch
-    let saved = null;
-    try {
-        saved = localStorage.getItem(KEY);
-    } catch (e) {}
-    // 沒存過 → 跟系統深淺色設定
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     // apply 用到後面的 btn 沒關係：btn 建好後才呼叫
     const apply = (theme) => {
         root.setAttribute("data-theme", theme);
@@ -79,7 +75,8 @@ if (h1Section && h7Section) {
     btn.type = "button";
     btn.className = "theme-toggle";
     document.body.appendChild(btn);
-    apply(saved || (prefersDark ? "dark" : "light"));
+    // 每頁 <head> 已先設好 data-theme（避免閃白）→ 這裡只同步按鈕圖示
+    apply(root.getAttribute("data-theme") || "light");
     btn.addEventListener("click", () => {
         const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
         apply(next);
