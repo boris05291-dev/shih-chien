@@ -63,6 +63,7 @@
     border: none;
     border-radius: var(--border-radius-sub);
     transition: transform 0.2s ease, background-color 0.3s ease;
+    white-space: normal; /* Bootstrap .btn 預設不換行 → 英文按鈕字太長會超出按鈕 */
 }
 /* Bootstrap 的 .text-danger 不跟深色模式，要用 !important 才蓋得過 */
 :root[data-theme="dark"] .price-now .text-danger{
