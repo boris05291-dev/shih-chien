@@ -78,6 +78,19 @@
     --dark-btn-hover: #4a5e72;
     --box-shadow-main: 0 4px 20px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.25);
 }
+/* 黑字書法圖：深色模式反白成白字，screen 讓反轉後的黑底消失（白底、透明底都適用） */
+:root[data-theme="dark"] .ink-img {
+    background-color: transparent;
+    filter: invert(1);
+    mix-blend-mode: screen;
+}
+/* 彩色 logo、校徽：hue-rotate(180deg) 把反轉後變紫的綠色轉回綠色 */
+:root[data-theme="dark"] .logo img,
+:root[data-theme="dark"] .pdd .ii-1 {
+    background-color: transparent;
+    filter: invert(1) hue-rotate(180deg);
+    mix-blend-mode: screen;
+}
 html {
     scroll-behavior: smooth;
 }
