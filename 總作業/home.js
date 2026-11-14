@@ -109,11 +109,10 @@ if (h1Section && h7Section) {
         const progress = clamp01((parseFloat(getComputedStyle(stage).top) - section.getBoundingClientRect().top) / range);
         // × 1.12 → 提早走到終點，最後停留一下讓人看完書法
         const pos = Math.min(last, progress * last * 1.12);
-        const index = Math.floor(pos);
-        const next = Math.min(last, index + 1);
-        const year = String(Math.round(years[index] + (years[next] - years[index]) * (pos - index)));
-        if (yearEl.textContent !== year) yearEl.textContent = year;
         const current = Math.round(pos);
+        // 大年份跟目前事件同一筆，不插值（插值會在民國68年旁顯示1981這種不存在的年份）
+        const year = String(years[current]);
+        if (yearEl.textContent !== year) yearEl.textContent = year;
         items.forEach((li, i) => li.classList.toggle("is-current", i === current));
         // 只有最後一段（1995 → 1997）才寫出校名
         brush.style.clipPath = `inset(0 ${100 - clamp01(pos - (last - 1)) * 100}% 0 0)`;
