@@ -13,7 +13,8 @@
     font-weight: 500;
     margin-bottom: 8px;
 }
-.courses h1{ font-size: 40px; text-align: center; }
+/* clamp(最小, 隨螢幕寬, 最大) → 手機 28px、桌機 40px，中間平滑縮放 */
+.courses h1{ font-size: clamp(28px, 5vw, 40px); text-align: center; }
 .courses h2{ font-size: 32px; }
 .courses :where(p){ margin-bottom: 16px; }
 .courses-hero{

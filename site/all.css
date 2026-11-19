@@ -572,8 +572,11 @@ section[id^="vp-"],
     border-top: 5px solid var(--primary-color);
     padding: 50px 20px;
 }
-.footer-brand h3 {
+/* 頁尾作品名：用 <p> 不用 <h3> → 不打亂全頁標題層級｜.f-1 前綴 → 蓋過 .f-1 p 的字級與顏色 */
+.f-1 .footer-title {
     font-size: 20px;
+    font-weight: bold;
+    line-height: 1.3;
     color: var(--footer-heading);
     margin-bottom: 10px;
     letter-spacing: 1.5px;
@@ -614,9 +617,14 @@ section[id^="vp-"],
     width: 20px;
     text-align: center;
 }
+/* 標籤字距用 letter-spacing，不在字中間打空白 → 螢幕閱讀器才不會一個字一個字念 */
 .contact-info strong {
     color: var(--footer-heading);
     font-weight: 500;
+    letter-spacing: 0.3em;
+}
+.contact-info strong:lang(en) {
+    letter-spacing: 0.05em;
 }
 .f-s1 .s-icons {
     margin-top: 25px;
@@ -1092,8 +1100,8 @@ section[id^="vp-"],
     gap: 15px;
     margin-bottom: 12px;
 }
-.brand-titles h3 {
-    margin-bottom: 5px !important;
+.f-1 .brand-titles .footer-title {
+    margin-bottom: 5px;
 }
 
 /* 頁尾頭像｜cubic-bezier(0.175, 0.885, 0.32, 1.275) → 超過再彈回的 Q 彈感 */
