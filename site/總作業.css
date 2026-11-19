@@ -533,3 +533,170 @@ html.scrub .chronicle-bar span {
         margin-top: 8px;
     }
 }
+
+/* ===== 學校師長輪播（.carousel）===== */
+/* 做法：橫向捲動 + scroll-snap → 手機可以直接用手指滑，電腦用箭頭 / 圓點（home.js 換頁就是叫它捲過去） */
+.carousel {
+    position: relative;
+    margin-bottom: 25px;
+}
+.carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory; /* 放手後一定停在某一張，不會卡在兩張中間 */
+    overscroll-behavior-x: contain; /* 滑到底不會帶動整頁左右晃 */
+    scrollbar-width: none; /* 有圓點了，捲軸藏起來 */
+    border-radius: var(--border-radius-main);
+    background-color: var(--bg-light);
+    box-shadow: var(--box-shadow-main);
+}
+.carousel-track::-webkit-scrollbar {
+    display: none;
+}
+/* 一張卡 = 整個軌道寬｜flex: 0 0 100% → 不縮不放 */
+.carousel-slide {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    padding: 28px 32px;
+}
+/* 照片尺寸不一（直的、橫的都有）→ 統一裁成 3:4｜object-position 靠上 → 不切到頭 */
+/* !important：all.css 的 .page-all main img、手機版 .all1 img 會把圖片撐成 100% 寬 → 這裡要蓋過去 */
+/* .carousel .carousel-slide img 多一層 class：all.css 比這檔晚載入，權重一樣時會被它蓋掉 */
+.carousel .carousel-slide img {
+    flex: 0 0 auto;
+    width: 180px !important;
+    max-width: 40% !important;
+    height: auto !important;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: var(--border-radius-sub);
+    box-shadow: var(--box-shadow-main);
+}
+.carousel-text {
+    min-width: 0; /* flex 子元素預設不會比內容窄 → 長英文職稱會撐破，設 0 才會折行 */
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+.carousel-role {
+    display: inline-block;
+    padding: 2px 12px;
+    border-radius: 999px;
+    background-color: var(--primary-light);
+    color: var(--accent-text);
+    font-size: 14px;
+    font-weight: 700;
+}
+.carousel-text h3 {
+    margin: 8px 0 6px;
+    font-size: 24px;
+    color: var(--heading-color);
+}
+.carousel-text p {
+    margin-bottom: 12px;
+}
+.carousel-text a {
+    color: var(--accent-text);
+    font-weight: 700;
+    text-decoration: none;
+}
+.carousel-text a:hover {
+    color: var(--link-hover);
+    text-decoration: underline;
+}
+
+/* ---- 控制列：上一張｜圓點｜下一張｜暫停（JS 產生，沒 JS 就不會出現）---- */
+.carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 14px;
+}
+.carousel-btn {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border-soft);
+    border-radius: 50%;
+    background-color: var(--bg-surface);
+    color: var(--text-main);
+    font-size: 16px;
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease;
+}
+.carousel-btn:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    color: var(--text-on-primary);
+}
+.carousel-btn:active {
+    transform: scale(0.96);
+    transition-duration: 0.1s;
+}
+.carousel-dots {
+    display: flex;
+    gap: 4px;
+}
+/* 圓點看起來 10px，但按鈕本身 24px → 手指好按（WCAG 目標尺寸 24px） */
+.carousel-dot {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+.carousel-dot::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background-color: var(--border-light);
+    transition:
+        width 0.25s var(--ease-out),
+        background-color 0.25s ease;
+}
+/* 目前這張 → 圓點拉長成綠色膠囊 */
+.carousel-dot[aria-current="true"]::before {
+    width: 22px;
+    background-color: var(--primary-color);
+}
+.carousel-dot:hover::before {
+    background-color: var(--primary-hover);
+}
+
+/* ---- 手機：照片疊在文字上面 ---- */
+@media (max-width: 600px) {
+    .carousel-slide {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        padding: 20px;
+        text-align: center;
+    }
+    .carousel .carousel-slide img {
+        width: 140px !important;
+        max-width: 100% !important;
+        margin: 0 auto;
+    }
+    .carousel-text h3 {
+        font-size: 20px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .carousel-dot::before {
+        transition: none;
+    }
+    .carousel-btn:active {
+        transform: none;
+    }
+}

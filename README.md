@@ -11,7 +11,7 @@
 
 | 頁面 | 中文 | English |
 |---|---|---|
-| 首頁（簡史、本校沿革、校名由來、校歌、校徽、校區地圖） | [home.html](site/home.html) | [home-en.html](site/home-en.html) |
+| 首頁（簡史、本校沿革、校名由來、學校師長輪播、校歌、校徽、校區地圖） | [home.html](site/home.html) | [home-en.html](site/home-en.html) |
 | 創辦人 | [Founder.html](site/Founder.html) | [Founder-en.html](site/Founder-en.html) |
 | 董事長 | [president.html](site/president.html) | [president-en.html](site/president-en.html) |
 | 校長 | [headmaster.html](site/headmaster.html) | [headmaster-en.html](site/headmaster-en.html) |
@@ -26,6 +26,7 @@
 - **中英切換**：切換語言時停留在同一個段落
 - **共用頁首頁尾**：`components.js` 用 `fetch` 載入 `components/` 裡的片段，改一次全站套用
 - **閱讀進度條、回到頂部、側邊選單**會標示目前讀到的段落
+- **學校師長輪播**：首頁 6 位師長卡片，左右箭頭、圓點、鍵盤左右鍵、手機直接滑；5 秒自動換頁，可暫停，滑鼠移上去或切到別的分頁會自動停；開啟「減少動態效果」時不自動播放
 - **照片燈箱**：點圖片放大，按 `Esc` 關閉
 - **效能**：圖片延遲載入、改用 WebP、YouTube 點了才載入、Font Awesome 和 Google Fonts 只載入用到的字
 - **無障礙**：跳至主內容連結、鍵盤可操作、外部連結 ↗ 標示
