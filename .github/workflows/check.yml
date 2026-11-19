@@ -1,0 +1,31 @@
+# 每次 push / 開 PR 自動檢查：站內連結有沒有壞、HTML 有沒有語法錯誤
+name: 網站檢查
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch: # 可以在 Actions 頁面手動按「Run workflow」
+
+permissions:
+  contents: read
+
+jobs:
+  links:
+    name: 站內連結
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 .github/scripts/check_links.py
+
+  html:
+    name: HTML 語法
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npx --yes html-validate@8.24.0 --config .github/htmlvalidate.json "**/*.html"

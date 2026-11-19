@@ -9,14 +9,14 @@
         <meta property="og:type" content="website" />
         <meta property="og:title" content="實踐大學高雄校區" />
         <meta property="og:description" content="認識實踐大學高雄校區的簡史、本校沿革、校名由來、校歌及校徽，並介紹創辦人、董事長、校長與副校長。本站為張栢睿的網頁程式設計作品。" />
-        <meta property="og:url" content="https://boris05291-dev.github.io/shih-chien/%E7%B8%BD%E4%BD%9C%E6%A5%AD/home.html" />
-        <meta property="og:image" content="https://boris05291-dev.github.io/shih-chien/%E7%B8%BD%E4%BD%9C%E6%A5%AD/p/makebead-256x225.png" />
+        <meta property="og:url" content="https://boris05291-dev.github.io/shih-chien/site/home.html" />
+        <meta property="og:image" content="https://boris05291-dev.github.io/shih-chien/site/p/makebead-256x225.png" />
         <title>實踐大學高雄校區</title>
         <!-- canonical：這頁的正式網址｜hreflang：告訴搜尋引擎中英版互相對應 -->
-        <link rel="canonical" href="https://boris05291-dev.github.io/shih-chien/%E7%B8%BD%E4%BD%9C%E6%A5%AD/home.html" />
-        <link rel="alternate" hreflang="zh-Hant" href="https://boris05291-dev.github.io/shih-chien/%E7%B8%BD%E4%BD%9C%E6%A5%AD/home.html" />
-        <link rel="alternate" hreflang="en" href="https://boris05291-dev.github.io/shih-chien/%E7%B8%BD%E4%BD%9C%E6%A5%AD/home-en.html" />
-        <link rel="alternate" hreflang="x-default" href="https://boris05291-dev.github.io/shih-chien/%E7%B8%BD%E4%BD%9C%E6%A5%AD/home.html" />
+        <link rel="canonical" href="https://boris05291-dev.github.io/shih-chien/site/home.html" />
+        <link rel="alternate" hreflang="zh-Hant" href="https://boris05291-dev.github.io/shih-chien/site/home.html" />
+        <link rel="alternate" hreflang="en" href="https://boris05291-dev.github.io/shih-chien/site/home-en.html" />
+        <link rel="alternate" hreflang="x-default" href="https://boris05291-dev.github.io/shih-chien/site/home.html" />
         <link rel="stylesheet" href="總作業.css" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -78,7 +78,7 @@
                         <div class="timeline-card">奉准改名為「<span class="h-t">實踐大學</span>」。</div>
                     </li>
                 </ol>
-                <img class="chronicle-brush" src="p/shih-chien-brush.webp" alt="書法校名：實踐大學" width="1200" height="387" loading="lazy" />
+                <img class="chronicle-brush" src="p/shih-chien-brush.webp" alt="書法校名：實踐大學" width="1200" height="387" loading="lazy" decoding="async" />
                 <div class="chronicle-bar" aria-hidden="true"><span></span></div>
             </div>
         </section>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="i-1">
                     <!-- 寫 width / height → 先留位置，載入時版面不跳動 -->
-                    <img src="p/03.jpg" alt="實踐高雄校區" width="400" height="246" />
+                    <img src="p/03.jpg" alt="實踐高雄校區" width="400" height="246" loading="lazy" decoding="async" />
                 </div>
                 
                 <div class="h-4">
@@ -188,27 +188,29 @@
                 <div class="vall-1">
                     <div class="t-1">
                         <table>
-                            <tr>
-                                <th>詞</th>
-                                <td>謝東閔</td>
-                            </tr>
-                            <tr>
-                                <th>曲</th>
-                                <td>呂泉生</td>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">詞</th>
+                                    <td>謝東閔</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">曲</th>
+                                    <td>呂泉生</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                     <div class="iframe-1">
                         <!-- YouTube 延遲載入：先放縮圖按鈕（data-id = 影片 ID），點了才換成 iframe（home.js） -->
                         <!-- 縮圖 alt="" → 按鈕已有 aria-label，避免念兩次 -->
                         <button type="button" class="yt-lite" data-id="0XMQiq8tRkI" aria-label="播放實踐大學校歌影片">
-                            <img src="https://i.ytimg.com/vi/0XMQiq8tRkI/hqdefault.jpg" alt="" loading="lazy" width="480" height="360" />
+                            <img src="https://i.ytimg.com/vi/0XMQiq8tRkI/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360" />
                             <span class="yt-play" aria-hidden="true"></span>
                         </button>
                     </div>
                     <div class="i2">
                         <!-- loading="lazy" → 快捲到才下載 -->
-                        <img src="p/348588577.jpg" alt="實踐大學校歌歌詞" loading="lazy" width="418" height="571" />
+                        <img src="p/348588577.jpg" alt="實踐大學校歌歌詞" loading="lazy" decoding="async" width="418" height="571" />
                     </div>
                 </div>
                 <div class="h-8">
@@ -217,12 +219,12 @@
                 <!-- download → 點了直接下載，不開新頁 -->
                 <!-- %E5%AF... = 中文檔名編碼後的樣子 -->
                 <section class="pdd">
-                    <img class="ii-1" src="p/903635956.png" alt="校徽" width="800" height="600" loading="lazy" />
+                    <img class="ii-1" src="p/903635956.png" alt="校徽" width="800" height="600" loading="lazy" decoding="async" />
                     <a href="p/903635956.pdf" download>點此下載 PDF 文件</a>
                     <a href="p/903635956.png" download>點此下載 PNG 文件</a>
-                    <img class="ii-2 ink-img" src="p/%E5%AF%A6%E8%B8%90%E5%A4%A7%E5%AD%B8.webp" alt="校名" loading="lazy" width="3661" height="1181" />
+                    <img class="ii-2 ink-img" src="p/%E5%AF%A6%E8%B8%90%E5%A4%A7%E5%AD%B8.webp" alt="校名" loading="lazy" decoding="async" width="3661" height="1181" />
                     <a href="p/%E5%AF%A6%E8%B8%90%E5%A4%A7%E5%AD%B8.jpg" download>點此下載 JPG 文件 </a>
-                    <img class="ii-3 ink-img" src="p/%E9%AB%98%E9%9B%84%E6%A0%A1%E5%8D%80.png" alt="高雄校區" loading="lazy" width="4722" height="1803" />
+                    <img class="ii-3 ink-img" src="p/%E9%AB%98%E9%9B%84%E6%A0%A1%E5%8D%80.png" alt="高雄校區" loading="lazy" decoding="async" width="4722" height="1803" />
                     <a href="p/%E9%AB%98%E9%9B%84%E6%A0%A1%E5%8D%80.png" download>點此下載 PNG 文件</a>
                 </section>
                 <!-- ===== 校區位置：OpenStreetMap 嵌入（座標同頁尾地圖連結）===== -->
@@ -240,6 +242,6 @@
         <p class="site-note">本站為學生課堂作業，並非實踐大學官方網站。資料來源：<a href="https://www.kh.usc.edu.tw/index.php">實踐大學高雄校區官網</a>｜最後更新：<time datetime="2026-11-09">2026-11-09</time></p>
         <footer class="f-1"></footer>
         <!-- 回到頂部（home.js）｜只有箭頭 → 補 aria-label -->
-        <button id="b-top" class="b-top" aria-label="返回頂部">↑</button>
+        <button type="button" id="b-top" class="b-top" aria-label="返回頂部">↑</button>
     </body>
 </html>
