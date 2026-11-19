@@ -112,13 +112,13 @@ html {
 .li-3,
 .li-4,
 .li-5 {
-    border-radius: 12px !important;
+    border-radius: 12px;
     box-shadow:
         0 4px 20px rgba(0, 0, 0, 0.04),
         0 1px 3px rgba(0, 0, 0, 0.02) !important;
     transition:
         transform 0.3s ease,
-        box-shadow 0.3s ease !important;
+        box-shadow 0.3s ease;
 }
 /* ===== 標題左側綠色直條 =====｜::before 絕對定位｜top 15% + height 70% → 置中 */
 h2,
@@ -129,7 +129,7 @@ h2,
 .li-4 h3,
 .li-5 h3 {
     position: relative;
-    padding-left: 16px !important;
+    padding-left: 16px;
     color: var(--heading-color);
 }
 h2::before,
@@ -151,18 +151,18 @@ h2::before,
 /* 履歷清單每行 = 小卡片（左邊框 4px） */
 .liall li {
     position: relative;
-    padding: 10px 15px !important;
-    margin-bottom: 10px !important;
-    background-color: var(--bg-surface) !important;
-    border-radius: 8px !important;
-    border-left: 4px solid var(--bg-surface) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
-    list-style-type: none !important;
-    transition: all 0.25s ease !important;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: var(--bg-surface);
+    border-radius: 8px;
+    border-left: 4px solid var(--bg-surface);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    list-style-type: none;
+    transition: all 0.25s ease;
 }
 /* hover：右移 + 變淺綠 */
 .liall li:hover {
-    transform: translateX(6px) !important;
+    transform: translateX(6px);
     background-color: var(--primary-light) !important;
     box-shadow: 0 4px 12px rgba(107, 158, 88, 0.15) !important;
 }
@@ -179,35 +179,35 @@ h2::before,
     transform: translateY(-3px);
     box-shadow:
         0 8px 30px rgba(107, 158, 88, 0.08),
-        0 2px 6px rgba(0, 0, 0, 0.04) !important;
+        0 2px 6px rgba(0, 0, 0, 0.04);
 }
 /* 各區塊左邊框不同色，hover 變深 */
 .li-1 li {
-    border-left-color: var(--border-color-1) !important;
+    border-left-color: var(--border-color-1);
 }
 .li-1 li:hover {
-    border-left-color: var(--primary-hover) !important;
+    border-left-color: var(--primary-hover);
 }
 
 .li-2 li {
-    border-left-color: var(--border-color-2) !important;
+    border-left-color: var(--border-color-2);
 }
 .li-2 li:hover {
-    border-left-color: var(--border-color-2-hover) !important;
+    border-left-color: var(--border-color-2-hover);
 }
 
 .li-3 li {
-    border-left-color: var(--border-color-3) !important;
+    border-left-color: var(--border-color-3);
 }
 .li-3 li:hover {
-    border-left-color: var(--border-color-3-hover) !important;
+    border-left-color: var(--border-color-3-hover);
 }
 
 .li-5 li {
-    border-left-color: var(--border-color-5) !important;
+    border-left-color: var(--border-color-5);
 }
 .li-5 li:hover {
-    border-left-color: var(--border-color-5-hover) !important;
+    border-left-color: var(--border-color-5-hover);
 }
 .pp1 {
     font-size: 16px;
@@ -216,14 +216,14 @@ h2::before,
     margin-bottom: 25px;
     padding: 25px;
     text-align: justify;
-    background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-gray) 100%) !important;
-    border: 1px solid var(--border-soft) !important;
-    border-left: 6px solid var(--primary-color) !important;
-    border-radius: 10px !important;
+    background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-gray) 100%);
+    border: 1px solid var(--border-soft);
+    border-left: 6px solid var(--primary-color);
+    border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04) !important;
     transition:
         transform 0.3s ease,
-        box-shadow 0.3s ease !important;
+        box-shadow 0.3s ease;
 }
 
 .pp1:hover {
@@ -563,7 +563,7 @@ a:hover {
 .vp,
 section[id^="vp-"],
 [id^="h"] {
-    scroll-margin-top: 110px !important;
+    scroll-margin-top: 110px;
 }
 /* 頁尾漸層背景（蓋掉上面 .f-1 的單色） */
 .f-1 {
@@ -582,7 +582,7 @@ section[id^="vp-"],
     letter-spacing: 1.5px;
 }
 .developer-tag {
-    font-size: 15px !important;
+    font-size: 15px;
     color: var(--footer-accent) !important;
     margin-bottom: 8px !important;
     font-family: monospace, "Microsoft JhengHei";
@@ -713,24 +713,24 @@ section[id^="vp-"],
 @media (max-width: 900px) {
     .page-all {
         flex-direction: column !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        gap: 15px !important;
-        padding: 0 15px !important;
-        margin: 10px auto !important;
+        width: 100%;
+        max-width: 100%;
+        gap: 15px;
+        padding: 0 15px;
+        margin: 10px auto;
         overflow-x: clip; /* 擋橫向捲軸｜用 clip 不用 hidden（hidden 會讓 sticky 失效） */
     }
     .all1 {
         width: 100% !important;
         max-width: 100% !important;
-        padding-top: 10px !important;
+        padding-top: 10px;
     }
     .all1 img,
     .i-2 img,
     .vp img {
-        width: 100% !important;
+        width: 100%;
         max-width: 100% !important;
-        height: auto !important;
+        height: auto;
         border-radius: 12px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
@@ -738,20 +738,20 @@ section[id^="vp-"],
         text-align: center;
     }
     .i-2 img {
-        max-width: 320px !important;
+        max-width: 320px;
         margin: 0 auto;
         display: block;
     }
     .nav-container {
-        flex-direction: row !important;
-        flex-wrap: nowrap !important;
-        justify-content: space-between !important;
-        align-items: center !important;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
         padding: 10px 16px !important;
         position: relative;
     }
     .logo img {
-        height: 44px !important;
+        height: 44px;
     }
     .nav-toggle {
         display: flex;
@@ -786,11 +786,11 @@ section[id^="vp-"],
         margin-top: 0;
     }
     .nav-menu {
-        flex-direction: column !important;
-        flex-wrap: nowrap !important;
-        align-items: stretch !important;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
         gap: 0 !important;
-        padding: 6px 0 !important;
+        padding: 6px 0;
         margin: 0;
         background: none;
         border-radius: 0;
@@ -814,20 +814,20 @@ section[id^="vp-"],
     }
     /* 手機版側邊選單：黏在頂端的下拉選單｜backdrop-filter: blur → 毛玻璃 */
     .side-menu {
-        display: block !important;
-        width: 100% !important;
+        display: block;
+        width: 100%;
         /* 按鈕 48px + 上下框線 2px：按鈕由 JS 插入，先留高度，內容才不會被往下推 */
         box-sizing: border-box;
         min-height: 50px;
-        position: sticky !important;
-        top: 0 !important;
-        z-index: 999 !important;
-        padding: 0 !important;
-        overflow: visible !important;
-        white-space: normal !important;
-        background-color: var(--bg-blur) !important;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        padding: 0;
+        overflow: visible;
+        white-space: normal;
+        background-color: var(--bg-blur);
         backdrop-filter: blur(8px);
-        border: 1px solid var(--border-light) !important;
+        border: 1px solid var(--border-light);
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     }
     .side-toggle {
@@ -880,19 +880,19 @@ section[id^="vp-"],
     }
     /* 下拉清單：absolute 在按鈕下方｜收起：visibility hidden + opacity 0 + pointer-events none｜.is-open 打開 + transition */
     .side-menu > ul {
-        display: block !important;
+        display: block;
         position: absolute;
         top: calc(100% + 1px);
         left: -1px;
         right: -1px;
         max-height: 70vh;
         overflow-y: auto;
-        margin: 0 !important;
-        padding: 4px 0 !important;
-        list-style: none !important;
-        background: var(--bg-surface) !important;
-        border: 1px solid var(--border-light) !important;
-        border-top: 3px solid var(--primary-color) !important;
+        margin: 0;
+        padding: 4px 0;
+        list-style: none;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-light);
+        border-top: 3px solid var(--primary-color);
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
         visibility: hidden;
         opacity: 0;
@@ -911,9 +911,9 @@ section[id^="vp-"],
     }
     .side-menu li,
     .side-menu .has-sub {
-        display: block !important;
-        margin: 0 !important;
-        padding: 0 !important;
+        display: block;
+        margin: 0;
+        padding: 0;
         border: none !important;
         border-bottom: 1px solid var(--divider) !important;
     }
@@ -922,54 +922,54 @@ section[id^="vp-"],
     }
     .side-menu a,
     .side-menu .sub-menu a {
-        display: block !important;
+        display: block;
         min-height: 48px;
-        padding: 14px 20px !important;
-        font-size: 16px !important;
+        padding: 14px 20px;
+        font-size: 16px;
         font-weight: 500;
-        color: var(--text-main) !important;
-        background-color: transparent !important;
-        border-radius: 0 !important;
-        text-decoration: none !important;
-        white-space: normal !important;
-        box-shadow: none !important;
+        color: var(--text-main);
+        background-color: transparent;
+        border-radius: 0;
+        text-decoration: none;
+        white-space: normal;
+        box-shadow: none;
         transition:
             background-color 0.2s ease,
-            color 0.2s ease !important;
+            color 0.2s ease;
     }
     .side-menu .sub-menu {
-        display: block !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        background: var(--bg-sub-menu) !important;
+        display: block;
+        margin: 0;
+        padding: 0;
+        background: var(--bg-sub-menu);
         border: none !important;
         border-top: 1px solid var(--divider) !important;
     }
     .side-menu .sub-menu a {
         min-height: 44px;
         padding: 12px 20px 12px 36px !important;
-        font-size: 15px !important;
-        color: var(--text-soft) !important;
+        font-size: 15px;
+        color: var(--text-soft);
     }
     .side-menu .sub-menu a::before {
-        display: none !important;
+        display: none;
     }
     .side-menu a:hover,
     .side-menu .sub-menu a:hover {
-        background-color: var(--primary-light) !important;
-        color: var(--accent-text) !important;
+        background-color: var(--primary-light);
+        color: var(--accent-text);
     }
     .side-menu a.active,
     .side-menu .sub-menu a.active {
-        background-color: var(--primary-light) !important;
-        color: var(--accent-text) !important;
-        font-weight: 700 !important;
-        box-shadow: inset 4px 0 0 0 var(--primary-color) !important;
+        background-color: var(--primary-light);
+        color: var(--accent-text);
+        font-weight: 700;
+        box-shadow: inset 4px 0 0 0 var(--primary-color);
     }
     .vp,
     section[id^="vp-"],
     [id^="h"] {
-        scroll-margin-top: 72px !important;
+        scroll-margin-top: 72px;
     }
     .page-all main h1 {
         font-size: 1.6rem;
@@ -981,12 +981,12 @@ section[id^="vp-"],
     }
     .liall ul,
     .liall ol {
-        margin-left: 0 !important;
+        margin-left: 0;
         padding-top: 8px;
     }
     .liall li {
-        padding: 10px 12px !important;
-        font-size: 15px !important;
+        padding: 10px 12px;
+        font-size: 15px;
         line-height: 1.6;
     }
     .li-1,
@@ -999,7 +999,7 @@ section[id^="vp-"],
     }
     .pp1 {
         padding: 18px 16px !important;
-        text-align: left !important;
+        text-align: left;
     }
     .p-1,
     .p-2,
@@ -1123,7 +1123,7 @@ section[id^="vp-"],
     transition:
         opacity 0.6s ease,
         transform 0.6s ease,
-        box-shadow 0.3s ease !important;
+        box-shadow 0.3s ease;
 }
 .reveal:not(.is-visible) {
     opacity: 0;
@@ -1373,7 +1373,7 @@ header {
     .vp,
     section[id^="vp-"],
     [id^="h"] {
-        scroll-margin-top: 130px !important;
+        scroll-margin-top: 130px;
     }
 }
 
@@ -1381,23 +1381,23 @@ header {
 :is(.li-1, .li-2, .li-3, .li-4, .li-5) {
     background-color: var(--bg-surface);
     border-left: none;
-    border-radius: var(--border-radius-main) !important;
+    border-radius: var(--border-radius-main);
 }
 :is(.p-1, .p-2, .p-3, .p-4, .pdd, .pp1) {
-    border-radius: var(--border-radius-main) !important;
+    border-radius: var(--border-radius-main);
 }
 .pp1 {
-    background: var(--bg-surface) !important;
-    border: none !important;
+    background: var(--bg-surface);
+    border: none;
 }
 .liall li {
-    background-color: var(--bg-subtle) !important;
-    border-left-width: 3px !important;
-    border-radius: var(--border-radius-sub) !important;
-    box-shadow: none !important;
+    background-color: var(--bg-subtle);
+    border-left-width: 3px;
+    border-radius: var(--border-radius-sub);
+    box-shadow: none;
     transition:
         background-color 0.2s ease,
-        border-color 0.2s ease !important;
+        border-color 0.2s ease;
 }
 .vall-1 {
     border-radius: var(--border-radius-main);
@@ -1414,7 +1414,7 @@ header {
 }
 .liall li:hover,
 .liall .li-4 li:hover {
-    transform: none !important;
+    transform: none;
 }
 /* 綠底白字：原本的主色對比只有 3.2:1，換深一階才讀得清楚 */
 .pdd a,
@@ -1475,7 +1475,7 @@ th {
     transition:
         opacity 0.5s var(--ease-out),
         transform 0.5s var(--ease-out),
-        box-shadow 0.2s ease !important;
+        box-shadow 0.2s ease;
 }
 
 /* ---- 燈箱：背景模糊，圖片從略小放大進場（不從 0） ---- */
@@ -1684,8 +1684,8 @@ main:focus {
     }
     /* 蓋掉手機版「圖片撐滿」的 !important，維持原尺寸 */
     .page-all main .person-hero .i-2 img {
-        width: var(--person-photo) !important;
-        max-width: 100% !important;
+        width: var(--person-photo);
+        max-width: 100%;
     }
 }
 
